@@ -181,3 +181,14 @@ body:has(.card[data-color="green"]:hover) {
   box-shadow: 0.6vmin 0.6vmin #fff, 1vmin 1vmin #d2e4ff, 1vmin 1vmin #d2e4ff,
     0.65vmin 1vmin #d2e4ff, 1vmin 0.65vmin #d2e4ff;
 }
+.pdf-container {
+  display: flex;
+  flex: 1; /* Allow container to grow and shrink */
+  width: 100%; /* Ensures container fills available space */
+  height: 0; /* Prevent initial height */
+}
+
+.pdf-container embed {
+  max-width: 100%; /* Ensure PDF doesn't overflow horizontally */
+  max-height: 100vh; /* Fit to viewport height (adjust as needed) */
+}
