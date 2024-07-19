@@ -6,7 +6,7 @@ const HomeInfo = ({ currentStage }) => {
   if (currentStage === 1)
     return (
         <div>
-          <h2 className='sm:text-bold sm:leading-snug text-center py-4 mx-5 font-bold'>← Feel free to turn the island →</h2>
+          <h2 className='sm:text-bold sm:leading-snug text-center py-4 mx-5 font-bold text-black'>← Feel free to turn the island →</h2>
           <h1 className='sm:text-xl sm:leading-snug text-center neo-brutalism-purple py-4 px-8 text-white mx-5'>
             Hi, I'm
             <span className='font-semibold mx-2 text-white'>Henard</span>
