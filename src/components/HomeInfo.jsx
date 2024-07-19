@@ -39,7 +39,7 @@ const HomeInfo = ({ currentStage }) => {
           Click here to find out more about me <br /> and view my CV!
         </p>
 
-        <Link to='/about' className='neo-brutalism-white neo-btn' target="_blank" rel="noopener mpreferrer">
+        <Link to='/about' className='neo-brutalism-white neo-btn'>
           Learn more
           <img src={arrow} alt='arrow' className='w-4 h-4 object-contain' />
         </Link>
@@ -54,7 +54,7 @@ const HomeInfo = ({ currentStage }) => {
           I have worked on many projects. <br /> Curious what these are?
         </p>
 
-        <Link to='/projects' className='neo-brutalism-white neo-btn' target="_blank" rel="noopener mpreferrer">
+        <Link to='/projects' className='neo-brutalism-white neo-btn'>
           Visit my portfolio
           <img src={arrow} alt='arrow' className='w-4 h-4 object-contain' />
         </Link>
