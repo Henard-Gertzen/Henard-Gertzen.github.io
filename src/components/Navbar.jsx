@@ -12,7 +12,10 @@ const Navbar = () => {
             'bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent' : 'text-black'}>
                 About
             </NavLink>
-            
+            <NavLink to="/projects" className={({isActive}) => isActive ?
+            "bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent": 'text-black'}>
+                Projects
+            </NavLink>
         </nav>
     </header>
   )
@@ -20,7 +23,3 @@ const Navbar = () => {
 
 export default Navbar
 
-/*<NavLink to="/projects" className={({isActive}) => isActive ?
-            'text-purple-500' : 'text-black'}>
-                Projects
-            </NavLink>*/

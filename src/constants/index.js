@@ -118,16 +118,16 @@ export const socialLinks = [
 export const projects = [
     {
         iconUrl: message,
-        theme: 'btn-back-red',
-        name: 'Chat Application',
-        description: 'Developed a chat app in which users can add and message each other after creating an account.',
+        theme: 'btn-back-green',
+        name: 'Chat Application - Solo Project',
+        description: 'Developed a chat app in which users can add and message each other after creating an account. The application made use of technologies such as Rust, JavaScript, and Google Firebase. Applied UI design skills with practical network programming skills',
         link: 'https://github.com/Henard-Gertzen/CMPG315-Group2-Chat-App',
     },
     {
         iconUrl: wallet,
-        theme: 'btn-back-red',
-        name: 'Point of Sale System Group Project',
-        description: 'Developed a cinema point-of-sale app in C# that uses SQL databases which allows users to buy seats and order snacks.',
+        theme: 'btn-back-blue',
+        name: 'Point of Sale System - Group Project',
+        description: 'Developed a cinema point-of-sale app in C# that uses SQL databases which allows users to buy seats and order snacks. Applied theoretical UI design with practical skills to create a responsive app.',
         link: 'https://github.com/Henard-Gertzen/Skreenkinikor_Master_Project',
     }
 ];
