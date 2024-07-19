@@ -23,7 +23,8 @@ const HomeInfo = ({ currentStage }) => {
           Need a project done or looking for a dev? <br/> I am just a click away
         </p>
   
-        <Link to='https://www.linkedin.com/in/henard-gertzen-5b4267199/' className='neo-brutalism-white neo-btn'>
+        <Link to='https://www.linkedin.com/in/henard-gertzen-5b4267199/' className='neo-brutalism-white neo-btn' target="_blank" rel="noopener mpreferrer"
+            >
           Get in Contact!
           <img src={arrow} alt='arrow' className='w-4 h-4 object-contain' />
         </Link>
@@ -38,7 +39,7 @@ const HomeInfo = ({ currentStage }) => {
           Click here to find out more about me <br /> and view my CV!
         </p>
 
-        <Link to='/about' className='neo-brutalism-white neo-btn'>
+        <Link to='/about' className='neo-brutalism-white neo-btn' target="_blank" rel="noopener mpreferrer">
           Learn more
           <img src={arrow} alt='arrow' className='w-4 h-4 object-contain' />
         </Link>
@@ -53,7 +54,7 @@ const HomeInfo = ({ currentStage }) => {
           I have worked on many projects. <br /> Curious what these are?
         </p>
 
-        <Link to='/projects' className='neo-brutalism-white neo-btn'>
+        <Link to='/projects' className='neo-brutalism-white neo-btn' target="_blank" rel="noopener mpreferrer">
           Visit my portfolio
           <img src={arrow} alt='arrow' className='w-4 h-4 object-contain' />
         </Link>
