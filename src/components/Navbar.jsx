@@ -9,7 +9,7 @@ const Navbar = () => {
         </NavLink>
         <nav className="flex text-lg gap-7 font-medium">
             <NavLink to="/about" className={({isActive}) => isActive ?
-            'text-blue-500' : 'text-black'}>
+            'bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent' : 'text-black'}>
                 About
             </NavLink>
             
