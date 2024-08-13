@@ -119,7 +119,7 @@ export const projects = [
     {
         iconUrl: message,
         theme: 'btn-back-green',
-        name: 'Chat Application - Solo Project',
+        name: 'Chat Application - Group Project',
         description: 'Developed a chat app in which users can add and message each other after creating an account. The application made use of technologies such as Rust, JavaScript, and Google Firebase. Applied UI design skills with practical network programming skills',
         link: 'https://github.com/Henard-Gertzen/CMPG315-Group2-Chat-App',
     },
