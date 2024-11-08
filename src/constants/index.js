@@ -13,7 +13,9 @@ import {
     message,
     python,
     sql,
-    wallet
+    wallet,
+    car
+    
 } from "../assets/icons";
 
 export const skills = [
@@ -116,6 +118,13 @@ export const socialLinks = [
 ];
 
 export const projects = [
+    {
+        iconUrl: car,
+        theme: 'btn-back-orange',
+        name: 'My Technical Blog - Individual Project',
+        description: 'My Technical blog where I chronicle my path through Software Engineering.',
+        link: 'https://blog-j06dv3vvd-henard-gertzens-projects.vercel.app/',
+    },
     {
         iconUrl: message,
         theme: 'btn-back-green',

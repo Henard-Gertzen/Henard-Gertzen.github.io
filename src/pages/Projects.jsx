@@ -1,7 +1,5 @@
-import React from 'react'
 import { projects } from '../constants';
 import { Link } from 'react-router-dom';
-import { arrow } from '../assets/icons';
 import CTA from '../components/CTA';
 
 function Projects() {
@@ -19,9 +17,9 @@ function Projects() {
 
       <div className='flex flex-wrap my-20 gap-16'>
         {projects.map((project) => (
-          <div className='lg:w-[400] w-full' key={project.name}>
+          <div className='lg:w-[400] w-ful' key={project.name}>
             <div className='block-container w-12 h-12'>
-              <div className={`btn-back rounded-xl ${project.theme}`}/>
+              <div className={`btn-back rounded-xl ${project.theme} `}/>
               <div className='btn-front rounded-xl flex justify-center items-center'>
                 <img
                 src={project.iconUrl}
