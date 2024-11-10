@@ -123,7 +123,7 @@ export const projects = [
         theme: 'btn-back-orange',
         name: 'My Technical Blog - Individual Project',
         description: 'My Technical blog where I chronicle my path through Software Engineering.',
-        link: 'https://blog-j06dv3vvd-henard-gertzens-projects.vercel.app/',
+        link: 'https://blog-green-ten-83.vercel.app/',
     },
     {
         iconUrl: message,
