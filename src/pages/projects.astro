@@ -1,0 +1,98 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import MaybeLink from '../components/MaybeLink.astro';
+import Text from '../components/Text.astro';
+import { getProjects } from '../lib/content';
+import { pages } from '../site';
+
+const meta = pages['/projects/'];
+const [tooling, games] = await Promise.all([getProjects('tooling'), getProjects('games')]);
+
+const withContent = (list: CollectionEntry<'projects'>[]) =>
+  Promise.all(list.map(async (project) => ({ project, Content: (await render(project)).Content })));
+const [toolingItems, gameItems] = await Promise.all([withContent(tooling), withContent(games)]);
+const groups = [
+  { id: 'tooling', title: 'Agent tooling', items: toolingItems },
+  { id: 'games', title: 'Built with AI', items: gameItems },
+];
+---
+
+<Base title={meta.title} description={meta.description} image="/og/projects.png">
+  <header class="page-head wrap">
+    <p class="kicker">Projects</p>
+    <h1>Harnesses, evals and the things I build with them</h1>
+    <p class="lede">
+      The tooling I use to make coding agents follow a team’s standards, then the games I build by orchestrating
+      those agents.
+    </p>
+  </header>
+
+  {
+    groups.map((group) => (
+      <section class="section wrap" aria-labelledby={`${group.id}-title`}>
+        <div class="section-head">
+          <h2 id={`${group.id}-title`}>{group.title}</h2>
+        </div>
+        {group.id === 'games' && (
+          <p class="section-intro games-intro">
+            I build these in my own time by directing Claude Code agents: written briefs, long-running sessions,
+            headless bot playtests and automated tests that keep the agents honest.
+          </p>
+        )}
+        <ul class="project-list">
+          {group.items.map(({ project, Content }) => (
+            <li class="project" id={project.id}>
+              <div>
+                <p class="project-meta">
+                  <span class="project-kind">{project.data.kind}</span>
+                  <span>
+                    <Text text={project.data.status} />
+                  </span>
+                </p>
+                <h3>
+                  <Text text={project.data.title} />
+                </h3>
+                <p class="project-summary">
+                  <Text text={project.data.summary} />
+                </p>
+                {project.data.links.length > 0 && (
+                  <ul class="project-links">
+                    {project.data.links.map((link) => (
+                      <li>
+                        <MaybeLink href={link.href}>{link.label}</MaybeLink>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              <div class="project-side">
+                {project.data.highlights.length > 0 && (
+                  <ul class="card-highlights" aria-label="Highlights">
+                    {project.data.highlights.map((h) => (
+                      <li>
+                        <Text text={h} />
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {project.body?.trim() && (
+                  <div class="project-body prose">
+                    <Content />
+                  </div>
+                )}
+                {project.data.stack.length > 0 && (
+                  <ul class="chips" aria-label="Stack">
+                    {project.data.stack.map((s) => (
+                      <li>{s}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>

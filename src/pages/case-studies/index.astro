@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProofCard from '../../components/ProofCard.astro';
+import { getCaseStudies } from '../../lib/content';
+import { pages } from '../../site';
+
+const meta = pages['/case-studies/'];
+const studies = await getCaseStudies();
+---
+
+<Base title={meta.title} description={meta.description} image="/og/case-studies.png">
+  <header class="page-head wrap">
+    <p class="kicker">Case studies</p>
+    <h1>Coding agents on real teams, measured</h1>
+    <p class="lede">
+      Each one follows the same shape: the context, the problem, what I built, how I measured it against a baseline,
+      the results, and what didn’t work. Clients are anonymised.
+    </p>
+  </header>
+
+  <div class="wrap">
+    <div class="card-grid">
+      {
+        studies.map((s) => (
+          <ProofCard
+            kind="Case study"
+            title={s.data.title}
+            summary={s.data.summary}
+            href={`/case-studies/${s.id}/`}
+            cta="Read the case study"
+            metrics={s.data.metrics}
+          />
+        ))
+      }
+    </div>
+  </div>
+</Base>

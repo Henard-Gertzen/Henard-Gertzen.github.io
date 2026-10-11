@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import ProofCard from '../components/ProofCard.astro';
+import PostList from '../components/PostList.astro';
+import Signup from '../components/Signup.astro';
+import { getCaseStudies, getPosts } from '../lib/content';
+import { getCollection } from 'astro:content';
+import { pages, site } from '../site';
+
+const meta = pages['/'];
+const [caseStudies, projects, posts] = await Promise.all([
+  getCaseStudies(),
+  getCollection('projects', ({ data }) => data.featured),
+  getPosts(),
+]);
+
+// Proof: featured case studies first, then featured projects, three at most.
+const proof = [
+  ...caseStudies
+    .filter((s) => s.data.featured)
+    .map((s) => ({
+      kind: 'Case study',
+      title: s.data.title,
+      summary: s.data.summary,
+      href: `/case-studies/${s.id}/`,
+      cta: 'Read the case study',
+      metrics: s.data.metrics,
+    })),
+  ...projects
+    .sort((a, b) => a.data.order - b.data.order)
+    .map((p) => ({
+      kind: p.data.kind,
+      title: p.data.title,
+      summary: p.data.summary,
+      href: `/projects/#${p.id}`,
+      cta: 'See the project',
+      highlights: p.data.highlights,
+    })),
+].slice(0, 3);
+
+const [heroStart, heroEnd] = splitLast(site.hero.title, 3);
+
+/** Split off the last `n` words so they can be accented. */
+function splitLast(text: string, n: number) {
+  const words = text.split(' ');
+  return [words.slice(0, -n).join(' '), words.slice(-n).join(' ')];
+}
+---
+
+<Base title={meta.title} description={meta.description} image="/og/index.png">
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <p class="kicker">{site.name} · {site.tagline}</p>
+    <h1 id="hero-title">{heroStart} <em>{heroEnd}</em></h1>
+    <p class="lede">{site.hero.subtitle}</p>
+    <div class="hero-actions">
+      {proof[0] && <a class="button button-primary" href={proof[0].href}>See the proof</a>}
+      <a class="button" href="/work-with-me/">Work with me</a>
+    </div>
+    <p class="availability">
+      Open to remote AI enablement and developer education roles in EMEA time zones, and to running Claude Code
+      workshops for .NET teams.
+    </p>
+  </section>
+
+  <section class="section wrap" aria-labelledby="proof-title">
+    <div class="section-head">
+      <h2 id="proof-title">Proof</h2>
+      <a href="/projects/">All projects</a>
+    </div>
+    <div class="card-grid card-grid-3">
+      {proof.map((item) => <ProofCard {...item} />)}
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="writing-title">
+    <div class="section-head">
+      <h2 id="writing-title">Latest writing</h2>
+      <a href="/writing/">All writing</a>
+    </div>
+    <PostList posts={posts.slice(0, 3)} headingLevel={3} />
+  </section>
+
+  <div class="section wrap">
+    <Signup />
+  </div>
+</Base>

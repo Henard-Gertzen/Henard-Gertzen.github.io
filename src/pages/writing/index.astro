@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import Signup from '../../components/Signup.astro';
+import Tags from '../../components/Tags.astro';
+import { getPosts } from '../../lib/content';
+import { pages } from '../../site';
+
+const meta = pages['/writing/'];
+const posts = await getPosts();
+const tags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+---
+
+<Base title={meta.title} description={meta.description} image="/og/writing.png">
+  <header class="page-head wrap">
+    <p class="kicker">Writing</p>
+    <h1>Notes on making coding agents behave</h1>
+    <p class="lede">
+      Harness engineering, context engineering and evals, mostly for .NET and Angular teams. Subscribe by
+      <a href="/rss.xml">RSS</a> or email.
+    </p>
+  </header>
+
+  <div class="wrap">
+    {
+      tags.length > 0 && (
+        <nav class="tag-filter" aria-label="Tags">
+          <Tags tags={tags} />
+        </nav>
+      )
+    }
+    <PostList posts={posts} />
+  </div>
+
+  <div class="section wrap">
+    <Signup />
+  </div>
+</Base>

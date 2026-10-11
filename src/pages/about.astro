@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Text from '../components/Text.astro';
+import { pages, site } from '../site';
+
+const meta = pages['/about/'];
+---
+
+<Base title={meta.title} description={meta.description} image="/og/about.png">
+  <header class="page-head narrow">
+    <p class="kicker">About</p>
+    <h1>Hi, I’m Henard</h1>
+  </header>
+
+  <div class="narrow about-body">
+    <p class="lede">
+      I’m a software developer from South Africa. I help teams get coding agents to write code that fits their
+      codebase, not just code that compiles.
+    </p>
+    <p>
+      I grew up in Secunda, Mpumalanga, and built my first client websites in WordPress while I was still at school.
+      I went on to study IT at North-West University in Potchefstroom (BSc IT, 2021 to 2024), working in C#, Java,
+      Python and SQL, and found that I enjoy designing interfaces most.
+    </p>
+    <p>
+      <Text text="{{TODO: one or two sentences on your current work, without naming the employer or its clients}}" />
+    </p>
+    <p>
+      Outside work I build games with the same agents: a satirical power-grid sim about load shedding, a few
+      prototypes, and one very silly weekend project. Long projects with lots of moving parts are a good test of
+      orchestration.
+    </p>
+    <p>
+      I speak English and Afrikaans, and some Dutch. I’m interested in the ethics of AI and in using it
+      responsibly.
+    </p>
+    <p>
+      The best way to reach me is <a href={`mailto:${site.email}`}>{site.email}</a>, or see
+      <a href="/work-with-me/">how we could work together</a>.
+    </p>
+  </div>
+</Base>

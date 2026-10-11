@@ -1,0 +1,81 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import MaybeLink from '../components/MaybeLink.astro';
+import Text from '../components/Text.astro';
+import { formatDate, getTalks, isoDate } from '../lib/content';
+import { pages } from '../site';
+
+const meta = pages['/talks/'];
+const { upcoming, past } = await getTalks();
+
+const withContent = (list: CollectionEntry<'talks'>[]) =>
+  Promise.all(list.map(async (talk) => ({ talk, Content: (await render(talk)).Content })));
+const groups = [
+  { id: 'upcoming', title: 'Upcoming', items: await withContent(upcoming), empty: 'Nothing booked right now.' },
+  { id: 'past', title: 'Past', items: await withContent(past), empty: 'Nothing here yet.' },
+];
+const kindLabel = { talk: 'Talk', workshop: 'Workshop', podcast: 'Podcast' } as const;
+---
+
+<Base title={meta.title} description={meta.description} image="/og/talks.png">
+  <header class="page-head wrap">
+    <p class="kicker">Talks and workshops</p>
+    <h1>Talks and workshops</h1>
+    <p class="lede">
+      On making coding agents work in real .NET and Angular codebases. Want me at your meetup, conference or team
+      day? <a href="/work-with-me/">Get in touch</a>.
+    </p>
+  </header>
+
+  {
+    groups.map((group) => (
+      <section class="section wrap" aria-labelledby={`${group.id}-title`}>
+        <div class="section-head">
+          <h2 id={`${group.id}-title`}>{group.title}</h2>
+        </div>
+        {group.items.length === 0 ? (
+          <p class="empty">{group.empty}</p>
+        ) : (
+          <ol class="talk-list">
+            {group.items.map(({ talk, Content }) => (
+              <li class="talk">
+                <p class="talk-date">
+                  <time datetime={isoDate(talk.data.date)}>
+                    <Text text={formatDate(talk.data.date)} />
+                  </time>
+                  <br />
+                  {kindLabel[talk.data.kind]}
+                </p>
+                <div>
+                  <h3>
+                    <Text text={talk.data.title} />
+                  </h3>
+                  <p class="talk-where">
+                    <Text text={talk.data.event} />
+                    {talk.data.location && (
+                      <>
+                        , <Text text={talk.data.location} />
+                      </>
+                    )}
+                  </p>
+                  {talk.body?.trim() && (
+                    <div class="prose talk-body">
+                      <Content />
+                    </div>
+                  )}
+                  {(talk.data.url || talk.data.slides) && (
+                    <p class="talk-links">
+                      {talk.data.url && <MaybeLink href={talk.data.url}>Event page</MaybeLink>}
+                      {talk.data.slides && <MaybeLink href={talk.data.slides}>Slides</MaybeLink>}
+                    </p>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+        )}
+      </section>
+    ))
+  }
+</Base>

@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import CopyEmail from '../components/CopyEmail.astro';
+import Text from '../components/Text.astro';
+import { pages, site } from '../site';
+import { isTodo } from '../lib/todo';
+
+const meta = pages['/work-with-me/'];
+---
+
+<Base title={meta.title} description={meta.description} image="/og/work-with-me.png">
+  <header class="page-head wrap">
+    <p class="kicker">Work with me</p>
+    <h1>Two ways to work together</h1>
+    <p class="lede">
+      Hire me into a role where I help engineers adopt coding agents, or bring me in to roll out Claude Code with your
+      .NET team.
+    </p>
+  </header>
+
+  <div class="wrap">
+    <div class="paths">
+      <section class="path" aria-labelledby="roles-title">
+        <p class="card-kind">For hiring managers</p>
+        <h2 id="roles-title">Roles</h2>
+        <p>
+          I’m looking for a remote role in AI enablement, AI adoption, developer relations or developer education:
+          helping engineers get real, measurable value out of coding agents.
+        </p>
+        <ul>
+          <li><strong>Harness engineering:</strong> settings, hooks, permissions and tools, so every developer’s agent works the same way.</li>
+          <li><strong>Context engineering:</strong> your conventions written where the agent reads them, with real examples from your codebase.</li>
+          <li><strong>Evals:</strong> repeatable tasks scored against your standards, so “it’s better now” is a number.</li>
+        </ul>
+        <dl class="path-facts">
+          <div>
+            <dt>Where</dt>
+            <dd>Remote, EMEA time zones. Based in {site.location}.</dd>
+          </div>
+          <div>
+            <dt>Stack</dt>
+            <dd>Claude Code, .NET and ABP Framework, Angular, TypeScript</dd>
+          </div>
+        </dl>
+        <div class="path-actions">
+          {
+            isTodo(site.cv) ? (
+              <Text text={site.cv} />
+            ) : (
+              <a class="button button-primary" href={site.cv}>
+                Download my CV (PDF)
+              </a>
+            )
+          }
+          <a class="button" href={site.links.linkedin} rel="noopener">LinkedIn</a>
+        </div>
+      </section>
+
+      <section class="path" aria-labelledby="workshop-title">
+        <p class="card-kind">For .NET and Angular teams</p>
+        <h2 id="workshop-title">Workshop: {site.workshop.title}</h2>
+        <p>
+          A hands-on rollout in your own repository, so your team leaves with a working setup rather than a slide deck.
+        </p>
+        <ul>
+          <li><strong>Harness:</strong> a shared Claude Code setup the whole team runs: settings, permissions, hooks.</li>
+          <li><strong>Context:</strong> your ABP and Angular conventions in CLAUDE.md and skills, with exemplar files.</li>
+          <li><strong>Evals:</strong> a small task set scored against your standards, run before and after.</li>
+          <li><Text text="{{TODO: confirm the workshop agenda above, or replace it}}" /></li>
+        </ul>
+        <dl class="path-facts">
+          <div>
+            <dt>Format</dt>
+            <dd><Text text={site.workshop.format} /></dd>
+          </div>
+          <div>
+            <dt>Price</dt>
+            <dd><Text text={site.workshop.price} /></dd>
+          </div>
+        </dl>
+        <div class="path-actions">
+          <a class="button button-primary" href={`mailto:${site.email}?subject=${encodeURIComponent(site.workshop.title)}`}>
+            Ask about a workshop
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <section class="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Email me</h2>
+      <p>The fastest way to reach me, whether it’s about a role or a workshop.</p>
+      <CopyEmail />
+    </section>
+  </div>
+</Base>
