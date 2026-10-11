@@ -98,6 +98,7 @@ cover:                        # optional screenshot, next to the .md file
   alt: "What the screenshot shows"
 featured: false               # true puts it in the home page's Proof section
 order: 5                      # lower comes first
+draft: false                  # optional: true hides it outside `npm run dev`
 ---
 ```
 

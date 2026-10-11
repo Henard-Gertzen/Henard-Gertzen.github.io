@@ -63,6 +63,7 @@ const projects = defineCollection({
     cover: z.object({ src: image(), alt: z.string() }).optional(),
     featured: z.boolean().default(false),
     order: z.number().default(100),
+    draft: z.boolean().default(false),
   }),
 });
 

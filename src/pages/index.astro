@@ -3,14 +3,14 @@ import Base from '../layouts/Base.astro';
 import ProofCard from '../components/ProofCard.astro';
 import PostList from '../components/PostList.astro';
 import Signup from '../components/Signup.astro';
-import { getCaseStudies, getPosts } from '../lib/content';
+import { getCaseStudies, getPosts, published } from '../lib/content';
 import { getCollection } from 'astro:content';
 import { pages, site } from '../site';
 
 const meta = pages['/'];
 const [caseStudies, projects, posts] = await Promise.all([
   getCaseStudies(),
-  getCollection('projects', ({ data }) => data.featured),
+  getCollection('projects', (entry) => entry.data.featured && published(entry)),
   getPosts(),
 ]);
 

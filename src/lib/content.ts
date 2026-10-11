@@ -3,7 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 type Dated = Date | string;
 
 /** Drafts show up in `npm run dev` and never in a production build. */
-const published = ({ data }: { data: { draft?: boolean } }) => import.meta.env.DEV || !data.draft;
+export const published = ({ data }: { data: { draft?: boolean } }) => import.meta.env.DEV || !data.draft;
 
 /** Real dates sort by time; a {{TODO}} date sorts as "unknown". */
 const time = (date: Dated, unknown: number) => (date instanceof Date ? date.valueOf() : unknown);
@@ -19,7 +19,7 @@ export async function getCaseStudies() {
 }
 
 export async function getProjects(group: CollectionEntry<'projects'>['data']['group']) {
-  const projects = await getCollection('projects', ({ data }) => data.group === group);
+  const projects = await getCollection('projects', (entry) => entry.data.group === group && published(entry));
   return projects.sort((a, b) => a.data.order - b.data.order);
 }
 

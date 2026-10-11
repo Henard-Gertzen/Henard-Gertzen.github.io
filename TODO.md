@@ -21,9 +21,10 @@ live site or **hidden** (drafts, or settings the site leaves out until they're s
   Anonymised throughout: no Sygnio, client or product names. Then remove
   `draft: true` and set `featured: true` to put it in the home page's Proof row.
   Until then the Case studies page says the first one is in progress.
-- [ ] **Eval suite** (visible, 7 placeholders): `src/content/projects/eval-suite.md`.
-  Name, summary, status, repo URL, two highlights, stack. Visible on Projects;
-  set `featured: true` to put it in the home page's Proof row.
+- [ ] **Eval suite** (hidden draft, 7 placeholders):
+  `src/content/projects/eval-suite.md`. Name, summary, status, repo URL, two
+  highlights, stack. Then remove `draft: true`; `featured: true` also puts it in
+  the home page's Proof row.
 - [ ] **Draft post** (hidden, 7 placeholders):
   `src/content/posts/claude-code-abp-team-standards.md`. Fill the outline from the
   case study, then remove `draft: true` to publish.
