@@ -25,7 +25,7 @@ export const site = {
     format: '{{TODO: duration and format, e.g. two half-days, remote}}',
   },
   // Kit form ID: the number in the form's embed URL (app.kit.com/forms/<id>/...).
-  kitFormId: '{{TODO: Kit form ID}}',
+  kitFormId: '10032559',
   // GoatCounter site code: the "<code>" in https://<code>.goatcounter.com.
   goatCounter: 'henard',
 };

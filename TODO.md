@@ -1,7 +1,7 @@
 # TODO
 
 Everything on the site that is still a placeholder. Run `npm run todos` for the
-live list with file and line numbers; this file groups the same 39 placeholders
+live list with file and line numbers; this file groups the same 38 placeholders
 by what needs doing.
 
 Placeholders render as yellow `{{TODO: ...}}` chips so nothing unfinished can
@@ -10,11 +10,7 @@ live site or **hidden** (drafts, or settings the site leaves out until they're s
 
 ## Accounts: `src/site.ts`
 
-- [ ] **Kit form ID** (`kitFormId`). Visible: the signup form shows the chip and
-  stays disabled until this is set. In Kit: Audience growth → Landing pages &
-  forms → Create a form (inline). Copy the number from the form's embed code
-  (`app.kit.com/forms/<id>/subscriptions`) and set the form's redirect to
-  `https://henard-gertzen.github.io/subscribed/`.
+- [x] Kit: form `10032559`, redirecting to `/subscribed/` after signup.
 - [x] GoatCounter: `henard` (henard.goatcounter.com).
 
 ## Not built yet
