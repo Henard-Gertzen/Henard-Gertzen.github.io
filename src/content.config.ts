@@ -50,7 +50,7 @@ const posts = defineCollection({
 
 const projects = defineCollection({
   loader: markdown('./src/content/projects'),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     summary: z.string(),
     group: z.enum(['tooling', 'games']),
@@ -59,6 +59,8 @@ const projects = defineCollection({
     links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
     highlights: z.array(z.string()).default([]),
     stack: z.array(z.string()).default([]),
+    // A screenshot, relative to the .md file, e.g. ./images/my-project.jpg
+    cover: z.object({ src: image(), alt: z.string() }).optional(),
     featured: z.boolean().default(false),
     order: z.number().default(100),
   }),
@@ -74,6 +76,7 @@ const talks = defineCollection({
     location: z.string().optional(),
     url: todoOr(z.url()).optional(),
     slides: todoOr(z.url()).optional(),
+    draft: z.boolean().default(false),
   }),
 });
 

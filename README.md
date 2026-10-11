@@ -93,15 +93,21 @@ links:
 highlights:                   # short, concrete, ideally measured
   - "87 tests, CI on Node 20 and 22"
 stack: ["Node.js", "PowerShell 7"]
+cover:                        # optional screenshot, next to the .md file
+  src: "./images/pwsh-axi.png"
+  alt: "What the screenshot shows"
 featured: false               # true puts it in the home page's Proof section
 order: 5                      # lower comes first
 ---
 ```
 
 The home page's Proof section shows featured case studies first, then featured
-projects, three at most.
+projects, three at most. Cover images are resized and converted to WebP at build
+time, so a full-size PNG or JPG is fine.
 
 ### A talk or workshop: `src/content/talks/my-talk.md`
+
+Copy `src/content/talks/_template.md`:
 
 ```yaml
 ---
@@ -112,15 +118,18 @@ date: 2027-03-14
 location: "Cape Town"         # optional
 url: "https://..."            # optional: event page
 slides: "https://..."         # optional
+draft: false                  # optional: true hides it outside `npm run dev`
 ---
 ```
 
-Talks dated today or later are listed as upcoming; earlier ones as past.
+Talks dated today or later are listed as upcoming; earlier ones as past. With
+nothing published, the page shows a "Nothing booked yet" message instead.
 
 ## Site settings: `src/site.ts`
 
 Your email, links, the hero copy, the CV path, workshop price and format, the
-Kit form ID and the GoatCounter code. The page titles and descriptions used for
+Kit form ID and the GoatCounter code. The workshop price and format stay off the
+page while they're still `{{TODO}}`s. The page titles and descriptions used for
 SEO and link previews are there too.
 
 - **Newsletter:** the signup form posts straight to Kit, with no third-party

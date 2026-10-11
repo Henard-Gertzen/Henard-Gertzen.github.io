@@ -12,15 +12,15 @@ const { upcoming, past } = await getTalks();
 const withContent = (list: CollectionEntry<'talks'>[]) =>
   Promise.all(list.map(async (talk) => ({ talk, Content: (await render(talk)).Content })));
 const groups = [
-  { id: 'upcoming', title: 'Upcoming', items: await withContent(upcoming), empty: 'Nothing booked right now.' },
-  { id: 'past', title: 'Past', items: await withContent(past), empty: 'Nothing here yet.' },
-];
+  { id: 'upcoming', title: 'Upcoming', items: await withContent(upcoming) },
+  { id: 'past', title: 'Past', items: await withContent(past) },
+].filter((group) => group.items.length > 0);
 const kindLabel = { talk: 'Talk', workshop: 'Workshop', podcast: 'Podcast' } as const;
 ---
 
 <Base title={meta.title} description={meta.description} image="/og/talks.png">
   <header class="page-head wrap">
-    <p class="kicker">Talks and workshops</p>
+    <p class="kicker">Speaking</p>
     <h1>Talks and workshops</h1>
     <p class="lede">
       On making coding agents work in real .NET and Angular codebases. Want me at your meetup, conference or team
@@ -29,52 +29,65 @@ const kindLabel = { talk: 'Talk', workshop: 'Workshop', podcast: 'Podcast' } as 
   </header>
 
   {
+    groups.length === 0 && (
+      <section class="section wrap" aria-labelledby="empty-title">
+        <div class="section-head">
+          <h2 id="empty-title">Nothing booked yet</h2>
+        </div>
+        <p class="section-intro">
+          No talks or workshops are booked right now. I also run a hands-on Claude Code rollout workshop for .NET
+          teams.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="/work-with-me/">Get in touch</a>
+          <a class="button" href="/work-with-me/#workshop-title">About the workshop</a>
+        </div>
+      </section>
+    )
+  }
+  {
     groups.map((group) => (
       <section class="section wrap" aria-labelledby={`${group.id}-title`}>
         <div class="section-head">
           <h2 id={`${group.id}-title`}>{group.title}</h2>
         </div>
-        {group.items.length === 0 ? (
-          <p class="empty">{group.empty}</p>
-        ) : (
-          <ol class="talk-list">
-            {group.items.map(({ talk, Content }) => (
-              <li class="talk">
-                <p class="talk-date">
-                  <time datetime={isoDate(talk.data.date)}>
-                    <Text text={formatDate(talk.data.date)} />
-                  </time>
-                  <br />
-                  {kindLabel[talk.data.kind]}
+        <ol class="talk-list">
+          {group.items.map(({ talk, Content }) => (
+            <li class="talk">
+              <p class="talk-date">
+                <time datetime={isoDate(talk.data.date)}>
+                  <Text text={formatDate(talk.data.date)} />
+                </time>
+                <br />
+                {kindLabel[talk.data.kind]}
+              </p>
+              <div>
+                <h3>
+                  <Text text={talk.data.title} />
+                </h3>
+                <p class="talk-where">
+                  <Text text={talk.data.event} />
+                  {talk.data.location && (
+                    <>
+                      , <Text text={talk.data.location} />
+                    </>
+                  )}
                 </p>
-                <div>
-                  <h3>
-                    <Text text={talk.data.title} />
-                  </h3>
-                  <p class="talk-where">
-                    <Text text={talk.data.event} />
-                    {talk.data.location && (
-                      <>
-                        , <Text text={talk.data.location} />
-                      </>
-                    )}
+                {talk.body?.trim() && (
+                  <div class="prose talk-body">
+                    <Content />
+                  </div>
+                )}
+                {(talk.data.url || talk.data.slides) && (
+                  <p class="talk-links">
+                    {talk.data.url && <MaybeLink href={talk.data.url}>Event page</MaybeLink>}
+                    {talk.data.slides && <MaybeLink href={talk.data.slides}>Slides</MaybeLink>}
                   </p>
-                  {talk.body?.trim() && (
-                    <div class="prose talk-body">
-                      <Content />
-                    </div>
-                  )}
-                  {(talk.data.url || talk.data.slides) && (
-                    <p class="talk-links">
-                      {talk.data.url && <MaybeLink href={talk.data.url}>Event page</MaybeLink>}
-                      {talk.data.slides && <MaybeLink href={talk.data.slides}>Slides</MaybeLink>}
-                    </p>
-                  )}
-                </div>
-              </li>
-            ))}
-          </ol>
-        )}
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
       </section>
     ))
   }

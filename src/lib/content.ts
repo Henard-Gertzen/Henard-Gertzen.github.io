@@ -25,7 +25,7 @@ export async function getProjects(group: CollectionEntry<'projects'>['data']['gr
 
 /** Upcoming talks (and ones without a date yet) soonest first, then past talks newest first. */
 export async function getTalks() {
-  const talks = await getCollection('talks');
+  const talks = await getCollection('talks', published);
   const now = Date.now();
   const upcoming = talks
     .filter(({ data }) => time(data.date, Infinity) >= now)

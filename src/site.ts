@@ -18,6 +18,7 @@ export const site = {
   },
   // Drop the PDF in public/ and set this to its path, e.g. '/cv.pdf'.
   cv: '{{TODO: updated CV PDF (put it in public/cv.pdf, then set this to /cv.pdf)}}',
+  // Format and price only appear on the site once they're no longer {{TODO}}s.
   workshop: {
     title: 'Claude Code rollout for .NET teams',
     price: '{{TODO: workshop price}}',

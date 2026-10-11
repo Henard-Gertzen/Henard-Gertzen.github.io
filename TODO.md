@@ -1,83 +1,67 @@
 # TODO
 
-Everything on the site that is still a placeholder. Each one renders as a yellow
-`{{TODO: ...}}` chip until it's replaced, so nothing unfinished can pass as real.
+Everything on the site that is still a placeholder. Run `npm run todos` for the
+live list with file and line numbers; this file groups the same 46 placeholders
+by what needs doing.
 
-Run `npm run todos` for the live list with file and line numbers. This file
-groups the same 53 placeholders by what you need to do. Placeholders in the
-draft post only show in `npm run dev`; everything else is visible on the live
-site.
+Placeholders render as yellow `{{TODO: ...}}` chips so nothing unfinished can
+pass as real. Each section says whether its placeholders are **visible** on the
+live site or **hidden** (drafts, or settings the site leaves out until they're set).
 
-## Accounts and settings: `src/site.ts`
+## Accounts: `src/site.ts`
 
-- [ ] **Kit form ID** (`kitFormId`). Create a form in Kit, copy the number from its
-  embed URL (`app.kit.com/forms/<id>/...`), and set the form's redirect URL to
-  `https://henard-gertzen.github.io/subscribed/`. Until then the signup form is disabled.
-- [ ] **GoatCounter site code** (`goatCounter`). Create a free site at goatcounter.com
-  and set the code (the `<code>` in `https://<code>.goatcounter.com`). Until then no
-  analytics script loads.
-- [ ] **CV** (`cv`). Put an updated PDF at `public/cv.pdf` and set `cv: '/cv.pdf'`.
-  The 2024 student CV stays on the `legacy-3d-site` branch.
-- [ ] **Workshop price** (`workshop.price`).
-- [ ] **Workshop duration and format** (`workshop.format`).
+- [ ] **Kit form ID** (`kitFormId`). Visible: the signup form shows the chip and
+  stays disabled until this is set. Create the form in Kit, copy the number from
+  the form's embed code (`app.kit.com/forms/<id>/subscriptions`), and set the
+  form's redirect to `https://henard-gertzen.github.io/subscribed/`.
+- [ ] **GoatCounter site code** (`goatCounter`). Hidden: no analytics script loads
+  until it's set. The code is the `<code>` in `https://<code>.goatcounter.com`.
 
-## Case study: `src/content/case-studies/claude-code-abp-angular-conventions.md`
+## Not built yet
 
-Anonymised throughout: no Sygnio, client or product names.
+- [ ] **Case study** (visible, 18 placeholders):
+  `src/content/case-studies/claude-code-abp-angular-conventions.md`. Client, role,
+  period, tooling, both metrics (baseline, after, method) and all six sections.
+  Anonymised throughout: no Sygnio, client or product names.
+- [ ] **Eval suite** (visible, 7 placeholders): `src/content/projects/eval-suite.md`.
+  Name, summary, status, repo URL, two highlights, stack. It's a featured Proof
+  card on the home page.
+- [ ] **LinkedIn article** (visible, 4 placeholders):
+  `src/content/posts/linkedin-article.md`. Title, summary, date and URL once it's
+  published. It stays out of the RSS feed until the date and URL are real.
+- [ ] **Draft post** (hidden, 7 placeholders):
+  `src/content/posts/claude-code-abp-team-standards.md`. Fill the outline from the
+  case study, then remove `draft: true` to publish.
+- [ ] **CV** (visible): put an updated PDF at `public/cv.pdf` and set
+  `cv: '/cv.pdf'` in `src/site.ts`. The 2024 student CV stays on the
+  `legacy-3d-site` branch.
 
-- [ ] Client: team size and domain
-- [ ] Your role
-- [ ] Period
-- [ ] Eval and CI tooling used (Stack)
-- [ ] Metric 1: baseline PR review rounds
-- [ ] Metric 1: PR review rounds after
-- [ ] Metric 1: how and over how many PRs it was measured
-- [ ] Metric 2: baseline eval pass rate
-- [ ] Metric 2: eval pass rate after
-- [ ] Metric 2: number of eval tasks and how each is scored
-- [ ] Context section
-- [ ] Problem section, with one concrete anonymised example
-- [ ] What I built: harness
-- [ ] What I built: context
-- [ ] What I built: evals
-- [ ] How I measured section
-- [ ] Results section
-- [ ] What didn't work section
+## Waiting on links or bookings
 
-## Projects: `src/content/projects/`
+- [ ] **Nuke France itch.io URL** (visible): `src/content/projects/nuke-france.md`.
+- [ ] **Load Shedding Steam page**: nothing on the site yet. When the page is live,
+  add a `links` entry to `src/content/projects/load-shedding.md`.
+- [ ] **First workshop booking** (hidden draft, 3 placeholders):
+  `src/content/talks/claude-code-rollout-workshop.md`. Host, date, location, then
+  remove `draft: true`. Until something is booked, the Talks page says "Nothing
+  booked yet".
 
-- [ ] `eval-suite.md`: real name, one-sentence summary, status, repo URL, two
-  highlights (task count and coverage, how a task is scored), stack
-- [ ] `load-shedding.md`: Steam page URL
-- [ ] `nuke-france.md`: itch.io URL
+## Workshop: `src/site.ts` (hidden)
 
-## Writing: `src/content/posts/`
+- [ ] **Price** (`workshop.price`) and **format** (`workshop.format`). Neither
+  shows on the Work with me page until it's set.
+- [ ] Confirm the workshop agenda on the Work with me page (harness, context, evals).
+  It's visible now, so edit it if it isn't what you'd run.
 
-- [ ] `linkedin-article.md`: title, one-sentence summary, publish date, URL. It
-  stays out of the RSS feed until the date and URL are real.
-- [ ] `claude-code-abp-team-standards.md` (draft): seven placeholders in the outline
-  (a recurring review comment, CLAUDE.md length and placement, best exemplars,
-  checks added, skills built, link to the case study numbers, what didn't work).
-  Remove `draft: true` to publish.
+## About: `src/pages/about.astro` (visible)
 
-## Talks: `src/content/talks/`
-
-- [ ] `claude-code-rollout-workshop.md`: host or event, date, location
-- [ ] `first-talk.md`: title, event, date, location, event page URL. Or delete the
-  file until you have a real talk.
-
-## Pages
-
-- [ ] `src/pages/about.astro`: one or two sentences on your current work, without
-  naming the employer or its clients
-- [ ] `src/pages/work-with-me.astro`: confirm the workshop agenda (harness, context,
-  evals) or replace it
+- [ ] One or two sentences on your current work, without naming the employer or
+  its clients. To come from your LinkedIn profile.
 
 ## Facts to check (not placeholders)
 
 I wrote these from your old site, your 2024 CV, the READMEs of your Synodalia
-repos and my notes from your game projects. Please confirm they're accurate and
-that you're happy to publish them:
+repos and my notes from your game projects. Please confirm they're accurate:
 
 - **About**: grew up in Secunda; first WordPress client sites while still at
   school (DYOPTRI, 2017 to 2018); BSc IT at North-West University, 2021 to 2024.
