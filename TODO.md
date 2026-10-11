@@ -4,7 +4,7 @@ Everything on the site that is still a placeholder. Each one renders as a yellow
 `{{TODO: ...}}` chip until it's replaced, so nothing unfinished can pass as real.
 
 Run `npm run todos` for the live list with file and line numbers. This file
-groups the same 63 placeholders by what you need to do. Placeholders in the
+groups the same 53 placeholders by what you need to do. Placeholders in the
 draft post only show in `npm run dev`; everything else is visible on the live
 site.
 
@@ -46,13 +46,8 @@ Anonymised throughout: no Sygnio, client or product names.
 
 ## Projects: `src/content/projects/`
 
-- [ ] `directorate-harness.md`: public harness repo URL
 - [ ] `eval-suite.md`: real name, one-sentence summary, status, repo URL, two
   highlights (task count and coverage, how a task is scored), stack
-- [ ] `claude-code-plugin.md`: real name, one-sentence summary, status, repo URL,
-  two highlights (most useful skill or hook, a measured result), stack
-- [ ] `the-directorate.md`: repo URL, if it goes public
-- [ ] `pwsh-axi.md`: repo URL, if it goes public
 - [ ] `load-shedding.md`: Steam page URL
 - [ ] `nuke-france.md`: itch.io URL
 
@@ -84,16 +79,11 @@ I wrote these from your old site, your 2024 CV, the READMEs of your Synodalia
 repos and my notes from your game projects. Please confirm they're accurate and
 that you're happy to publish them:
 
-- **Hero line**: sharpened to "I make coding agents write code your team would
-  merge." Your original is one edit away in `src/site.ts` (`hero.title`).
 - **About**: grew up in Secunda; first WordPress client sites while still at
   school (DYOPTRI, 2017 to 2018); BSc IT at North-West University, 2021 to 2024.
 - **Directorate Harness**: NO_COLOR 171 → 118 tokens (-31%); profile costs of 162
-  tokens (solo) and 945 (directorate). From its BENCHMARKS.md.
+  (solo), 945 (directorate) and 312 (operative) tokens. From its BENCHMARKS.md.
 - **pwsh-axi**: 87 tests, CI on Node 20 and 22. From the repo description.
-- **The Directorate, Directorate Harness, pwsh-axi** are private repos today. Their
-  descriptions are public on the site now; check that's fine and that none of them
-  contain Sygnio material.
 - **Load Shedding**: 60 to 80 seeded bot runs per difficulty cell; deterministic
   dynamic difficulty; GDScript chosen for a browser demo.
 - **Nuke France**: six Shorts rendered from a script; browser performance work.
