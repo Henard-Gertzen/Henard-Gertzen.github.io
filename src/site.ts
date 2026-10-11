@@ -14,7 +14,7 @@ export const site = {
   location: 'South Africa (UTC+2)',
   links: {
     github: 'https://github.com/Henard-Gertzen',
-    linkedin: 'https://www.linkedin.com/in/henard-gertzen-5b4267199',
+    linkedin: 'https://www.linkedin.com/in/henard-g-5b4267199',
   },
   // Drop the PDF in public/ and set this to its path, e.g. '/cv.pdf'.
   cv: '{{TODO: updated CV PDF (put it in public/cv.pdf, then set this to /cv.pdf)}}',
@@ -27,7 +27,7 @@ export const site = {
   // Kit form ID: the number in the form's embed URL (app.kit.com/forms/<id>/...).
   kitFormId: '{{TODO: Kit form ID}}',
   // GoatCounter site code: the "<code>" in https://<code>.goatcounter.com.
-  goatCounter: '{{TODO: GoatCounter site code}}',
+  goatCounter: 'henard',
 };
 
 /** Title and description for each standalone page; also drives its Open Graph image. */

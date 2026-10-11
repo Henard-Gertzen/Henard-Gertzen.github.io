@@ -5,7 +5,7 @@ summary: "A weekend meme game. Click. Boom. Baguette. Released on itch.io for Wi
 status: "Released"
 links:
   - label: "itch.io"
-    href: "{{TODO: Nuke France itch.io URL}}"
+    href: "https://de-jonkheer.itch.io/nuke-france"
 highlights:
   - "Six YouTube Shorts rendered from a script, not edited by hand"
   - "Browser build made smooth by merging map meshes and batching draw calls, profiled in headless Chrome"

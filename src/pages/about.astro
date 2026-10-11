@@ -1,9 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
-import Text from '../components/Text.astro';
 import { pages, site } from '../site';
 
 const meta = pages['/about/'];
+const article = 'https://www.linkedin.com/pulse/lazy-optimizer-why-we-need-stop-calling-ai-henard-gertzen-dnpef/';
 ---
 
 <Base title={meta.title} description={meta.description} image="/og/about.png">
@@ -14,25 +14,25 @@ const meta = pages['/about/'];
 
   <div class="narrow about-body">
     <p class="lede">
-      I’m a software developer from South Africa. I help teams get coding agents to write code that fits their
-      codebase, not just code that compiles.
+      I’m a software developer based in Secunda, Mpumalanga, in South Africa. I help teams get coding agents to write
+      code that fits their codebase, not just code that compiles.
     </p>
     <p>
-      I grew up in Secunda, Mpumalanga, and built my first client websites in WordPress while I was still at school.
-      I went on to study IT at North-West University in Potchefstroom (BSc IT, 2021 to 2024), working in C#, Java,
-      Python and SQL, and found that I enjoy designing interfaces most.
+      I built my first websites in WordPress during a high-school holiday job. I went on to study IT at North-West
+      University in Potchefstroom (BSc IT, 2021 to 2024), doing freelance graphic and web design alongside my studies.
     </p>
     <p>
-      <Text text="{{TODO: one or two sentences on your current work, without naming the employer or its clients}}" />
+      Since 2025 I’ve worked as a full-stack developer: first on React and Next.js front-ends, and now remotely on
+      enterprise .NET and Angular software.
     </p>
     <p>
-      Outside work I build games with the same agents: a satirical power-grid sim about load shedding, a few
+      Outside work I build games with coding agents: a satirical power-grid sim about load shedding, a few
       prototypes, and one very silly weekend project. Long projects with lots of moving parts are a good test of
       orchestration.
     </p>
     <p>
-      I speak English and Afrikaans, and some Dutch. I’m interested in the ethics of AI and in using it
-      responsibly.
+      I speak English and Afrikaans, and some Dutch. I’m interested in the ethics of AI, and I’ve written about
+      <a href={article}>why I’d rather call it a lazy optimizer than intelligent</a>.
     </p>
     <p>
       The best way to reach me is <a href={`mailto:${site.email}`}>{site.email}</a>, or see
