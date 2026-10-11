@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import headshot from '../assets/henard-gertzen.jpg';
+import headshot from '../assets/henard-gertzen.png';
 import { pages, site } from '../site';
 
 const meta = pages['/about/'];
@@ -9,52 +9,79 @@ const article = 'https://www.linkedin.com/pulse/lazy-optimizer-why-we-need-stop-
 ---
 
 <Base title={meta.title} description={meta.description} image="/og/about.png">
-  <header class="page-head narrow about-head">
-    <Image
-      class="about-photo"
-      src={headshot}
-      alt="Henard Gertzen, smiling, in a white shirt and blue tie"
-      width={176}
-      height={176}
-      densities={[1, 2]}
-      loading="eager"
-    />
-    <div>
+  <div class="wrap about">
+    <header class="about-head">
       <p class="kicker">About</p>
       <h1>Hi, I’m Henard</h1>
-    </div>
-  </header>
+    </header>
 
-  <div class="narrow about-body">
-    <p class="lede">
-      I’m a full-stack developer in Secunda, South Africa. I help teams get coding agents to write code that fits their
-      codebase, not just code that compiles.
-    </p>
-    <p>
-      I wrote my first software in high school, as one of a handful of students in the first year group at my school
-      to take IT, and built my first WordPress websites in holiday jobs. After school I worked as a hardware technician,
-      keeping clients’ systems up to date.
-    </p>
-    <p>
-      In 2021 I started a BSc in IT at North-West University in Potchefstroom. Alongside my studies I did freelance
-      graphic and web design, and helped other students set up their computers, learn their software and get through
-      their projects. In my final year I led our team on <a href="/projects/#share2teach">Share2Teach</a> as team lead,
-      Scrum Master and head designer.
-    </p>
-    <p>
-      After graduating I spent a few months as an intermediate full-stack developer at EziDev, then moved back to
-      Secunda. Today I work remotely as a full-stack developer on .NET and Angular software, specialising in AI
-      harnesses: the setup that makes coding agents work to a team’s standards.
-    </p>
-    <p>
-      Outside work I build <a href="/projects/#games-title">games with coding agents</a>, a point-of-sale system, and
-      software for philosophy and theology. I think a lot about what AI actually is and the role agents play in our
-      lives, and I’ve written about <a href={article}>why I’d rather call it a lazy optimizer than intelligent</a>.
-    </p>
-    <p>I speak English and Afrikaans, and some Dutch.</p>
-    <p>
-      The best way to reach me is <a href={`mailto:${site.email}`}>{site.email}</a>, or see
-      <a href="/work-with-me/">what I do</a>.
-    </p>
+    <aside class="about-aside" aria-label="At a glance">
+      <figure class="about-portrait">
+        <Image
+          src={headshot}
+          alt="Henard Gertzen, smiling, in a white shirt and tie"
+          widths={[200, 400]}
+          sizes="(min-width: 52rem) 13rem, 7rem"
+          loading="eager"
+        />
+      </figure>
+      <dl class="about-facts">
+        <div>
+          <dt>Based in</dt>
+          <dd>Secunda, South Africa</dd>
+        </div>
+        <div>
+          <dt>Works on</dt>
+          <dd>.NET, Angular, Claude Code</dd>
+        </div>
+        <div>
+          <dt>Studied</dt>
+          <dd>BSc IT, North-West University</dd>
+        </div>
+        <div>
+          <dt>Speaks</dt>
+          <dd>English, Afrikaans, some Dutch</dd>
+        </div>
+        <div>
+          <dt>Elsewhere</dt>
+          <dd>
+            <a href={site.links.linkedin} rel="noopener">LinkedIn</a>,
+            <a href={site.links.github} rel="noopener">GitHub</a>
+          </dd>
+        </div>
+      </dl>
+    </aside>
+
+    <div class="about-body">
+      <p class="lede">
+        I’m a full-stack developer in Secunda, South Africa. I help teams get coding agents to write code that fits
+        their codebase, not just code that compiles.
+      </p>
+      <p>
+        I wrote my first software in high school, as one of a handful of students in the first year group at my
+        school to take IT, and built my first WordPress websites in holiday jobs. After school I worked as a hardware
+        technician, keeping clients’ systems up to date.
+      </p>
+      <p>
+        In 2021 I started a BSc in IT at North-West University in Potchefstroom. Alongside my studies I did freelance
+        graphic and web design, and helped other students set up their computers, learn their software and get
+        through their projects. In my final year I led our team on <a href="/projects/#share2teach">Share2Teach</a> as
+        team lead, Scrum Master and head designer.
+      </p>
+      <p>
+        After graduating I spent a few months as an intermediate full-stack developer at EziDev, then moved back to
+        Secunda. Today I work remotely as a full-stack developer on .NET and Angular software, specialising in AI
+        harnesses: the setup that makes coding agents work to a team’s standards.
+      </p>
+      <p>
+        Outside work I build <a href="/projects/#games-title">games with coding agents</a>, a point-of-sale system,
+        and software for philosophy and theology. I think a lot about what AI actually is and the role agents play in
+        our lives, and I’ve written about <a href={article}>why I’d rather call it a lazy optimizer than intelligent</a>.
+      </p>
+      <p>
+        The best way to reach me is <a href={`mailto:${site.email}`}>{site.email}</a>, or see
+        <a href="/work-with-me/">what I do</a>.
+      </p>
+    </div>
   </div>
 </Base>
