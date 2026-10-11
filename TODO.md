@@ -15,11 +15,12 @@ live site or **hidden** (drafts, or settings the site leaves out until they're s
 
 ## Not built yet
 
-- [ ] **Case study** (visible, 18 placeholders):
+- [ ] **Case study** (hidden draft, 18 placeholders):
   `src/content/case-studies/claude-code-abp-angular-conventions.md`. Client, role,
   period, tooling, both metrics (baseline, after, method) and all six sections.
-  Anonymised throughout: no Sygnio, client or product names. Then set
-  `featured: true` to put it back in the home page's Proof row.
+  Anonymised throughout: no Sygnio, client or product names. Then remove
+  `draft: true` and set `featured: true` to put it in the home page's Proof row.
+  Until then the Case studies page says the first one is in progress.
 - [ ] **Eval suite** (visible, 7 placeholders): `src/content/projects/eval-suite.md`.
   Name, summary, status, repo URL, two highlights, stack. Visible on Projects;
   set `featured: true` to put it in the home page's Proof row.

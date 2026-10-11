@@ -22,6 +22,7 @@ metrics:
     note: "{{TODO: number of eval tasks and how each is scored}}"
 featured: false # true when written: puts it back in the home page Proof row
 order: 1
+draft: true # hidden until written; remove to publish
 ---
 
 ## Context

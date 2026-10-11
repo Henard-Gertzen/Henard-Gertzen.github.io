@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ProofCard from '../../components/ProofCard.astro';
+import Signup from '../../components/Signup.astro';
 import { getCaseStudies } from '../../lib/content';
 import { pages } from '../../site';
 
@@ -17,6 +18,26 @@ const studies = await getCaseStudies();
       the results, and what didn’t work. Clients are anonymised.
     </p>
   </header>
+
+  {
+    studies.length === 0 && (
+      <section class="section wrap" aria-labelledby="progress-title">
+        <div class="section-head">
+          <h2 id="progress-title">The first one is in progress</h2>
+        </div>
+        <p class="section-intro">
+          It covers making Claude Code follow a team’s ABP and Angular conventions, with baseline and after numbers.
+          Until it’s ready, my agent tooling is on the Projects page.
+        </p>
+        <div class="section-actions">
+          <a class="button button-primary" href="/projects/">See the projects</a>
+        </div>
+        <div class="section">
+          <Signup />
+        </div>
+      </section>
+    )
+  }
 
   <div class="wrap">
     <div class="card-grid">

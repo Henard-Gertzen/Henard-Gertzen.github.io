@@ -523,6 +523,12 @@ mark.todo {
   color: var(--ink-2);
 }
 
+.section-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
 /* ---------- Home ---------- */
 
 .hero {
