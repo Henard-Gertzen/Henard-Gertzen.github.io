@@ -28,8 +28,9 @@ live site or **hidden** (drafts, or settings the site leaves out until they're s
 - [ ] **Draft post** (hidden, 7 placeholders):
   `src/content/posts/claude-code-abp-team-standards.md`. Fill the outline from the
   case study, then remove `draft: true` to publish.
-- [ ] **CV** (visible): put an updated PDF at `public/cv.pdf` and set
-  `cv: '/cv.pdf'` in `src/site.ts`. The 2024 student CV stays on the
+- [ ] **CV** (hidden): put an updated PDF at `public/cv.pdf` and set
+  `cv: '/cv.pdf'` in `src/site.ts`; the Download button then appears on Work with
+  me. The 2024 student CV stays on the
   `legacy-3d-site` branch.
 
 ## Waiting on links or bookings

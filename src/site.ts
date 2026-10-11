@@ -16,7 +16,8 @@ export const site = {
     github: 'https://github.com/Henard-Gertzen',
     linkedin: 'https://www.linkedin.com/in/henard-g-5b4267199',
   },
-  // Drop the PDF in public/ and set this to its path, e.g. '/cv.pdf'.
+  // Drop the PDF in public/ and set this to its path, e.g. '/cv.pdf'. Until then
+  // the Work with me page shows only the LinkedIn button.
   cv: '{{TODO: updated CV PDF (put it in public/cv.pdf, then set this to /cv.pdf)}}',
   // Format and price only appear on the site once they're no longer {{TODO}}s.
   workshop: {

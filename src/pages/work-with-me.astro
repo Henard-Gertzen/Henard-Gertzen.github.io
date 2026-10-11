@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import CopyEmail from '../components/CopyEmail.astro';
-import Text from '../components/Text.astro';
 import { pages, site } from '../site';
 import { isTodo } from '../lib/todo';
 
@@ -44,20 +43,20 @@ const workshopFacts = [
           </div>
           <div>
             <dt>Stack</dt>
-            <dd>Claude Code, .NET and ABP Framework, Angular, TypeScript</dd>
+            <dd>Claude Code, C# and .NET (ABP Framework), Angular, TypeScript, React and Next.js</dd>
           </div>
         </dl>
         <div class="path-actions">
           {
-            isTodo(site.cv) ? (
-              <Text text={site.cv} />
-            ) : (
+            !isTodo(site.cv) && (
               <a class="button button-primary" href={site.cv}>
                 Download my CV (PDF)
               </a>
             )
           }
-          <a class="button" href={site.links.linkedin} rel="noopener">LinkedIn</a>
+          <a class:list={['button', { 'button-primary': isTodo(site.cv) }]} href={site.links.linkedin} rel="noopener">
+            LinkedIn
+          </a>
         </div>
       </section>
 
