@@ -1,7 +1,7 @@
 /**
- * Placeholders look like `{{TODO: what is missing}}`. They are allowed anywhere
- * real content is still missing, are highlighted wherever they render, and are
- * listed by `npm run todos`.
+ * Placeholders look like `{{TODO: ...}}`, with a note on what is missing. They
+ * are allowed anywhere real content is still missing, are highlighted wherever
+ * they render, and are listed by `npm run todos`.
  */
 const TODO = /(\{\{TODO:[^}]*\}\})/;
 
