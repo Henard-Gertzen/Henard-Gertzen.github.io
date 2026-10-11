@@ -1298,6 +1298,26 @@ mark.todo {
 
 /* ---------- About ---------- */
 
+.about-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1.25rem 1.75rem;
+}
+
+.about-photo {
+  width: 7.5rem;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+@media (min-width: 40rem) {
+  .about-photo {
+    width: 11rem;
+  }
+}
+
 .about-body > * + * {
   margin-top: 1.1em;
 }

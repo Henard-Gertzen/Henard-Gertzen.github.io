@@ -7,7 +7,7 @@ links:
   - label: "Repository"
     href: "https://github.com/Henard-Gertzen/CMPG315-Group2-Chat-App"
 highlights:
-  - "Scored 95% for the Networks project"
+  - "I led the project, which scored 95% for Networks"
   - "Tauri desktop shell (Rust) with a React front-end and Firebase for auth and messages"
 stack: ["Tauri", "Rust", "React", "JavaScript", "Firebase"]
 group: university
