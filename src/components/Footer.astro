@@ -6,7 +6,9 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="wrap site-footer-inner">
-    <p>© {year} {site.name}. {site.location}.</p>
+    <p>
+      © {year} {site.name}. Secunda, South Africa, <time class="local-time">UTC+2</time>.
+    </p>
     <ul class="footer-links">
       <li><a href={`mailto:${site.email}`}>Email</a></li>
       <li><a href={site.links.linkedin} rel="noopener">LinkedIn</a></li>
@@ -15,3 +17,14 @@ const year = new Date().getFullYear();
     </ul>
   </div>
 </footer>
+
+<script>
+  // Swap the static "UTC+2" for Henard's current local time.
+  const el = document.querySelector<HTMLTimeElement>('.local-time');
+  const format = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Johannesburg' });
+  const tick = () => {
+    if (el) el.textContent = `${format.format(new Date())} SAST`;
+  };
+  tick();
+  setInterval(tick, 30_000);
+</script>
