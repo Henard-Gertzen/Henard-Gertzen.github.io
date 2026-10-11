@@ -33,6 +33,7 @@ export async function renderOg({ kicker, title, description }: OgCard) {
     h(
       'div',
       {
+        boxSizing: 'border-box',
         width: '100%',
         height: '100%',
         display: 'flex',
