@@ -47,7 +47,7 @@ export const pages = {
   },
   '/writing/': {
     title: 'Writing',
-    description: 'Notes on harness engineering, context engineering and evals for teams adopting coding agents.',
+    description: 'What coding agents actually are, and how to make them write code your team would merge.',
   },
   '/talks/': {
     title: 'Talks and workshops',
