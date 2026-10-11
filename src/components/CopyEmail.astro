@@ -1,0 +1,30 @@
+---
+import { site } from '../site';
+---
+
+<div class="copy-email">
+  <span class="copy-email-address">{site.email}</span>
+  <button type="button" class="button button-small" data-copy={site.email}>Copy</button>
+  <span class="copy-email-status" role="status"></span>
+</div>
+
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy]')) {
+    const status = button.nextElementSibling;
+    const address = button.previousElementSibling;
+    let timer: number | undefined;
+
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy ?? '');
+        if (status) status.textContent = 'Copied';
+      } catch {
+        // No clipboard access: select the address so Ctrl+C / Cmd+C works.
+        if (address) window.getSelection()?.selectAllChildren(address);
+        if (status) status.textContent = 'Selected: press Ctrl+C or Cmd+C to copy';
+      }
+      clearTimeout(timer);
+      timer = window.setTimeout(() => status && (status.textContent = ''), 3000);
+    });
+  }
+</script>

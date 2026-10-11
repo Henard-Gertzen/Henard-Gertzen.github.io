@@ -1,0 +1,65 @@
+/**
+ * Site-wide settings. Anything still wrapped in {{TODO: ...}} is a placeholder:
+ * the newsletter form and analytics stay switched off until their value is real.
+ */
+export const site = {
+  name: 'Henard Gertzen',
+  url: 'https://henard-gertzen.github.io',
+  tagline: 'AI enablement for .NET and Angular teams',
+  hero: {
+    title: 'I make coding agents write code your team would merge.',
+    subtitle: 'Harness engineering, context engineering and evals for .NET/ABP and Angular teams.',
+  },
+  email: 'henardgertzen@gmail.com',
+  location: 'South Africa (UTC+2)',
+  links: {
+    github: 'https://github.com/Henard-Gertzen',
+    linkedin: 'https://www.linkedin.com/in/henard-gertzen-5b4267199',
+  },
+  // Drop the PDF in public/ and set this to its path, e.g. '/cv.pdf'.
+  cv: '{{TODO: updated CV PDF (put it in public/cv.pdf, then set this to /cv.pdf)}}',
+  workshop: {
+    title: 'Claude Code rollout for .NET teams',
+    price: '{{TODO: workshop price}}',
+    format: '{{TODO: duration and format, e.g. two half-days, remote}}',
+  },
+  // Kit form ID: the number in the form's embed URL (app.kit.com/forms/<id>/...).
+  kitFormId: '{{TODO: Kit form ID}}',
+  // GoatCounter site code: the "<code>" in https://<code>.goatcounter.com.
+  goatCounter: '{{TODO: GoatCounter site code}}',
+};
+
+/** Title and description for each standalone page; also drives its Open Graph image. */
+export const pages = {
+  '/': {
+    title: 'Henard Gertzen | Coding agents that follow your team’s standards',
+    description:
+      'Harness engineering, context engineering and evals that make Claude Code write .NET/ABP and Angular code your team would merge.',
+  },
+  '/case-studies/': {
+    title: 'Case studies',
+    description: 'How I made coding agents follow real teams’ standards, with baselines, results and what didn’t work.',
+  },
+  '/projects/': {
+    title: 'Projects',
+    description: 'Agent harnesses, evals and tooling for Claude Code, plus games built by orchestrating coding agents.',
+  },
+  '/writing/': {
+    title: 'Writing',
+    description: 'Notes on harness engineering, context engineering and evals for teams adopting coding agents.',
+  },
+  '/talks/': {
+    title: 'Talks and workshops',
+    description: 'Talks and workshops on rolling out Claude Code in .NET and Angular teams.',
+  },
+  '/work-with-me/': {
+    title: 'Work with me',
+    description: 'Hire me for an AI enablement role, or book a Claude Code rollout workshop for your .NET team.',
+  },
+  '/about/': {
+    title: 'About',
+    description: 'Henard Gertzen: a South African developer who makes coding agents behave like members of the team.',
+  },
+} as const;
+
+export type PagePath = keyof typeof pages;

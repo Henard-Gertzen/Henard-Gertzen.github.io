@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://henard-gertzen.github.io/sitemap-index.xml

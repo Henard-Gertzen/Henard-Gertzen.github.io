@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import MaybeLink from './MaybeLink.astro';
+import Text from './Text.astro';
+import Tags from './Tags.astro';
+import { formatDate, isoDate, postHref } from '../lib/content';
+
+interface Props {
+  posts: CollectionEntry<'posts'>[];
+  headingLevel?: 2 | 3;
+}
+
+const { posts, headingLevel = 2 } = Astro.props;
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
+---
+
+<ol class="post-list">
+  {
+    posts.map((post) => (
+      <li class="post-item">
+        <p class="post-meta">
+          <time datetime={isoDate(post.data.date)}>
+            <Text text={formatDate(post.data.date)} />
+          </time>
+          {post.data.outlet && <span>on {post.data.outlet}</span>}
+          {post.data.draft && <span class="badge">Draft</span>}
+        </p>
+        <Heading class="post-title">
+          <MaybeLink href={postHref(post)}>
+            <Text text={post.data.title} />
+            {post.data.externalUrl && <span class="sr-only">(external)</span>}
+          </MaybeLink>
+          {post.data.externalUrl && <span aria-hidden="true"> ↗</span>}
+        </Heading>
+        <p class="post-description">
+          <Text text={post.data.description} />
+        </p>
+        <Tags tags={post.data.tags} />
+      </li>
+    ))
+  }
+</ol>

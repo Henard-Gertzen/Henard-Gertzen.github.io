@@ -1,0 +1,45 @@
+---
+// The "before → after" ledger used for every case-study metric.
+import type { CollectionEntry } from 'astro:content';
+import Text from './Text.astro';
+
+interface Props {
+  metrics: CollectionEntry<'caseStudies'>['data']['metrics'];
+  compact?: boolean;
+}
+
+const { metrics, compact = false } = Astro.props;
+---
+
+{
+  metrics.length > 0 && (
+    <dl class:list={['ledger', { 'ledger-compact': compact }]}>
+      {metrics.map((m) => (
+        <div class="ledger-row">
+          <dt>
+            <Text text={m.label} />
+            {m.note && !compact && (
+              <span class="ledger-note">
+                <Text text={m.note} />
+              </span>
+            )}
+          </dt>
+          <dd>
+            <span class="sr-only">Before: </span>
+            <span class="ledger-before">
+              <Text text={m.before} />
+            </span>
+            <span class="ledger-arrow" aria-hidden="true">
+              →
+            </span>
+            <span class="sr-only">, after: </span>
+            <span class="ledger-after">
+              <Text text={m.after} />
+            </span>
+            {m.unit && <span class="ledger-unit">{m.unit}</span>}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  )
+}

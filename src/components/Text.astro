@@ -1,0 +1,12 @@
+---
+// Renders a string, highlighting any {{TODO: ...}} placeholders inside it.
+import { splitTodos } from '../lib/todo';
+
+interface Props {
+  text: string | number;
+}
+
+const parts = splitTodos(String(Astro.props.text));
+---
+
+{parts.map(({ value, todo }) => (todo ? <mark class="todo">{value}</mark> : value))}

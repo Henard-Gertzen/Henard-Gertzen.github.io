@@ -1,0 +1,25 @@
+---
+// A link whose href may still be a {{TODO}} placeholder; until it is real, the
+// label renders as plain text followed by the highlighted placeholder.
+import { isTodo } from '../lib/todo';
+import Text from './Text.astro';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+const external = /^https?:\/\//.test(href);
+---
+
+{
+  isTodo(href) ? (
+    <span>
+      <slot /> <Text text={href} />
+    </span>
+  ) : (
+    <a href={href} {...(external ? { rel: 'noopener' } : {})}>
+      <slot />
+    </a>
+  )
+}

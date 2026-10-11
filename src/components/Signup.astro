@@ -1,0 +1,35 @@
+---
+import Text from './Text.astro';
+import { site } from '../site';
+import { isTodo } from '../lib/todo';
+
+// The form posts straight to Kit (no third-party script). Until the form ID is
+// set in src/site.ts it renders disabled.
+const ready = !isTodo(site.kitFormId);
+---
+
+<section class="signup" aria-labelledby="signup-title">
+  <h2 id="signup-title">Get the next post by email</h2>
+  <p>
+    Practical notes on harnesses, context and evals for teams adopting coding agents. Occasional, and one click to
+    unsubscribe.
+  </p>
+  <form
+    class="signup-form"
+    method="post"
+    action={ready ? `https://app.kit.com/forms/${site.kitFormId}/subscriptions` : undefined}
+  >
+    <label for="signup-email">Email address</label>
+    <div class="signup-row">
+      <input id="signup-email" type="email" name="email_address" autocomplete="email" required disabled={!ready} />
+      <button class="button button-primary" type="submit" disabled={!ready}>Subscribe</button>
+    </div>
+    {
+      !ready && (
+        <p class="signup-todo">
+          <Text text={site.kitFormId} />
+        </p>
+      )
+    }
+  </form>
+</section>
