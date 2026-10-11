@@ -49,11 +49,10 @@ function splitLast(text: string, n: number) {
 
 <Base title={meta.title} description={meta.description} image="/og/index.png">
   <section class="hero wrap" aria-labelledby="hero-title">
-    <p class="kicker">{site.tagline}</p>
     <h1 id="hero-title">{heroStart} <em>{heroEnd}</em></h1>
     <p class="lede">{site.hero.subtitle}</p>
     <div class="hero-actions">
-      {proof[0] && <a class="button button-primary" href={proof[0].href}>See the proof</a>}
+      <a class="button button-primary" href="#proof">See the proof</a>
       <a class="button" href="/work-with-me/">Work with me</a>
     </div>
     <p class="availability">
@@ -62,7 +61,7 @@ function splitLast(text: string, n: number) {
     </p>
   </section>
 
-  <section class="section wrap" aria-labelledby="proof-title">
+  <section class="section wrap" id="proof" aria-labelledby="proof-title">
     <div class="section-head">
       <h2 id="proof-title">Proof</h2>
       <a href="/projects/">All projects</a>

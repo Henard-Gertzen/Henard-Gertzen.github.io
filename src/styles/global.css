@@ -531,7 +531,6 @@ mark.todo {
 
 .hero h1 {
   max-width: 17ch;
-  margin-top: 1.25rem;
   font-size: var(--step-4);
   font-weight: 800;
   line-height: 1;

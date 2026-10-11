@@ -20,7 +20,7 @@ metrics:
     after: "{{TODO: eval pass rate after}}"
     unit: "%"
     note: "{{TODO: number of eval tasks and how each is scored}}"
-featured: true
+featured: false # true when written: puts it back in the home page Proof row
 order: 1
 ---
 

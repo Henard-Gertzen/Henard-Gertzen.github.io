@@ -11,6 +11,6 @@ highlights:
   - "{{TODO: how a task is scored, e.g. analyzers, architecture tests, rubric}}"
 stack: ["Claude Code", "{{TODO: eval stack}}"]
 group: tooling
-featured: true
+featured: false # true when written: puts it back in the home page Proof row
 order: 2
 ---

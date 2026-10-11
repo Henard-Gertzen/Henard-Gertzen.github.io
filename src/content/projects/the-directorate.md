@@ -8,5 +8,6 @@ highlights:
   - "Approved work is fetched into your checkout without touching your branch, index or uncommitted changes"
 stack: ["Claude Code", "PowerShell", "WezTerm", "Git worktrees"]
 group: tooling
+featured: true
 order: 3
 ---
