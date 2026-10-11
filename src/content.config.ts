@@ -53,7 +53,7 @@ const projects = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     summary: z.string(),
-    group: z.enum(['tooling', 'games']),
+    group: z.enum(['tooling', 'games', 'university']),
     kind: z.string(),
     status: z.string(),
     links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),

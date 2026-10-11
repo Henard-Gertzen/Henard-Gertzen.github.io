@@ -69,3 +69,9 @@ accurate:
 - **Nuke France**: six Shorts rendered from a script; browser performance work.
 - **The Paracelsian**: four milestones, 53 automated tests; ML matting pipeline.
 - **Ides of Plunder**: seeded world bit-exact with its browser prototype.
+- **Coblynau**: from its README (damage calculator on a worker thread, material
+  limits that explain refusals, Blender-generated assets). Private repo, no link.
+- **University** (from the repos and your 2024 CV): Share2Teach (CMPG 323,
+  final-year group project, 2024); chat app (CMPG 315, 95% for the Networks
+  project); text messaging app (networks group task, 2024); Skreenkinikor
+  (CMPG 223, 2023). Only the two public repos are linked.

@@ -8,15 +8,24 @@ import { getProjects } from '../lib/content';
 import { pages } from '../site';
 
 const meta = pages['/projects/'];
-const [tooling, games] = await Promise.all([getProjects('tooling'), getProjects('games')]);
+const [tooling, games, university] = await Promise.all([
+  getProjects('tooling'),
+  getProjects('games'),
+  getProjects('university'),
+]);
 
 const withContent = (list: CollectionEntry<'projects'>[]) =>
   Promise.all(list.map(async (project) => ({ project, Content: (await render(project)).Content })));
-const [toolingItems, gameItems] = await Promise.all([withContent(tooling), withContent(games)]);
+const [toolingItems, gameItems, universityItems] = await Promise.all([
+  withContent(tooling),
+  withContent(games),
+  withContent(university),
+]);
 const groups = [
   { id: 'tooling', title: 'Agent tooling', items: toolingItems },
   { id: 'games', title: 'Built with AI', items: gameItems },
-];
+  { id: 'university', title: 'University', items: universityItems },
+].filter((group) => group.items.length > 0);
 ---
 
 <Base title={meta.title} description={meta.description} image="/og/projects.png">
@@ -24,8 +33,8 @@ const groups = [
     <p class="kicker">Projects</p>
     <h1>Harnesses, evals and the things I build with them</h1>
     <p class="lede">
-      The tooling I use to make coding agents follow a team’s standards, then the games I build by orchestrating
-      those agents.
+      The tooling I use to make coding agents follow a team’s standards, the games I build by orchestrating those
+      agents, and my university projects.
     </p>
   </header>
 
@@ -40,6 +49,9 @@ const groups = [
             I build these in my own time by directing Claude Code agents: written briefs, long-running sessions,
             headless bot playtests and automated tests that keep the agents honest.
           </p>
+        )}
+        {group.id === 'university' && (
+          <p class="section-intro">Group projects from my BSc IT at North-West University, 2021 to 2024.</p>
         )}
         <ul class="project-list">
           {group.items.map(({ project, Content }) => (
@@ -75,6 +87,7 @@ const groups = [
                     alt={project.data.cover.alt}
                     widths={[480, 800, 1200]}
                     sizes="(min-width: 72rem) 33rem, (min-width: 52rem) 45vw, 100vw"
+                    fetchpriority="low"
                   />
                 )}
                 {project.data.highlights.length > 0 && (

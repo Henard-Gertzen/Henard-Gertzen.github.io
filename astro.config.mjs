@@ -28,13 +28,21 @@ export default defineConfig({
   },
   fonts: [
     {
-      provider: fontProviders.fontsource(),
+      // The weight + optical-size variable file: 77 KB against 131 KB for the full
+      // font, whose width axis the site never uses.
+      provider: fontProviders.local(),
       name: 'Bricolage Grotesque',
       cssVariable: '--font-display',
-      weights: ['500 800'],
-      styles: ['normal'],
-      subsets: ['latin'],
       fallbacks: ['sans-serif'],
+      options: {
+        variants: [
+          {
+            src: ['@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2'],
+            weight: '200 800',
+            style: 'normal',
+          },
+        ],
+      },
     },
     {
       provider: fontProviders.fontsource(),
