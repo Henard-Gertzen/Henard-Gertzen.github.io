@@ -17,14 +17,9 @@ export const site = {
     linkedin: 'https://www.linkedin.com/in/henard-g-5b4267199',
   },
   // Drop the PDF in public/ and set this to its path, e.g. '/cv.pdf'. Until then
-  // the Work with me page shows only the LinkedIn button.
+  // the Work with me page leaves the CV link out.
   cv: '{{TODO: updated CV PDF (put it in public/cv.pdf, then set this to /cv.pdf)}}',
-  // Format and price only appear on the site once they're no longer {{TODO}}s.
-  workshop: {
-    title: 'Claude Code rollout for .NET teams',
-    price: '{{TODO: workshop price}}',
-    format: '{{TODO: duration and format, e.g. two half-days, remote}}',
-  },
+
   // Kit form ID: the number in the form's embed URL (app.kit.com/forms/<id>/...).
   kitFormId: '10032559',
   // GoatCounter site code: the "<code>" in https://<code>.goatcounter.com.
@@ -50,13 +45,10 @@ export const pages = {
     title: 'Writing',
     description: 'What coding agents actually are, and how to make them write code your team would merge.',
   },
-  '/talks/': {
-    title: 'Talks and workshops',
-    description: 'Talks and workshops on rolling out Claude Code in .NET and Angular teams.',
-  },
+
   '/work-with-me/': {
     title: 'Work with me',
-    description: 'Hire me for an AI enablement role, or book a Claude Code rollout workshop for your .NET team.',
+    description: 'What I do: full-stack .NET and Angular development, and AI harnesses for coding agents. How to get in touch.',
   },
   '/about/': {
     title: 'About',

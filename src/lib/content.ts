@@ -23,19 +23,6 @@ export async function getProjects(group: CollectionEntry<'projects'>['data']['gr
   return projects.sort((a, b) => a.data.order - b.data.order);
 }
 
-/** Upcoming talks (and ones without a date yet) soonest first, then past talks newest first. */
-export async function getTalks() {
-  const talks = await getCollection('talks', published);
-  const now = Date.now();
-  const upcoming = talks
-    .filter(({ data }) => time(data.date, Infinity) >= now)
-    .sort((a, b) => time(a.data.date, Infinity) - time(b.data.date, Infinity));
-  const past = talks
-    .filter(({ data }) => time(data.date, Infinity) < now)
-    .sort((a, b) => time(b.data.date, 0) - time(a.data.date, 0));
-  return { upcoming, past };
-}
-
 export const postHref = (post: CollectionEntry<'posts'>) => post.data.externalUrl ?? `/writing/${post.id}/`;
 
 export const tagSlug = (tag: string) => tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');

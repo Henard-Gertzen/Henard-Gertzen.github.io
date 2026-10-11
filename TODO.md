@@ -29,25 +29,13 @@ live site or **hidden** (drafts, or settings the site leaves out until they're s
   `src/content/posts/claude-code-abp-team-standards.md`. Fill the outline from the
   case study, then remove `draft: true` to publish.
 - [ ] **CV** (hidden): put an updated PDF at `public/cv.pdf` and set
-  `cv: '/cv.pdf'` in `src/site.ts`; the Download button then appears on Work with
-  me. The 2024 student CV stays on the
+  `cv: '/cv.pdf'` in `src/site.ts`; a download link then appears on Work with me. The 2024 student CV stays on the
   `legacy-3d-site` branch.
 
-## Waiting on links or bookings
+## Waiting on links
 
 - [ ] **Load Shedding Steam page**: nothing on the site yet. When the page is live,
   add a `links` entry to `src/content/projects/load-shedding.md`.
-- [ ] **First workshop booking** (hidden draft, 3 placeholders):
-  `src/content/talks/claude-code-rollout-workshop.md`. Host, date, location, then
-  remove `draft: true`. Until something is booked, the Talks page says "Nothing
-  booked yet".
-
-## Workshop: `src/site.ts` (hidden)
-
-- [ ] **Price** (`workshop.price`) and **format** (`workshop.format`). Neither
-  shows on the Work with me page until it's set.
-- [ ] Confirm the workshop agenda on the Work with me page (harness, context, evals).
-  It's visible now, so edit it if it isn't what you'd run.
 
 ## Facts to check (not placeholders)
 

@@ -5,96 +5,69 @@ import { pages, site } from '../site';
 import { isTodo } from '../lib/todo';
 
 const meta = pages['/work-with-me/'];
-// Format and price stay off the page until they're set in src/site.ts.
-const workshopFacts = [
-  ['Format', site.workshop.format],
-  ['Price', site.workshop.price],
-].filter(([, value]) => !isTodo(value));
 ---
 
 <Base title={meta.title} description={meta.description} image="/og/work-with-me.png">
   <header class="page-head wrap">
     <p class="kicker">Work with me</p>
-    <h1>Two ways to work together</h1>
+    <h1>What I do</h1>
     <p class="lede">
-      Hire me into a role where I help engineers adopt coding agents, or bring me in to roll out Claude Code with your
-      .NET team.
+      Full-stack development on .NET and Angular, and getting coding agents to work to a team’s standards. Remote,
+      from South Africa.
     </p>
   </header>
 
   <div class="wrap">
     <div class="paths">
-      <section class="path" aria-labelledby="roles-title">
-        <p class="card-kind">For hiring managers</p>
-        <h2 id="roles-title">Roles</h2>
-        <p>
-          I’m looking for a remote role in AI enablement, AI adoption, developer relations or developer education:
-          helping engineers get real, measurable value out of coding agents.
-        </p>
-        <ul>
-          <li><strong>Harness engineering:</strong> settings, hooks, permissions and tools, so every developer’s agent works the same way.</li>
-          <li><strong>Context engineering:</strong> your conventions written where the agent reads them, with real examples from your codebase.</li>
-          <li><strong>Evals:</strong> repeatable tasks scored against your standards, so “it’s better now” is a number.</li>
-        </ul>
+      <section class="path" aria-labelledby="dev-title">
+        <p class="card-kind">Day to day</p>
+        <h2 id="dev-title">Full-stack developer</h2>
+        <p>I build and maintain enterprise software on .NET and Angular, working remotely as part of a product team.</p>
         <dl class="path-facts">
           <div>
-            <dt>Where</dt>
-            <dd>Remote, EMEA time zones. Based in {site.location}.</dd>
+            <dt>Stack</dt>
+            <dd>C# and .NET (ABP Framework), Angular, TypeScript</dd>
           </div>
           <div>
-            <dt>Stack</dt>
-            <dd>Claude Code, C# and .NET (ABP Framework), Angular, TypeScript, React and Next.js</dd>
+            <dt>Before</dt>
+            <dd>React and Next.js front-ends</dd>
+          </div>
+          <div>
+            <dt>Where</dt>
+            <dd>Remote. Based in {site.location}.</dd>
           </div>
         </dl>
-        <div class="path-actions">
-          {
-            !isTodo(site.cv) && (
-              <a class="button button-primary" href={site.cv}>
-                Download my CV (PDF)
-              </a>
-            )
-          }
-          <a class:list={['button', { 'button-primary': isTodo(site.cv) }]} href={site.links.linkedin} rel="noopener">
-            LinkedIn
-          </a>
-        </div>
       </section>
 
-      <section class="path" aria-labelledby="workshop-title">
-        <p class="card-kind">For .NET and Angular teams</p>
-        <h2 id="workshop-title">Workshop: {site.workshop.title}</h2>
-        <p>
-          A hands-on rollout in your own repository, so your team leaves with a working setup rather than a slide deck.
-        </p>
+      <section class="path" aria-labelledby="ai-title">
+        <p class="card-kind">Focus</p>
+        <h2 id="ai-title">AI harnesses for coding agents</h2>
+        <p>Setting up Claude Code so it follows a team’s conventions, and checking whether it actually does.</p>
         <ul>
-          <li><strong>Harness:</strong> a shared Claude Code setup the whole team runs: settings, permissions, hooks.</li>
-          <li><strong>Context:</strong> your ABP and Angular conventions in CLAUDE.md and skills, with exemplar files.</li>
-          <li><strong>Evals:</strong> a small task set scored against your standards, run before and after.</li>
+          <li><strong>Harness:</strong> shared settings, hooks, permissions and tools, so every developer’s agent works the same way.</li>
+          <li><strong>Context:</strong> conventions written where the agent reads them, with real examples from the codebase.</li>
+          <li><strong>Measurement:</strong> every change gets a number, like the 31% token saving from one harness default.</li>
         </ul>
-        {
-          workshopFacts.length > 0 && (
-            <dl class="path-facts">
-              {workshopFacts.map(([label, value]) => (
-                <div>
-                  <dt>{label}</dt>
-                  <dd>{value}</dd>
-                </div>
-              ))}
-            </dl>
-          )
-        }
         <div class="path-actions">
-          <a class="button button-primary" href={`mailto:${site.email}?subject=${encodeURIComponent(site.workshop.title)}`}>
-            Ask about a workshop
-          </a>
+          <a class="button" href="/projects/">See the tooling</a>
         </div>
       </section>
     </div>
 
     <section class="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">Email me</h2>
-      <p>The fastest way to reach me, whether it’s about a role or a workshop.</p>
+      <h2 id="contact-title">Get in touch</h2>
+      <p>
+        Email is the fastest way to reach me. I’m also on <a href={site.links.linkedin} rel="noopener">LinkedIn</a>
+        and <a href={site.links.github} rel="noopener">GitHub</a>.
+      </p>
       <CopyEmail />
+      {
+        !isTodo(site.cv) && (
+          <p class="contact-cv">
+            <a href={site.cv}>Download my CV (PDF)</a>
+          </p>
+        )
+      }
     </section>
   </div>
 </Base>

@@ -67,18 +67,4 @@ const projects = defineCollection({
   }),
 });
 
-const talks = defineCollection({
-  loader: markdown('./src/content/talks'),
-  schema: z.object({
-    title: z.string(),
-    kind: z.enum(['talk', 'workshop', 'podcast']),
-    event: z.string(),
-    date: todoOr(z.coerce.date()),
-    location: z.string().optional(),
-    url: todoOr(z.url()).optional(),
-    slides: todoOr(z.url()).optional(),
-    draft: z.boolean().default(false),
-  }),
-});
-
-export const collections = { caseStudies, posts, projects, talks };
+export const collections = { caseStudies, posts, projects };
