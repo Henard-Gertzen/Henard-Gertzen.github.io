@@ -11,14 +11,16 @@ interface Props {
   cta: string;
   metrics?: CollectionEntry<'caseStudies'>['data']['metrics'];
   highlights?: string[];
+  headingLevel?: 2 | 3;
 }
 
-const { kind, title, summary, href, cta, metrics = [], highlights = [] } = Astro.props;
+const { kind, title, summary, href, cta, metrics = [], highlights = [], headingLevel = 3 } = Astro.props;
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
 ---
 
 <article class="card">
   <p class="card-kind">{kind}</p>
-  <h3 class="card-title"><a href={href}><Text text={title} /></a></h3>
+  <Heading class="card-title"><a href={href}><Text text={title} /></a></Heading>
   <p class="card-summary"><Text text={summary} /></p>
   {metrics.length > 0 && <Metrics metrics={metrics.slice(0, 2)} compact />}
   {

@@ -1,12 +1,20 @@
 ---
-// Renders a string, highlighting any {{TODO: ...}} placeholders inside it.
+// Renders a frontmatter string: {{TODO: ...}} placeholders are highlighted and
+// `backticks` become inline code, the only Markdown these short strings need.
 import { splitTodos } from '../lib/todo';
 
 interface Props {
   text: string | number;
 }
 
-const parts = splitTodos(String(Astro.props.text));
+const parts = splitTodos(String(Astro.props.text)).flatMap(({ value, todo }) =>
+  todo
+    ? [{ value, kind: 'todo' }]
+    : value
+        .split(/`([^`]+)`/)
+        .map((v, i) => ({ value: v, kind: i % 2 ? 'code' : 'text' }))
+        .filter((part) => part.value),
+);
 ---
 
-{parts.map(({ value, todo }) => (todo ? <mark class="todo">{value}</mark> : value))}
+{parts.map(({ value, kind }) => (kind === 'todo' ? <mark class="todo">{value}</mark> : kind === 'code' ? <code>{value}</code> : value))}

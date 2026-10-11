@@ -29,6 +29,7 @@ const studies = await getCaseStudies();
             href={`/case-studies/${s.id}/`}
             cta="Read the case study"
             metrics={s.data.metrics}
+            headingLevel={2}
           />
         ))
       }

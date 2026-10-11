@@ -48,7 +48,7 @@ const imageUrl = new URL(image, Astro.site);
     <meta name="theme-color" content="#121110" media="(prefers-color-scheme: dark)" />
 
     <Font cssVariable="--font-display" preload />
-    <Font cssVariable="--font-body" preload />
+    <Font cssVariable="--font-body" preload={[{ weight: 400, style: 'normal' }]} />
     <Font cssVariable="--font-mono" />
 
     <script is:inline>

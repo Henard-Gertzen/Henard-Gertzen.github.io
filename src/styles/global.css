@@ -94,6 +94,11 @@ dd {
   text-wrap: pretty;
 }
 
+b,
+strong {
+  font-weight: 600;
+}
+
 p {
   margin: 0;
 }
@@ -262,6 +267,10 @@ mark.todo {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+.kicker .badge {
+  margin-left: 0.6rem;
 }
 
 .tags {
@@ -581,11 +590,20 @@ mark.todo {
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  /* An odd last card spans the row instead of sitting alone. */
+  .card-grid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (min-width: 64rem) {
   .card-grid-3 {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card-grid-3 > :last-child:nth-child(odd) {
+    grid-column: auto;
   }
 }
 
@@ -636,6 +654,10 @@ mark.todo {
 
 .card-title a:focus-visible {
   outline: none;
+}
+
+.card :not(pre) > code {
+  font-size: 0.85em;
 }
 
 .card-summary {
@@ -691,7 +713,7 @@ mark.todo {
 
 @media (min-width: 40rem) {
   .ledger:not(.ledger-compact) .ledger-row {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) fit-content(55%);
     align-items: baseline;
   }
 
@@ -940,6 +962,14 @@ mark.todo {
   color: var(--accent);
 }
 
+.prose .chips {
+  padding-left: 0;
+}
+
+.prose .chips li + li {
+  margin-top: 0;
+}
+
 .prose blockquote {
   margin-inline: 0;
   padding-left: 1.1em;
@@ -1008,7 +1038,7 @@ mark.todo {
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 2px solid var(--ink);
+  border-top: 1px solid var(--rule);
 }
 
 .project {
@@ -1092,7 +1122,7 @@ mark.todo {
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 2px solid var(--ink);
+  border-top: 1px solid var(--rule);
 }
 
 .talk {
