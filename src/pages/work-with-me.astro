@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import CopyEmail from '../components/CopyEmail.astro';
+import Copy from '../components/Copy.astro';
 import { pages, site } from '../site';
 import { isTodo } from '../lib/todo';
 
@@ -60,7 +60,7 @@ const meta = pages['/work-with-me/'];
         Email is the fastest way to reach me. I’m also on <a href={site.links.linkedin} rel="noopener">LinkedIn</a>
         and <a href={site.links.github} rel="noopener">GitHub</a>.
       </p>
-      <CopyEmail />
+      <Copy text={site.email} />
       {
         !isTodo(site.cv) && (
           <p class="contact-cv">

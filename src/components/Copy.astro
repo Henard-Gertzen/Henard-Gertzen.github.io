@@ -1,11 +1,16 @@
 ---
-import { site } from '../site';
+// Selectable text with a Copy button (the email address, the feed URL).
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
 ---
 
-<div class="copy-email">
-  <span class="copy-email-address">{site.email}</span>
-  <button type="button" class="button button-small" data-copy={site.email}>Copy</button>
-  <span class="copy-email-status" role="status"></span>
+<div class="copy">
+  <span class="copy-text">{text}</span>
+  <button type="button" class="button button-small" data-copy={text}>Copy</button>
+  <span class="copy-status" role="status"></span>
 </div>
 
 <script>

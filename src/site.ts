@@ -50,6 +50,10 @@ export const pages = {
     title: 'Work with me',
     description: 'What I do: full-stack .NET and Angular development, and AI harnesses for coding agents. How to get in touch.',
   },
+  '/feed/': {
+    title: 'Follow by RSS',
+    description: 'Get new posts from Henard Gertzen in your feed reader, or by email.',
+  },
   '/about/': {
     title: 'About',
     description: 'Henard Gertzen: a South African developer who makes coding agents behave like members of the team.',

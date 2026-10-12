@@ -1246,7 +1246,7 @@ main {
   color: var(--ink-2);
 }
 
-.copy-email {
+.copy {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1254,7 +1254,7 @@ main {
   margin-top: 1.25rem;
 }
 
-.copy-email-address {
+.copy-text {
   font-family: var(--font-mono);
   font-size: clamp(1rem, 0.9rem + 1.2vw, 1.4rem);
   font-weight: 700;
@@ -1262,11 +1262,17 @@ main {
   user-select: all;
 }
 
+.feed-raw {
+  margin-top: 1rem;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+
 .contact-cv {
   margin-top: 1rem;
 }
 
-.copy-email-status {
+.copy-status {
   min-height: 1.5em;
   font-family: var(--font-mono);
   font-size: var(--step--1);

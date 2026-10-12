@@ -1,0 +1,31 @@
+---
+// A page for people who click "RSS": the feed itself (/rss.xml) is for feed readers.
+import Base from '../layouts/Base.astro';
+import Copy from '../components/Copy.astro';
+import Signup from '../components/Signup.astro';
+import { pages, site } from '../site';
+
+const meta = pages['/feed/'];
+const feedUrl = new URL('/rss.xml', site.url).href;
+---
+
+<Base title={meta.title} description={meta.description} image="/og/feed.png">
+  <header class="page-head narrow">
+    <p class="kicker">Feed</p>
+    <h1>Follow by RSS</h1>
+    <p class="lede">
+      Paste this address into a feed reader, such as Feedly, Inoreader or NetNewsWire, and new posts will show up there
+      as they’re published.
+    </p>
+  </header>
+
+  <div class="narrow">
+    <Copy text={feedUrl} />
+    <p class="feed-raw">
+      This address is for feed readers; opening it in a browser shows <a href="/rss.xml">the raw feed</a>.
+    </p>
+    <div class="section">
+      <Signup />
+    </div>
+  </div>
+</Base>
