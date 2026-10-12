@@ -59,12 +59,16 @@ const imageUrl = new URL(image, Astro.site);
     </script>
     {
       !isTodo(site.goatCounter) && (
-        <script
-          is:inline
-          async
-          data-goatcounter={`https://${site.goatCounter}.goatcounter.com/count`}
-          src="https://gc.zgo.at/count.js"
-        />
+        /* Analytics load after the page has, so they never compete with it. */
+        <script is:inline define:vars={{ endpoint: `https://${site.goatCounter}.goatcounter.com/count` }}>
+          addEventListener('load', () => {
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://gc.zgo.at/count.js';
+            script.dataset.goatcounter = endpoint;
+            document.body.append(script);
+          });
+        </script>
       )
     }
   </head>
