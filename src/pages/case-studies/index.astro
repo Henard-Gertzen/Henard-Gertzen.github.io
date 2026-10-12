@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Metrics from '../../components/Metrics.astro';
 import Text from '../../components/Text.astro';
+import Band from '../../components/Band.astro';
 import Signup from '../../components/Signup.astro';
 import { getCaseStudies } from '../../lib/content';
 import { pages } from '../../site';
@@ -29,9 +30,6 @@ const studies = await getCaseStudies();
           It covers making Claude Code follow a team’s ABP and Angular conventions, with baseline and after numbers.
           Until it’s ready, my agent tooling is on the <a href="/projects/">Projects</a> page.
         </p>
-        <div class="section">
-          <Signup />
-        </div>
       </section>
     )
   }
@@ -58,4 +56,13 @@ const studies = await getCaseStudies();
       }
     </ul>
   </div>
+  {
+    studies.length === 0 && (
+      <Band>
+        <div class="wrap">
+          <Signup />
+        </div>
+      </Band>
+    )
+  }
 </Base>

@@ -19,7 +19,7 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/subscribed'),
+      filter: (page) => !page.includes('/subscribed') && !page.includes('/contact/sent'),
     }),
   ],
   markdown: {

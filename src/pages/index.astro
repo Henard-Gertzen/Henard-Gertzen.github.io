@@ -2,7 +2,10 @@
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import Band from '../components/Band.astro';
 import Signup from '../components/Signup.astro';
+import circuitTraces from '../assets/backgrounds/circuit-traces.jpg';
+import codeScreen from '../assets/backgrounds/code-screen.jpg';
 import headshot from '../assets/henard-gertzen.png';
 import { getCaseStudies, isoDate, published } from '../lib/content';
 import { pages, site } from '../site';
@@ -42,8 +45,10 @@ const built = [
         </p>
       </div>
     </section>
+  </div>
 
-    <section class="section" aria-labelledby="recent-title">
+  <Band photo={circuitTraces} labelledby="recent-title">
+    <div class="wrap">
       <h2 class="section-title" id="recent-title">Recently</h2>
       <ol class="dated">
         {
@@ -55,8 +60,10 @@ const built = [
           ))
         }
       </ol>
-    </section>
+    </div>
+  </Band>
 
+  <div class="wrap">
     <section class="section" aria-labelledby="built-title">
       <h2 class="section-title" id="built-title">Built</h2>
       <ul class="built">
@@ -71,9 +78,11 @@ const built = [
       </ul>
       <p class="more"><a href="/projects/">All projects, including the games and university work</a></p>
     </section>
+  </div>
 
-    <div class="section">
+  <Band photo={codeScreen}>
+    <div class="wrap">
       <Signup />
     </div>
-  </div>
+  </Band>
 </Base>

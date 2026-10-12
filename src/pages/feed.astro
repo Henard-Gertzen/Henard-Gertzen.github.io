@@ -2,6 +2,7 @@
 // A page for people who click "RSS": the feed itself (/rss.xml) is for feed readers.
 import Base from '../layouts/Base.astro';
 import Copy from '../components/Copy.astro';
+import Band from '../components/Band.astro';
 import Signup from '../components/Signup.astro';
 import { pages, site } from '../site';
 
@@ -23,8 +24,11 @@ const feedUrl = new URL('/rss.xml', site.url).href;
     <p class="feed-raw">
       This address is for feed readers; opening it in a browser shows <a href="/rss.xml">the raw feed</a>.
     </p>
-    <div class="section">
+  </div>
+
+  <Band>
+    <div class="narrow">
       <Signup />
     </div>
-  </div>
+  </Band>
 </Base>

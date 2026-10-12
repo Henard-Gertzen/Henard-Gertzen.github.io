@@ -12,11 +12,15 @@
   --rule: light-dark(#dadad4, #2a3140);
   --accent: light-dark(#e8770e, #f59a3c);
   --on-ink: light-dark(#f5f5f2, #121722);
+  --bar: light-dark(#000000, #0a0e16);
+  --bar-ink: light-dark(#f5f5f2, #ecedef);
+  --bar-muted: light-dark(#b9bac0, #a3a8b3);
   --todo-bg: light-dark(#fff0b0, #3a2f00);
   --todo-ink: light-dark(#4f3c00, #ffe48f);
   --todo-rule: light-dark(#9c7b00, #b8962a);
 
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0.08 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0.13 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain-strong: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0.2 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 
   --measure: 38rem;
   --wide: 64rem;
@@ -271,8 +275,15 @@ mark.todo {
 
 /* ---------- Header and footer ---------- */
 
-.site-header {
-  border-bottom: 1px solid var(--rule);
+.site-header,
+.site-footer {
+  background: var(--bar);
+  color: var(--bar-ink);
+}
+
+.site-header :focus-visible,
+.site-footer :focus-visible {
+  outline-color: var(--bar-ink);
 }
 
 .site-header-inner {
@@ -345,7 +356,7 @@ mark.todo {
   border: 0;
   border-radius: var(--radius);
   background: transparent;
-  color: var(--ink);
+  color: var(--bar-ink);
   cursor: pointer;
 }
 
@@ -374,9 +385,8 @@ mark.todo {
 
 .site-footer {
   margin-top: 6rem;
-  border-top: 1px solid var(--rule);
   font-size: var(--step--1);
-  color: var(--ink-2);
+  color: var(--bar-muted);
 }
 
 .site-footer-inner {
@@ -403,7 +413,7 @@ mark.todo {
 .footer-links a {
   display: inline-block;
   padding-block: 0.3rem;
-  color: var(--ink);
+  color: var(--bar-ink);
 }
 
 /* ---------- Page scaffolding ---------- */
@@ -432,7 +442,62 @@ mark.todo {
 
 .section-title {
   margin-bottom: 1.25rem;
+  padding-top: 0.85rem;
+  border-top: 3px solid var(--ink);
   font-size: var(--step-2);
+}
+
+/* Alternate sections sit on a darker, more textured band so each one clearly
+   starts and ends. */
+.band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-top: clamp(3.5rem, 7vw, 5rem);
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+  border-block: 1px solid var(--rule);
+  background: var(--grain-strong) var(--paper-2);
+}
+
+/* Muted text over a photo gets a little more contrast, so it clears AA on the
+   busiest part of the photo too. */
+.band:has(.band-photo) {
+  --ink-2: light-dark(#46474d, #b3b8c2);
+}
+
+/* The faint photo behind a band: pale lines on a light band, light lines on a
+   dark one, fading out towards the text on the left. */
+.band-photo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  opacity: 0.16;
+  filter: grayscale(1) invert(1) contrast(1.15);
+  mix-blend-mode: multiply;
+  mask-image: linear-gradient(100deg, transparent 20%, #000 80%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .band-photo {
+    opacity: 0.14;
+    filter: grayscale(1) contrast(1.15);
+    mix-blend-mode: screen;
+  }
+}
+
+:root[data-theme='dark'] .band-photo {
+  opacity: 0.14;
+  filter: grayscale(1) contrast(1.15);
+  mix-blend-mode: screen;
+}
+
+/* A band that ends the page runs straight into the footer. */
+main:has(> .band:last-child) + .site-footer {
+  margin-top: 0;
 }
 
 .section-intro {
@@ -1015,18 +1080,66 @@ mark.todo {
 }
 
 .contact {
-  margin-top: clamp(3.5rem, 7vw, 5rem);
-  padding-top: 1.75rem;
-  border-top: 2px solid var(--ink);
+  display: grid;
+  gap: 2rem 4rem;
 }
 
-.contact h2 {
-  font-size: var(--step-2);
+@media (min-width: 52rem) {
+  .contact:has(.contact-form) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  }
 }
 
-.contact p {
-  margin-top: 0.5rem;
-  color: var(--ink-2);
+.contact > .section-title {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+.contact > div > p {
+  max-width: 34rem;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.contact-form .button {
+  justify-self: start;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field label,
+.signup-form label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.75rem;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.honeypot {
+  display: none;
 }
 
 .contact-cv {

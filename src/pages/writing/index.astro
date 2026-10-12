@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PostList from '../../components/PostList.astro';
+import Band from '../../components/Band.astro';
 import Signup from '../../components/Signup.astro';
 import Tags from '../../components/Tags.astro';
 import { getPosts } from '../../lib/content';
@@ -31,7 +32,9 @@ const tags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
     <PostList posts={posts} />
   </div>
 
-  <div class="section wrap">
-    <Signup />
-  </div>
+  <Band>
+    <div class="wrap">
+      <Signup />
+    </div>
+  </Band>
 </Base>

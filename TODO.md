@@ -1,7 +1,7 @@
 # TODO
 
 Everything on the site that is still a placeholder. Run `npm run todos` for the
-live list with file and line numbers; this file groups the same 38 placeholders
+live list with file and line numbers; this file groups the same 34 placeholders
 by what needs doing.
 
 Placeholders render as yellow `{{TODO: ...}}` chips so nothing unfinished can
@@ -10,6 +10,9 @@ live site or **hidden** (drafts, or settings the site leaves out until they're s
 
 ## Accounts: `src/site.ts`
 
+- [ ] **Web3Forms access key** (`web3formsKey`). Hidden: the Contact page shows
+  only the email link until it's set. Get one free at web3forms.com (enter your
+  email; the key arrives by email, no account needed).
 - [x] Kit: form `10032559`, redirecting to `/subscribed/` after signup.
 - [x] GoatCounter: `henard` (henard.goatcounter.com).
 

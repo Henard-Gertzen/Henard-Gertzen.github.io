@@ -121,15 +121,17 @@ something; it's sorted by date, so order in the file doesn't matter.
 
 ## Site settings: `src/site.ts`
 
-Your email, links, the hero copy, the CV path, the Kit form ID and the
-GoatCounter code. The page titles and descriptions used for
+Your email, links, the hero copy, the CV path, the Kit form ID, the Web3Forms
+access key and the GoatCounter code. The page titles and descriptions used for
 SEO and link previews are there too.
 
 - **Newsletter:** the signup form posts straight to Kit, with no third-party
   script. It stays disabled until `kitFormId` is set. In Kit, set the form's
   redirect URL to `/subscribed/`.
+- **Contact form:** posts straight to Web3Forms, which emails you the message and
+  sends the visitor to `/contact/sent/`. It stays hidden until `web3formsKey` is set.
 - **Analytics:** GoatCounter (no cookies, no banner). The script only loads once
-  `goatCounter` is set.
+  `goatCounter` is set, and then only after the page has finished loading.
 - **CV:** put the PDF at `public/cv.pdf` and set `cv: '/cv.pdf'`; a download link
   then appears on the Contact page.
 
@@ -151,6 +153,10 @@ of "AI design tells" in the frontend-design skill was the guide.
   marks things (underlines, bullets, the brand square, button hover) and is never
   used for body text in light mode. Dark mode is the game's navy. Every colour is
   a token at the top of `src/styles/global.css`, written as `light-dark(light, dark)`.
+- **Sections:** alternate sections sit on a darker, grainier band (`Band.astro`),
+  each opening with a heading over a thick rule. A band can take a faint photo
+  (`<Band photo={...}>`); the photos are from Pixabay, credited in
+  `src/assets/backgrounds/CREDITS.md`.
 - **Structure:** lists, not cards. Dates, plain sentences and real screenshots do
   the work; no numbered sections, eyebrows or "→" links.
 - **Motion:** only in answer to the visitor: page cross-fades, the theme switch

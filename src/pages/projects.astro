@@ -2,7 +2,9 @@
 import { render, type CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import Band from '../components/Band.astro';
 import MaybeLink from '../components/MaybeLink.astro';
+import serverRoom from '../assets/backgrounds/server-room.jpg';
 import Text from '../components/Text.astro';
 import { getProjects } from '../lib/content';
 import { pages } from '../site';
@@ -40,8 +42,9 @@ const list = new Intl.ListFormat('en-GB', { type: 'conjunction' });
   </header>
 
   {
-    groups.map((group) => (
-      <section class="section wrap" aria-labelledby={`${group.id}-title`}>
+    groups.map((group) => {
+      const body = (
+        <div class="wrap">
         <h2 class="section-title" id={`${group.id}-title`}>
           {group.title}
         </h2>
@@ -111,7 +114,17 @@ const list = new Intl.ListFormat('en-GB', { type: 'conjunction' });
             </li>
           ))}
         </ul>
-      </section>
-    ))
+        </div>
+      );
+      return group.id === 'games' ? (
+        <Band photo={serverRoom} labelledby={`${group.id}-title`}>
+          {body}
+        </Band>
+      ) : (
+        <section class="section" aria-labelledby={`${group.id}-title`}>
+          {body}
+        </section>
+      );
+    })
   }
 </Base>

@@ -22,6 +22,9 @@ export const site = {
 
   // Kit form ID: the number in the form's embed URL (app.kit.com/forms/<id>/...).
   kitFormId: '10032559',
+  // Web3Forms access key for the contact form (web3forms.com; free, no account).
+  // Until it's set, the Contact page shows only the email link.
+  web3formsKey: '{{TODO: Web3Forms access key}}',
   // GoatCounter site code: the "<code>" in https://<code>.goatcounter.com.
   goatCounter: 'henard',
 };
