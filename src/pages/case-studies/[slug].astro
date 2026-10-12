@@ -23,8 +23,8 @@ const { Content } = await render(study);
 <Base title={data.title} description={data.summary} image={`/og/case-studies/${study.id}.png`} type="article">
   <article>
     <header class="article-head narrow">
-      <p class="kicker">
-        <a href="/case-studies/">Case study</a>
+      <p class="back">
+        <a href="/case-studies/">Case studies</a>
         {data.draft && <span class="badge">Draft</span>}
       </p>
       <h1>{data.title}</h1>
@@ -51,7 +51,7 @@ const { Content } = await render(study);
           <section class="glance" aria-labelledby="glance-title">
             <div class="ledger-legend">
               <h2 id="glance-title">Results at a glance</h2>
-              <span class="kicker" aria-hidden="true">
+              <span class="muted" aria-hidden="true">
                 before → after
               </span>
             </div>
@@ -63,23 +63,16 @@ const { Content } = await render(study);
       <div class="prose">
         <Content />
         <h2 id="stack">Stack</h2>
-        <ul class="chips" aria-label="Stack">
-          {
-            data.stack.map((item) => (
-              <li>
-                <Text text={item} />
-              </li>
-            ))
-          }
-        </ul>
+        <p>
+          <Text text={`${new Intl.ListFormat('en-GB', { type: 'conjunction' }).format(data.stack)}.`} />
+        </p>
       </div>
 
       <footer class="article-foot">
-        <section class="cta-panel" aria-labelledby="cta-title">
-          <h2 id="cta-title">Questions about this?</h2>
-          <p>I’m happy to talk through how it works and what I’d do differently.</p>
-          <a class="button button-primary" href="/work-with-me/#contact-title">Get in touch</a>
-        </section>
+        <p>
+          Questions about this? I’m happy to talk through how it works and what I’d do differently:
+          <a href="/contact/">get in touch</a>.
+        </p>
         <Signup />
       </footer>
     </div>

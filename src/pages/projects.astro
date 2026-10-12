@@ -23,29 +23,30 @@ const [toolingItems, gameItems, universityItems] = await Promise.all([
 ]);
 const groups = [
   { id: 'tooling', title: 'Agent tooling', items: toolingItems },
-  { id: 'games', title: 'Built with AI', items: gameItems },
+  { id: 'games', title: 'Games built with coding agents', items: gameItems },
   { id: 'university', title: 'University', items: universityItems },
 ].filter((group) => group.items.length > 0);
+
+const list = new Intl.ListFormat('en-GB', { type: 'conjunction' });
 ---
 
 <Base title={meta.title} description={meta.description} image="/og/projects.png">
   <header class="page-head wrap">
-    <p class="kicker">Projects</p>
-    <h1>Harnesses, evals and the things I build with them</h1>
+    <h1>Projects</h1>
     <p class="lede">
-      The tooling I use to make coding agents follow a team’s standards, the games I build by orchestrating those
-      agents, and my university projects.
+      Tooling that makes coding agents follow a team’s standards, games I build by directing those agents, and my
+      university projects.
     </p>
   </header>
 
   {
     groups.map((group) => (
       <section class="section wrap" aria-labelledby={`${group.id}-title`}>
-        <div class="section-head">
-          <h2 id={`${group.id}-title`}>{group.title}</h2>
-        </div>
+        <h2 class="section-title" id={`${group.id}-title`}>
+          {group.title}
+        </h2>
         {group.id === 'games' && (
-          <p class="section-intro games-intro">
+          <p class="section-intro">
             I build these in my own time by directing Claude Code agents: written briefs, long-running sessions,
             headless bot playtests and automated tests that keep the agents honest.
           </p>
@@ -57,15 +58,12 @@ const groups = [
           {group.items.map(({ project, Content }) => (
             <li class="project" id={project.id}>
               <div>
-                <p class="project-meta">
-                  <span class="project-kind">{project.data.kind}</span>
-                  <span>
-                    <Text text={project.data.status} />
-                  </span>
-                </p>
                 <h3>
                   <Text text={project.data.title} />
                 </h3>
+                <p class="project-meta">
+                  <Text text={`${project.data.kind}. ${project.data.status}.`} />
+                </p>
                 <p class="project-summary">
                   <Text text={project.data.summary} />
                 </p>
@@ -86,12 +84,12 @@ const groups = [
                     src={project.data.cover.src}
                     alt={project.data.cover.alt}
                     widths={[480, 800, 1200]}
-                    sizes="(min-width: 72rem) 33rem, (min-width: 52rem) 45vw, 100vw"
+                    sizes="(min-width: 64rem) 30rem, (min-width: 52rem) 45vw, 100vw"
                     fetchpriority="low"
                   />
                 )}
                 {project.data.highlights.length > 0 && (
-                  <ul class="card-highlights" aria-label="Highlights">
+                  <ul class="marked">
                     {project.data.highlights.map((h) => (
                       <li>
                         <Text text={h} />
@@ -100,16 +98,14 @@ const groups = [
                   </ul>
                 )}
                 {project.body?.trim() && (
-                  <div class="project-body prose">
+                  <div class="prose">
                     <Content />
                   </div>
                 )}
                 {project.data.stack.length > 0 && (
-                  <ul class="chips" aria-label="Stack">
-                    {project.data.stack.map((s) => (
-                      <li>{s}</li>
-                    ))}
-                  </ul>
+                  <p class="project-stack">
+                    <Text text={`Built with ${list.format(project.data.stack)}.`} />
+                  </p>
                 )}
               </div>
             </li>

@@ -76,7 +76,7 @@ metrics:                                  # illustrative numbers
 
 Keep case studies anonymised: no employer, client or product names.
 
-Set `featured: true` to show it in the Proof section on the home page.
+Set `featured: true` to list it under "Built" on the home page.
 
 ### A project: `src/content/projects/my-project.md`
 
@@ -96,15 +96,28 @@ stack: ["Node.js", "PowerShell 7"]
 cover:                        # optional screenshot, next to the .md file
   src: "./images/pwsh-axi.png"
   alt: "What the screenshot shows"
-featured: false               # true puts it in the home page's Proof section
+tagline: "Six words or so"     # optional: its line in the home page's Built list
+featured: false               # true lists it under Built on the home page
 order: 5                      # lower comes first
 draft: false                  # optional: true hides it outside `npm run dev`
 ---
 ```
 
-The home page's Proof section shows featured case studies first, then featured
-projects, three at most. Cover images are resized and converted to WebP at build
+The home page's Built list shows featured case studies first, then featured
+projects, each with its `tagline`. Cover images are resized and converted to WebP at build
 time, so a full-size PNG or JPG is fine.
+
+### The "Recently" log: `src/content/log.yaml`
+
+The dated list on the home page. Add an entry when you ship, write or start
+something; it's sorted by date, so order in the file doesn't matter.
+
+```yaml
+- id: nuke-france            # any unique name
+  date: 2026-10-06
+  text: Shipped Nuke France, a game I made in a weekend
+  href: https://de-jonkheer.itch.io/nuke-france   # optional
+```
 
 ## Site settings: `src/site.ts`
 
@@ -118,7 +131,7 @@ SEO and link previews are there too.
 - **Analytics:** GoatCounter (no cookies, no banner). The script only loads once
   `goatCounter` is set.
 - **CV:** put the PDF at `public/cv.pdf` and set `cv: '/cv.pdf'`; a download link
-  then appears on Work with me.
+  then appears on the Contact page.
 
 ## SEO
 
@@ -129,14 +142,20 @@ sitemap is at `/sitemap-index.xml`.
 
 ## Design
 
-- **Type:** Bricolage Grotesque (headings), Source Serif 4 (body), JetBrains Mono
-  (code, labels, metrics). All served from the site itself.
-- **Colour:** every colour is a token at the top of `src/styles/global.css`,
-  written as `light-dark(light, dark)`. All text pairs meet WCAG AA in both
-  themes.
-- **Themes:** follows the system setting, and the header toggle overrides it
-  (saved in the browser).
-- **JavaScript:** just the theme toggle and the copy-email button.
+The aim is a site that reads as made by a person, not generated: the checklist
+of "AI design tells" in the frontend-design skill was the guide.
+
+- **Type:** Bricolage Grotesque for the name, headings and numbers; Source Serif 4
+  for everything else. JetBrains Mono only for code. No uppercase labels.
+- **Colour:** neutral paper and true-black ink; safety orange from Load Shedding
+  marks things (underlines, bullets, the brand square, button hover) and is never
+  used for body text in light mode. Dark mode is the game's navy. Every colour is
+  a token at the top of `src/styles/global.css`, written as `light-dark(light, dark)`.
+- **Structure:** lists, not cards. Dates, plain sentences and real screenshots do
+  the work; no numbered sections, eyebrows or "→" links.
+- **Motion:** only in answer to the visitor: page cross-fades, the theme switch
+  wipe, underline and button transitions. All off for `prefers-reduced-motion`.
+- **JavaScript:** the theme toggle, the copy button and the footer clock.
 
 ## Deploying
 

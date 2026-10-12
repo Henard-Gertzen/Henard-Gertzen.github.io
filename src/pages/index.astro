@@ -1,84 +1,79 @@
 ---
-import Base from '../layouts/Base.astro';
-import ProofCard from '../components/ProofCard.astro';
-import PostList from '../components/PostList.astro';
-import Signup from '../components/Signup.astro';
-import { getCaseStudies, getPosts, published } from '../lib/content';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Signup from '../components/Signup.astro';
+import headshot from '../assets/henard-gertzen.png';
+import { getCaseStudies, isoDate, published } from '../lib/content';
 import { pages, site } from '../site';
 
 const meta = pages['/'];
-const [caseStudies, projects, posts] = await Promise.all([
+const month = (date: Date) => date.toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+
+const log = (await getCollection('log')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// "Built": featured case studies first, then featured projects in their page order.
+const groupOrder = { tooling: 0, games: 1, university: 2 } as const;
+const [studies, projects] = await Promise.all([
   getCaseStudies(),
   getCollection('projects', (entry) => entry.data.featured && published(entry)),
-  getPosts(),
 ]);
-
-// Proof: featured case studies first, then featured projects, three at most.
-const proof = [
-  ...caseStudies
+const built = [
+  ...studies
     .filter((s) => s.data.featured)
-    .map((s) => ({
-      kind: 'Case study',
-      title: s.data.title,
-      summary: s.data.summary,
-      href: `/case-studies/${s.id}/`,
-      cta: 'Read the case study',
-      metrics: s.data.metrics,
-    })),
+    .map((s) => ({ title: s.data.title, href: `/case-studies/${s.id}/`, line: s.data.summary })),
   ...projects
-    .sort((a, b) => a.data.order - b.data.order)
-    .map((p) => ({
-      kind: p.data.kind,
-      title: p.data.title,
-      summary: p.data.summary,
-      href: `/projects/#${p.id}`,
-      cta: 'See the project',
-      highlights: p.data.highlights,
-    })),
-].slice(0, 3);
-
-const [heroStart, heroEnd] = splitLast(site.hero.title, 3);
-
-/** Split off the last `n` words so they can be accented. */
-function splitLast(text: string, n: number) {
-  const words = text.split(' ');
-  return [words.slice(0, -n).join(' '), words.slice(-n).join(' ')];
-}
+    .sort((a, b) => groupOrder[a.data.group] - groupOrder[b.data.group] || a.data.order - b.data.order)
+    .map((p) => ({ title: p.data.title, href: `/projects/#${p.id}`, line: p.data.tagline ?? p.data.kind })),
+];
 ---
 
 <Base title={meta.title} description={meta.description} image="/og/index.png">
-  <section class="hero wrap" aria-labelledby="hero-title">
-    <h1 id="hero-title">{heroStart} <em>{heroEnd}</em></h1>
-    <p class="lede">{site.hero.subtitle}</p>
-    <div class="hero-actions">
-      <a class="button button-primary" href="#proof">See the proof</a>
-      <a class="button" href="/work-with-me/">Work with me</a>
-    </div>
-    <p class="availability">
-      Full-stack developer on .NET and Angular, working remotely from South Africa (UTC+2).
-    </p>
-  </section>
+  <div class="wrap">
+    <section class="hero" aria-labelledby="hero-title">
+      <figure class="portrait">
+        <Image src={headshot} alt="Henard Gertzen" widths={[200, 400]} sizes="(min-width: 48rem) 11rem, 7rem" loading="eager" />
+      </figure>
+      <div class="hero-text">
+        <h1 id="hero-title">Hi, I’m Henard. {site.hero.title}</h1>
+        <p>
+          I’m a full-stack developer on .NET and Angular in Secunda, South Africa, and I make games with coding agents on
+          the side.
+        </p>
+      </div>
+    </section>
 
-  <section class="section wrap" id="proof" aria-labelledby="proof-title">
-    <div class="section-head">
-      <h2 id="proof-title">Proof</h2>
-      <a href="/projects/">All projects</a>
-    </div>
-    <div class="card-grid card-grid-3">
-      {proof.map((item) => <ProofCard {...item} />)}
-    </div>
-  </section>
+    <section class="section" aria-labelledby="recent-title">
+      <h2 class="section-title" id="recent-title">Recently</h2>
+      <ol class="dated">
+        {
+          log.map((entry) => (
+            <li>
+              <time datetime={isoDate(entry.data.date)}>{month(entry.data.date)}</time>
+              <span>{entry.data.href ? <a href={entry.data.href}>{entry.data.text}</a> : entry.data.text}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
 
-  <section class="section wrap" aria-labelledby="writing-title">
-    <div class="section-head">
-      <h2 id="writing-title">Latest writing</h2>
-      <a href="/writing/">All writing</a>
-    </div>
-    <PostList posts={posts.slice(0, 3)} headingLevel={3} />
-  </section>
+    <section class="section" aria-labelledby="built-title">
+      <h2 class="section-title" id="built-title">Built</h2>
+      <ul class="built">
+        {
+          built.map((item) => (
+            <li>
+              <a href={item.href}>{item.title}</a>
+              <span>{item.line}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="more"><a href="/projects/">All projects, including the games and university work</a></p>
+    </section>
 
-  <div class="section wrap">
-    <Signup />
+    <div class="section">
+      <Signup />
+    </div>
   </div>
 </Base>

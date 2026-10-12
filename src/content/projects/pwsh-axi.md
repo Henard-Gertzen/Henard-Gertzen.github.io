@@ -9,6 +9,5 @@ highlights:
   - "Claims that didn't survive testing were removed and listed under 'What this does not do'"
 stack: ["Node.js", "PowerShell 7", "TOON"]
 group: tooling
-featured: true
 order: 4
 ---

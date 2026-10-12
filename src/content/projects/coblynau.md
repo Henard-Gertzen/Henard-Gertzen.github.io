@@ -1,6 +1,6 @@
 ---
 title: "Coblynau"
-kind: "Game prototype"
+kind: "Game"
 summary: "A forge prototype built to answer one question: is shaping a weapon and watching what it does fun? Build a weapon from parts on an anvil grid, then swing it at dummies and a brawler in a first-person test room."
 status: "Playable prototype"
 highlights:

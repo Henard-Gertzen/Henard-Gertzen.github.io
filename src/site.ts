@@ -46,8 +46,8 @@ export const pages = {
     description: 'What coding agents actually are, and how to make them write code your team would merge.',
   },
 
-  '/work-with-me/': {
-    title: 'Work with me',
+  '/contact/': {
+    title: 'Contact',
     description: 'What I do: full-stack .NET and Angular development, and AI harnesses for coding agents. How to get in touch.',
   },
   '/feed/': {

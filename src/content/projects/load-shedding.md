@@ -11,6 +11,8 @@ stack: ["Godot 4", "GDScript", "Claude Code"]
 cover:
   src: "./images/load-shedding-run-the-grid.jpg"
   alt: "Load Shedding gameplay: a 3D map of Gauteng at night, with the load-shedding schedule on the left and the grid, money and escape fund along the top"
+tagline: "A satirical power-grid sim, in development"
+featured: true
 group: games
 order: 1
 ---

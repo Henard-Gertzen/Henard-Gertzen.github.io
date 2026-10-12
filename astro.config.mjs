@@ -10,6 +10,9 @@ export default defineConfig({
   // Standard HTML whitespace: Astro 7's default ('jsx') drops the space where
   // prose wraps onto a new line before a link.
   compressHTML: true,
+  redirects: {
+    '/work-with-me': '/contact',
+  },
   build: {
     // The stylesheet is small; inlining it removes the only render-blocking request.
     inlineStylesheets: 'always',

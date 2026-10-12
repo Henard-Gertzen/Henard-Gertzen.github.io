@@ -1,6 +1,6 @@
 ---
 title: "Ides of Plunder"
-kind: "Game prototype"
+kind: "Game"
 summary: "Proof of concept for a pirate naval-action game on a seeded, procedurally generated ocean."
 status: "Proof of concept, in progress"
 highlights:

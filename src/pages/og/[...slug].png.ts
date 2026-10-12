@@ -9,8 +9,8 @@ export const getStaticPaths = (async () => {
   const cards: (OgCard & { slug: string })[] = [
     ...Object.entries(pages).map(([path, meta]) =>
       path === '/'
-        ? { slug: 'index', kicker: site.tagline, title: site.hero.title, description: site.hero.subtitle }
-        : { slug: path.slice(1, -1), kicker: site.tagline, title: meta.title, description: meta.description },
+        ? { slug: 'index', kicker: '', title: site.hero.title, description: site.hero.subtitle }
+        : { slug: path.slice(1, -1), kicker: '', title: meta.title, description: meta.description },
     ),
     ...studies.map((s) => ({
       slug: `case-studies/${s.id}`,

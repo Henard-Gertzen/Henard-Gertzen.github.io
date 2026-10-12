@@ -10,6 +10,7 @@ highlights:
   - "Ideas that failed measurement are recorded in BENCHMARKS.md instead of shipped"
 stack: ["Claude Code", "Claude Code plugins", "Node.js", "PowerShell", "Git worktrees"]
 group: tooling
+tagline: "A bootloader for Claude Code, with three measured plugins"
 featured: true
 order: 1
 ---

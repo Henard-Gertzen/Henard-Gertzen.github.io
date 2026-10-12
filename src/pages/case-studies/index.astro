@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
-import ProofCard from '../../components/ProofCard.astro';
+import Metrics from '../../components/Metrics.astro';
+import Text from '../../components/Text.astro';
 import Signup from '../../components/Signup.astro';
 import { getCaseStudies } from '../../lib/content';
 import { pages } from '../../site';
@@ -11,8 +12,7 @@ const studies = await getCaseStudies();
 
 <Base title={meta.title} description={meta.description} image="/og/case-studies.png">
   <header class="page-head wrap">
-    <p class="kicker">Case studies</p>
-    <h1>Coding agents on real teams, measured</h1>
+    <h1>Case studies</h1>
     <p class="lede">
       Each one follows the same shape: the context, the problem, what I built, how I measured it against a baseline,
       the results, and what didn’t work. Clients are anonymised.
@@ -22,16 +22,13 @@ const studies = await getCaseStudies();
   {
     studies.length === 0 && (
       <section class="section wrap" aria-labelledby="progress-title">
-        <div class="section-head">
-          <h2 id="progress-title">The first one is in progress</h2>
-        </div>
+        <h2 class="section-title" id="progress-title">
+          The first one is in progress
+        </h2>
         <p class="section-intro">
           It covers making Claude Code follow a team’s ABP and Angular conventions, with baseline and after numbers.
-          Until it’s ready, my agent tooling is on the Projects page.
+          Until it’s ready, my agent tooling is on the <a href="/projects/">Projects</a> page.
         </p>
-        <div class="section-actions">
-          <a class="button button-primary" href="/projects/">See the projects</a>
-        </div>
         <div class="section">
           <Signup />
         </div>
@@ -40,20 +37,25 @@ const studies = await getCaseStudies();
   }
 
   <div class="wrap">
-    <div class="card-grid">
+    <ul class="project-list">
       {
         studies.map((s) => (
-          <ProofCard
-            kind="Case study"
-            title={s.data.title}
-            summary={s.data.summary}
-            href={`/case-studies/${s.id}/`}
-            cta="Read the case study"
-            metrics={s.data.metrics}
-            headingLevel={2}
-          />
+          <li class="project">
+            <div>
+              <h2 class="section-title">
+                <a href={`/case-studies/${s.id}/`}>
+                  <Text text={s.data.title} />
+                </a>
+                {s.data.draft && <span class="badge">Draft</span>}
+              </h2>
+              <p>
+                <Text text={s.data.summary} />
+              </p>
+            </div>
+            <Metrics metrics={s.data.metrics.slice(0, 2)} compact />
+          </li>
         ))
       }
-    </div>
+    </ul>
   </div>
 </Base>

@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import Copy from '../components/Copy.astro';
+import { pages, site } from '../site';
+import { isTodo } from '../lib/todo';
+
+const meta = pages['/contact/'];
+---
+
+<Base title={meta.title} description={meta.description} image="/og/contact.png">
+  <header class="page-head wrap">
+    <h1>Contact</h1>
+    <p class="lede">What I do day to day, and how to reach me.</p>
+  </header>
+
+  <div class="wrap">
+    <div class="roles">
+      <section aria-labelledby="dev-title">
+        <h2 id="dev-title">Full-stack developer</h2>
+        <p>
+          I build and maintain enterprise software on .NET and Angular, working remotely as part of a product team.
+        </p>
+        <dl class="facts">
+          <div>
+            <dt>Stack</dt>
+            <dd>C# and .NET (ABP Framework), Angular, TypeScript</dd>
+          </div>
+          <div>
+            <dt>Before</dt>
+            <dd>React and Next.js front-ends</dd>
+          </div>
+          <div>
+            <dt>Where</dt>
+            <dd>Remote, from {site.location}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section aria-labelledby="ai-title">
+        <h2 id="ai-title">AI harnesses for coding agents</h2>
+        <p>
+          Setting up Claude Code so it follows a team’s conventions, and checking whether it actually does. The tooling
+          is on the <a href="/projects/">Projects</a> page.
+        </p>
+        <ul class="marked">
+          <li>
+            <strong>Harness:</strong> shared settings, hooks, permissions and tools, so every developer’s agent works the
+            same way.
+          </li>
+          <li>
+            <strong>Context:</strong> conventions written where the agent reads them, with real examples from the codebase.
+          </li>
+          <li>
+            <strong>Measurement:</strong> every change gets a number, like the 31% token saving from one harness default.
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Get in touch</h2>
+      <p>
+        Email is the fastest way to reach me. I’m also on <a href={site.links.linkedin} rel="noopener">LinkedIn</a>
+        and <a href={site.links.github} rel="noopener">GitHub</a>.
+      </p>
+      <Copy text={site.email} />
+      {
+        !isTodo(site.cv) && (
+          <p class="contact-cv">
+            <a href={site.cv}>Download my CV (PDF)</a>
+          </p>
+        )
+      }
+    </section>
+  </div>
+</Base>

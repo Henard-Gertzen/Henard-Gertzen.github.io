@@ -26,16 +26,15 @@ const { Content } = await render(post);
 <Base title={data.title} description={data.description} image={`/og/writing/${post.id}.png`} type="article">
   <article>
     <header class="article-head narrow">
-      <p class="kicker">
+      <p class="back">
         <a href="/writing/">Writing</a>
         {data.draft && <span class="badge">Draft</span>}
       </p>
       <h1>{data.title}</h1>
       <p class="lede"><Text text={data.description} /></p>
-      <p class="post-meta">
-        <time datetime={isoDate(data.date)}><Text text={formatDate(data.date)} /></time>
-        <span>{readingMinutes(post.body)} min read</span>
-        {data.updated && <span>Updated <time datetime={isoDate(data.updated)}>{formatDate(data.updated)}</time></span>}
+      <p class="article-meta-line">
+        <time datetime={isoDate(data.date)}><Text text={formatDate(data.date)} /></time>, {readingMinutes(post.body)} min
+        read{data.updated && <>, updated <time datetime={isoDate(data.updated)}>{formatDate(data.updated)}</time></>}
       </p>
     </header>
 
@@ -44,7 +43,7 @@ const { Content } = await render(post);
         <Content />
       </div>
       <footer class="article-foot">
-        <Tags tags={data.tags} />
+        {data.tags.length > 0 && <p class="muted">Filed under <Tags tags={data.tags} /></p>}
         <Signup />
       </footer>
     </div>

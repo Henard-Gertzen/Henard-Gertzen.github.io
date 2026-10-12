@@ -40,15 +40,17 @@ export async function renderOg({ kicker, title, description }: OgCard) {
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: '64px 72px',
-        background: '#f7f4ee',
-        color: '#1a1814',
-        borderTop: '16px solid #0b6847',
+        background: '#f5f5f2',
+        color: '#000000',
+        borderTop: '16px solid #e8770e',
       },
       [
-        h('div', { display: 'flex', alignItems: 'center', gap: 18, fontFamily: 'Display', fontWeight: 600, fontSize: 28 }, [
-          h('div', { width: 22, height: 22, background: '#0b6847' }),
-          h('div', { display: 'flex' }, 'Henard Gertzen'),
-          h('div', { display: 'flex', color: '#4d473e', marginLeft: 8 }, `/ ${kicker}`),
+        h('div', { display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontFamily: 'Display', fontWeight: 600, fontSize: 28 }, [
+          h('div', { display: 'flex', alignItems: 'center', gap: 16 }, [
+            h('div', { width: 20, height: 20, background: '#e8770e' }),
+            h('div', { display: 'flex' }, 'Henard Gertzen'),
+          ]),
+          h('div', { display: 'flex', color: '#55565c' }, kicker),
         ]),
         h('div', { display: 'flex', flexDirection: 'column', gap: 28 }, [
           h(
@@ -56,12 +58,12 @@ export async function renderOg({ kicker, title, description }: OgCard) {
             { display: 'flex', fontFamily: 'Display', fontWeight: 800, fontSize: titleSize, lineHeight: 1.02, letterSpacing: '-0.035em' },
             title,
           ),
-          h('div', { display: 'flex', fontFamily: 'Serif', fontSize: 30, lineHeight: 1.35, color: '#4d473e', maxWidth: 980 }, description),
+          h('div', { display: 'flex', fontFamily: 'Serif', fontSize: 30, lineHeight: 1.35, color: '#55565c', maxWidth: 980 }, description),
         ]),
         h(
           'div',
-          { display: 'flex', justifyContent: 'space-between', paddingTop: 22, borderTop: '3px solid #1a1814', fontFamily: 'Display', fontWeight: 600, fontSize: 24 },
-          [h('div', { display: 'flex' }, 'henard-gertzen.github.io'), h('div', { display: 'flex', color: '#0b6847' }, 'AI enablement')],
+          { display: 'flex', justifyContent: 'space-between', paddingTop: 22, borderTop: '2px solid #dadad4', fontFamily: 'Display', fontWeight: 600, fontSize: 24 },
+          [h('div', { display: 'flex' }, 'henard-gertzen.github.io'), h('div', { display: 'flex', color: '#55565c' }, 'Secunda, South Africa')],
         ),
       ],
     ) as Parameters<typeof satori>[0],

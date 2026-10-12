@@ -19,17 +19,17 @@ live site or **hidden** (drafts, or settings the site leaves out until they're s
   `src/content/case-studies/claude-code-abp-angular-conventions.md`. Client, role,
   period, tooling, both metrics (baseline, after, method) and all six sections.
   Anonymised throughout: no Sygnio, client or product names. Then remove
-  `draft: true` and set `featured: true` to put it in the home page's Proof row.
+  `draft: true` and set `featured: true` to list it under Built on the home page.
   Until then the Case studies page says the first one is in progress.
 - [ ] **Eval suite** (hidden draft, 7 placeholders):
   `src/content/projects/eval-suite.md`. Name, summary, status, repo URL, two
-  highlights, stack. Then remove `draft: true`; `featured: true` also puts it in
-  the home page's Proof row.
+  highlights, stack. Then remove `draft: true`; `featured: true` (with a `tagline`)
+  also lists it under Built on the home page.
 - [ ] **Draft post** (hidden, 7 placeholders):
   `src/content/posts/claude-code-abp-team-standards.md`. Fill the outline from the
   case study, then remove `draft: true` to publish.
 - [ ] **CV** (hidden): put an updated PDF at `public/cv.pdf` and set
-  `cv: '/cv.pdf'` in `src/site.ts`; a download link then appears on Work with me. The 2024 student CV stays on the
+  `cv: '/cv.pdf'` in `src/site.ts`; a download link then appears on the Contact page. The 2024 student CV stays on the
   `legacy-3d-site` branch.
 
 ## Waiting on links

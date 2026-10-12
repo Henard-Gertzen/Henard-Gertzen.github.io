@@ -1,6 +1,6 @@
 ---
 title: "The Paracelsian"
-kind: "Game prototype"
+kind: "Game"
 summary: "Proof of concept for a 2.5D alchemy-lab game set in late-1600s Utrecht, with a \"living painting\" look built from period art."
 status: "Proof of concept"
 highlights:

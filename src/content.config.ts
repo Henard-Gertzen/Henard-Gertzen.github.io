@@ -1,5 +1,5 @@
 import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 // A `{{TODO: ...}}` placeholder can stand in for any value that isn't known yet.
@@ -56,6 +56,8 @@ const projects = defineCollection({
     group: z.enum(['tooling', 'games', 'university']),
     kind: z.string(),
     status: z.string(),
+    // A few words for the home page's "Built" list.
+    tagline: z.string().optional(),
     links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
     highlights: z.array(z.string()).default([]),
     stack: z.array(z.string()).default([]),
@@ -67,4 +69,13 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { caseStudies, posts, projects };
+const log = defineCollection({
+  loader: file('src/content/log.yaml'),
+  schema: z.object({
+    date: z.coerce.date(),
+    text: z.string(),
+    href: z.string().optional(),
+  }),
+});
+
+export const collections = { caseStudies, posts, projects, log };

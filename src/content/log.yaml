@@ -1,0 +1,28 @@
+# The "Recently" list on the home page. Add a line when you ship, write or start
+# something; the home page sorts by date, newest first. `href` is optional.
+- id: paracelsian-poc
+  date: 2026-10-07
+  text: Finished the proof of concept for The Paracelsian
+  href: /projects/#the-paracelsian
+- id: nuke-france
+  date: 2026-10-06
+  text: Shipped Nuke France, a game I made in a weekend
+  href: https://de-jonkheer.itch.io/nuke-france
+- id: harness-plugin-costs
+  date: 2026-09-08
+  text: Measured what each Directorate Harness plugin costs in context
+  href: /projects/#directorate-harness
+- id: lazy-optimizer
+  date: 2026-08-06
+  text: Wrote “The Lazy Optimizer”, on why I’d rather not call AI intelligent
+  href: https://www.linkedin.com/pulse/lazy-optimizer-why-we-need-stop-calling-ai-henard-gertzen-dnpef/
+- id: remote-role
+  date: 2025-09-29
+  text: Started as a remote full-stack developer on .NET and Angular
+- id: ezidev
+  date: 2025-01-20
+  text: Joined EziDev as an intermediate full-stack developer
+- id: graduated
+  date: 2024-11-11
+  text: Finished my BSc IT at North-West University, after leading our final-year project
+  href: /projects/#share2teach

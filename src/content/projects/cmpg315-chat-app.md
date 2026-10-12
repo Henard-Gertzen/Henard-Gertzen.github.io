@@ -1,6 +1,6 @@
 ---
 title: "Chat app"
-kind: "CMPG 315 · Networks"
+kind: "CMPG 315, Networks"
 summary: "A desktop chat app: sign up, find other users, message them in real time with emoji and images, and block people."
 status: "Group project, 2024"
 links:
