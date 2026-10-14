@@ -135,11 +135,12 @@ SEO and link previews are there too.
 - **CV:** the resume is a page, `src/pages/cv/`, laid out for A4 in the site's style.
   After `npm run build`, `npm run cv` prints it with headless Chrome to `public/cv.pdf`
   (commit that; the Contact page links it). The public version describes the current
-  employer without naming it and has no phone number. In a local `.env` (git-ignored), set
-  `CV_EMPLOYER` and `CV_LINKEDIN_PDF` for a LinkedIn version (employer named, no phone), and
-  `CV_PHONE` and `CV_PRIVATE_PDF` for an applications version: the build then also makes
-  `/cv/linkedin/` and `/cv/private/`, and `npm run cv` prints them there. GitHub never sees
-  the `.env`, so those versions are never deployed.
+  employer without naming it and has no phone number. A git-ignored `cv.private.json` in the
+  repository root (`employer`, `phone`, and `points` for the current role) adds a LinkedIn
+  version (employer and achievements, no phone) and an applications version (with phone): the
+  build makes `/cv/linkedin/` and `/cv/private/`, and `npm run cv` prints them to
+  `CV_LINKEDIN_PDF` and `CV_PRIVATE_PDF`, set in a git-ignored `.env`. GitHub never sees either
+  file, so those versions are never built or deployed there.
 
 ## SEO
 

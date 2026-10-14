@@ -52,3 +52,14 @@ whole photo), `png` (the file's own transparency), `sky` (bright sky becomes tra
   pixels below it. Bottom-anchored cut-outs sink below the frame far enough to never lift clear.
 - Key subjects sit beside the cards, not behind them: cards cover the middle of each plate.
 - Phones never download a plate.
+
+## LinkedIn banner
+
+`linkedin/banner.html` is the profile banner (1584 × 396, LinkedIn's size): the Highveld plate
+with a punch-card on the right, clear of the profile photo in the lower left. It uses the
+plates in `public/plates/` and the site's fonts, copied into `linkedin/fonts/`. Capture it with
+headless Chrome, at `--force-device-scale-factor=2` for a sharper copy:
+
+```bash
+chrome --headless=new --hide-scrollbars --window-size=1584,396 --screenshot=banner.png art/linkedin/banner.html
+```

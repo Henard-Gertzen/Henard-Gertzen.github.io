@@ -17,3 +17,6 @@ npm-debug.log*
 !.vscode/extensions.json
 .idea/
 .DS_Store
+
+# Private resume details (employer, phone, achievements): see README
+cv.private.json

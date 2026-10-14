@@ -3,9 +3,8 @@
 //   npm run cv
 //
 // The public version goes to public/cv.pdf (commit it; the site links it). The LinkedIn and
-// private versions (employer, and phone number, from the git-ignored .env) are only built when
-// CV_EMPLOYER and CV_PHONE are set, and are written to CV_LINKEDIN_PDF and CV_PRIVATE_PDF, which
-// should be outside the repository.
+// private versions are only built when the git-ignored cv.private.json exists, and are written
+// to CV_LINKEDIN_PDF and CV_PRIVATE_PDF from the git-ignored .env (outside the repository).
 import { spawn } from 'node:child_process';
 import { existsSync, mkdtempSync, readFileSync, rmSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
@@ -41,7 +40,7 @@ try {
     ['private', 'CV_PRIVATE_PDF'],
   ]) {
     if (!existsSync(`dist/cv/${variant}/index.html`)) {
-      console.log(`No ${variant} version: set CV_EMPLOYER (and CV_PHONE) in .env and rebuild to make one.`);
+      console.log(`No ${variant} version: add cv.private.json (with a phone number for the private one) and rebuild.`);
     } else if (!env[setting]) {
       console.log(`Skipped the ${variant} version: set ${setting} in .env to where it should go.`);
     } else {

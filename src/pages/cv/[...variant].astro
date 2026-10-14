@@ -1,39 +1,49 @@
 ---
 // The resume, laid out for A4 and printed to PDF by scripts/cv.mjs.
-//   /cv/           the public version: no phone number, employer described, not named.
-//   /cv/linkedin/  for LinkedIn: employer named (the profile already shows it), no phone number.
-//   /cv/private/   for applications: phone number and employer name.
-// The last two are only built when CV_EMPLOYER (and CV_PHONE) are set in a local, git-ignored
-// .env, so they are never deployed.
+//   /cv/           the public version: no phone number, current employer described, not named.
+//   /cv/linkedin/  for LinkedIn: employer and its achievements (the profile shows them), no phone.
+//   /cv/private/   for applications: the same, plus the phone number.
+// The last two come from cv.private.json in the repository root, which is git-ignored, so they
+// are only built locally and never deployed.
 import { Font } from 'astro:assets';
 import '../../styles/cv.css';
 
+interface Private {
+  employer: string;
+  phone?: string;
+  /** What the current role's entry says when the employer is named. */
+  points?: string[];
+}
+
 export function getStaticPaths() {
-  const phone = import.meta.env.CV_PHONE as string | undefined;
-  const employer = import.meta.env.CV_EMPLOYER as string | undefined;
+  const files = import.meta.glob<{ default: Private }>('/cv.private.json', { eager: true });
+  const details = Object.values(files)[0]?.default;
+  if (!details) return [{ params: { variant: undefined }, props: {} }];
+  const { employer, phone, points } = details;
   return [
     { params: { variant: undefined }, props: {} },
-    ...(employer ? [{ params: { variant: 'linkedin' }, props: { employer } }] : []),
-    ...(phone && employer ? [{ params: { variant: 'private' }, props: { phone, employer } }] : []),
+    { params: { variant: 'linkedin' }, props: { employer, points } },
+    ...(phone ? [{ params: { variant: 'private' }, props: { employer, phone, points } }] : []),
   ];
 }
 
 interface Props {
-  phone?: string;
   employer?: string;
+  phone?: string;
+  points?: string[];
 }
 
-const { phone, employer } = Astro.props;
+const { employer, phone, points } = Astro.props;
 
 const experience = [
   {
-    role: 'Junior Software Developer',
+    role: 'Junior Full-Stack Software Developer',
     org: employer ?? 'Software company (remote)',
     dates: 'Sep 2025 – present',
     place: 'Remote',
-    points: [
+    points: points ?? [
       'Build and maintain enterprise software on .NET (ABP Framework) and Angular as part of a product team.',
-      'Specialise in AI harnesses: setting up Claude Code so coding agents follow the team’s conventions, and checking that they do.',
+      'Set up the team’s Claude Code development environment for a new project: CLAUDE.md files and skills that the whole team uses.',
     ],
   },
   {
@@ -45,6 +55,13 @@ const experience = [
       'Built the front end for a payment aggregation platform.',
       'Built landing pages and interactive experiences, working with Next.js, C#, SQL and Docker.',
     ],
+  },
+  {
+    role: 'Freelance Graphic Designer',
+    org: 'Self-employed',
+    dates: 'Jan 2022 – Sep 2023',
+    place: 'Potchefstroom, North-West',
+    points: ['Designed multimedia packages and websites for clients part-time while studying, and learnt SEO and social media management.'],
   },
   {
     role: 'Computer Hardware Technician',
