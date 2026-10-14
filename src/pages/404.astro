@@ -1,10 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
 ---
 
 <Base title="Page not found" description="This page doesn’t exist." noindex>
-  <div class="not-found narrow">
-    <h1>This page doesn’t exist</h1>
-    <p>It may have moved when the site was rebuilt. Try the <a href="/">home page</a> or the <a href="/writing/">writing</a>.</p>
-  </div>
+  <PageHead icon="pylon" kicker="404" title="This Page Doesn’t Exist">
+    <p>
+      It may have moved when the site was rebuilt. Try the <a href="/">home page</a> or the
+      <a href="/writing/">writing</a>.
+    </p>
+  </PageHead>
 </Base>

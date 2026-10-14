@@ -1,6 +1,7 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
 import Signup from '../../components/Signup.astro';
 import Tags from '../../components/Tags.astro';
 import Text from '../../components/Text.astro';
@@ -21,31 +22,38 @@ interface Props {
 const { post } = Astro.props;
 const { data } = post;
 const { Content } = await render(post);
+const kicker = `${formatDate(data.date)} / ${readingMinutes(post.body)} min read`;
 ---
 
 <Base title={data.title} description={data.description} image={`/og/writing/${post.id}.png`} type="article">
   <article>
-    <header class="article-head narrow">
-      <p class="back">
-        <a href="/writing/">Writing</a>
-        {data.draft && <span class="badge">Draft</span>}
-      </p>
-      <h1>{data.title}</h1>
-      <p class="lede"><Text text={data.description} /></p>
-      <p class="article-meta-line">
-        <time datetime={isoDate(data.date)}><Text text={formatDate(data.date)} /></time>, {readingMinutes(post.body)} min
-        read{data.updated && <>, updated <time datetime={isoDate(data.updated)}>{formatDate(data.updated)}</time></>}
-      </p>
-    </header>
+    <PageHead kicker={kicker} tag={data.draft ? 'Draft' : undefined} title={data.title} back={{ href: '/writing/', label: 'Writing' }}>
+      <p><Text text={data.description} /></p>
+      {
+        data.updated && (
+          <p class="page-note">
+            Updated <time datetime={isoDate(data.updated)}>{formatDate(data.updated)}</time>
+          </p>
+        )
+      }
+    </PageHead>
 
-    <div class="narrow">
-      <div class="prose">
+    <div class="card reading">
+      <div class="prose measure">
         <Content />
       </div>
-      <footer class="article-foot">
-        {data.tags.length > 0 && <p class="muted">Filed under <Tags tags={data.tags} /></p>}
-        <Signup />
-      </footer>
+      {
+        data.tags.length > 0 && (
+          <p class="chips">
+            <span>Filed under</span>
+            <Tags tags={data.tags} chips />
+          </p>
+        )
+      }
     </div>
+  </article>
+
+  <article class="card scene">
+    <Signup />
   </article>
 </Base>

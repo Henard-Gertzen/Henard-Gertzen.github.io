@@ -2,6 +2,7 @@
 import { render, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Metrics from '../../components/Metrics.astro';
+import PageHead from '../../components/PageHead.astro';
 import Signup from '../../components/Signup.astro';
 import Text from '../../components/Text.astro';
 import { getCaseStudies } from '../../lib/content';
@@ -22,59 +23,46 @@ const { Content } = await render(study);
 
 <Base title={data.title} description={data.summary} image={`/og/case-studies/${study.id}.png`} type="article">
   <article>
-    <header class="article-head narrow">
-      <p class="back">
-        <a href="/case-studies/">Case studies</a>
-        {data.draft && <span class="badge">Draft</span>}
-      </p>
-      <h1>{data.title}</h1>
-      <p class="lede"><Text text={data.summary} /></p>
-      <dl class="article-meta">
-        <div>
-          <dt>Client</dt>
-          <dd><Text text={data.client} /></dd>
-        </div>
-        <div>
-          <dt>My role</dt>
-          <dd><Text text={data.role} /></dd>
-        </div>
-        <div>
-          <dt>Period</dt>
-          <dd><Text text={data.period} /></dd>
-        </div>
-      </dl>
-    </header>
+    <PageHead icon="chart" kicker="Case study" tag={data.draft ? 'Draft' : undefined} title={data.title} back={{ href: '/case-studies/', label: 'Case studies' }}>
+      <p><Text text={data.summary} /></p>
+    </PageHead>
 
-    <div class="narrow">
+    <section class="card" aria-labelledby="glance-title">
+      <p class="kicker" id="glance-title">At a Glance</p>
+      <dl class="readout readout-3">
+        <div><dt>Client</dt><dd class="readout-text"><Text text={data.client} /></dd></div>
+        <div><dt>My role</dt><dd class="readout-text"><Text text={data.role} /></dd></div>
+        <div><dt>Period</dt><dd class="readout-text"><Text text={data.period} /></dd></div>
+      </dl>
       {
         data.metrics.length > 0 && (
-          <section class="glance" aria-labelledby="glance-title">
-            <div class="ledger-legend">
-              <h2 id="glance-title">Results at a glance</h2>
-              <span class="muted" aria-hidden="true">
-                before → after
-              </span>
-            </div>
+          <div class="measure results">
+            <p class="ledger-legend">
+              <span>Results</span>
+              <span aria-hidden="true">before → after</span>
+            </p>
             <Metrics metrics={data.metrics} />
-          </section>
+          </div>
         )
       }
+    </section>
 
-      <div class="prose">
+    <div class="card reading">
+      <div class="prose measure">
         <Content />
         <h2 id="stack">Stack</h2>
         <p>
           <Text text={`${new Intl.ListFormat('en-GB', { type: 'conjunction' }).format(data.stack)}.`} />
         </p>
       </div>
-
-      <footer class="article-foot">
-        <p>
-          Questions about this? I’m happy to talk through how it works and what I’d do differently:
-          <a href="/contact/">get in touch</a>.
-        </p>
-        <Signup />
-      </footer>
+      <p class="more">
+        <span>Questions about this? I’m happy to talk through how it works and what I’d do differently.</span>
+        <a href="/contact/">Get in touch</a>
+      </p>
     </div>
+  </article>
+
+  <article class="card scene">
+    <Signup />
   </article>
 </Base>

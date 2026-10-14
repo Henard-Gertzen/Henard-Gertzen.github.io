@@ -17,25 +17,23 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3';
 <ol class="post-list">
   {
     posts.map((post) => (
-      <li class="post-item">
-        <time class="post-date" datetime={isoDate(post.data.date)}>
-          <Text text={formatDate(post.data.date)} />
-        </time>
-        <Heading class="post-title">
+      <li class="post">
+        <p class="post-meta">
+          <time datetime={isoDate(post.data.date)}>
+            <Text text={formatDate(post.data.date)} />
+          </time>
+          {post.data.outlet && <span> / {post.data.outlet}</span>}
+          {post.data.draft && <span class="badge">Draft</span>}
+        </p>
+        <Heading>
           <MaybeLink href={postHref(post)}>
             <Text text={post.data.title} />
           </MaybeLink>
-          {post.data.outlet && <span class="post-outlet"> on {post.data.outlet}</span>}
-          {post.data.draft && <span class="badge">Draft</span>}
         </Heading>
-        <p class="post-description">
+        <p>
           <Text text={post.data.description} />
         </p>
-        {post.data.tags.length > 0 && (
-          <div class="tags-line">
-            <Tags tags={post.data.tags} />
-          </div>
-        )}
+        {post.data.tags.length > 0 && <Tags tags={post.data.tags} chips />}
       </li>
     ))
   }

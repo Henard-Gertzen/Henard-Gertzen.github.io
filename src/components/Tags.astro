@@ -3,14 +3,19 @@ import { tagSlug } from '../lib/content';
 
 interface Props {
   tags: string[];
+  /** Render as separate chips instead of a comma-separated line. */
+  chips?: boolean;
 }
 
-const { tags } = Astro.props;
+const { tags, chips = false } = Astro.props;
 ---
 
 {
   /* One line on purpose: line breaks here would render as spaces before the commas. */
-  tags.length > 0 && (
-    <span class="tags">{tags.map((tag, i) => <>{i > 0 && ', '}<a href={`/writing/tags/${tagSlug(tag)}/`}>{tag}</a></>)}</span>
-  )
+  tags.length > 0 &&
+    (chips ? (
+      <span class="tag-chips">{tags.map((tag) => <a class="ref" href={`/writing/tags/${tagSlug(tag)}/`}>{tag}</a>)}</span>
+    ) : (
+      <span class="tags">{tags.map((tag, i) => <>{i > 0 && ', '}<a href={`/writing/tags/${tagSlug(tag)}/`}>{tag}</a></>)}</span>
+    ))
 }

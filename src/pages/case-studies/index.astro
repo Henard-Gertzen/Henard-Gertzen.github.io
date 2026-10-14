@@ -1,9 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Metrics from '../../components/Metrics.astro';
-import Text from '../../components/Text.astro';
-import Band from '../../components/Band.astro';
+import PageHead from '../../components/PageHead.astro';
 import Signup from '../../components/Signup.astro';
+import Text from '../../components/Text.astro';
 import { getCaseStudies } from '../../lib/content';
 import { pages } from '../../site';
 
@@ -12,57 +12,61 @@ const studies = await getCaseStudies();
 ---
 
 <Base title={meta.title} description={meta.description} image="/og/case-studies.png">
-  <header class="page-head wrap">
-    <h1>Case studies</h1>
-    <p class="lede">
+  <PageHead icon="chart" kicker="Baselines and results" title="Case Studies">
+    <p>
       Each one follows the same shape: the context, the problem, what I built, how I measured it against a baseline,
       the results, and what didn’t work. Clients are anonymised.
     </p>
-  </header>
+  </PageHead>
 
   {
     studies.length === 0 && (
-      <section class="section wrap" aria-labelledby="progress-title">
-        <h2 class="section-title" id="progress-title">
-          The first one is in progress
+      <section class="card scene" aria-labelledby="progress-title">
+        <h2 class="display scene-title" id="progress-title">
+          The First One Is in Progress
         </h2>
-        <p class="section-intro">
-          It covers making Claude Code follow a team’s ABP and Angular conventions, with baseline and after numbers.
-          Until it’s ready, my agent tooling is on the <a href="/projects/">Projects</a> page.
+        <p class="dateline">
+          <span>Claude Code</span>
+          <span>ABP and Angular</span>
         </p>
+        <div class="measure">
+          <p>
+            It covers making Claude Code follow a team’s ABP and Angular conventions, with baseline and after numbers.
+            Until it’s ready, my agent tooling is on the <a href="/projects/#tooling">Projects</a> page.
+          </p>
+        </div>
       </section>
     )
   }
 
-  <div class="wrap">
-    <ul class="project-list">
-      {
-        studies.map((s) => (
-          <li class="project">
-            <div>
-              <h2 class="section-title">
-                <a href={`/case-studies/${s.id}/`}>
-                  <Text text={s.data.title} />
-                </a>
-                {s.data.draft && <span class="badge">Draft</span>}
-              </h2>
-              <p>
-                <Text text={s.data.summary} />
-              </p>
-            </div>
-            <Metrics metrics={s.data.metrics.slice(0, 2)} compact />
-          </li>
-        ))
-      }
-    </ul>
-  </div>
   {
-    studies.length === 0 && (
-      <Band>
-        <div class="wrap">
-          <Signup />
+    studies.map((s) => (
+      <article class="card scene">
+        <h2 class="display scene-title">
+          <a href={`/case-studies/${s.id}/`}>
+            <Text text={s.data.title} />
+          </a>
+        </h2>
+        <p class="dateline">
+          <span>
+            <Text text={s.data.period} />
+          </span>
+          {s.data.draft && <span>Draft</span>}
+        </p>
+        <div class="measure">
+          <p>
+            <Text text={s.data.summary} />
+          </p>
+          <Metrics metrics={s.data.metrics.slice(0, 2)} compact />
         </div>
-      </Band>
-    )
+        <p class="more">
+          <a href={`/case-studies/${s.id}/`}>Read the case study</a>
+        </p>
+      </article>
+    ))
   }
+
+  <article class="card scene">
+    <Signup />
+  </article>
 </Base>

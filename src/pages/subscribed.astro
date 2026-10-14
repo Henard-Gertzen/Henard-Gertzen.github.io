@@ -1,12 +1,12 @@
 ---
 // Kit redirects here after someone subscribes (set it as the form's redirect URL in Kit).
 import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
 ---
 
 <Base title="Check your inbox" description="Confirm your subscription to Henard Gertzen’s writing." noindex>
-  <div class="not-found narrow">
-    <h1>Check your inbox</h1>
+  <PageHead icon="nib" kicker="Almost done" title="Check Your Inbox">
     <p>I’ve sent you an email to confirm your subscription. Until you click the link in it, you won’t get anything.</p>
-    <p><a href="/writing/">Back to the writing</a></p>
-  </div>
+    <p class="page-note"><a href="/writing/">Back to the writing</a></p>
+  </PageHead>
 </Base>

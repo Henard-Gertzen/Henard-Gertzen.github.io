@@ -1,11 +1,8 @@
 ---
-import { render, type CollectionEntry } from 'astro:content';
-import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import Band from '../components/Band.astro';
-import MaybeLink from '../components/MaybeLink.astro';
-import serverRoom from '../assets/backgrounds/server-room.jpg';
-import Text from '../components/Text.astro';
+import Emblem from '../components/Emblem.astro';
+import PageHead from '../components/PageHead.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import { getProjects } from '../lib/content';
 import { pages } from '../site';
 
@@ -16,115 +13,67 @@ const [tooling, games, university] = await Promise.all([
   getProjects('university'),
 ]);
 
-const withContent = (list: CollectionEntry<'projects'>[]) =>
-  Promise.all(list.map(async (project) => ({ project, Content: (await render(project)).Content })));
-const [toolingItems, gameItems, universityItems] = await Promise.all([
-  withContent(tooling),
-  withContent(games),
-  withContent(university),
-]);
 const groups = [
-  { id: 'tooling', title: 'Agent tooling', items: toolingItems },
-  { id: 'games', title: 'Games built with coding agents', items: gameItems },
-  { id: 'university', title: 'University', items: universityItems },
-].filter((group) => group.items.length > 0);
-
-const list = new Intl.ListFormat('en-GB', { type: 'conjunction' });
+  {
+    id: 'tooling',
+    icon: 'gauge',
+    kicker: 'Tooling',
+    title: 'Harnesses and Tools for Coding Agents',
+    intro: 'Tooling that makes coding agents follow a team’s standards, and measures whether they actually do.',
+    items: tooling,
+  },
+  {
+    id: 'games',
+    icon: 'anvil',
+    kicker: 'Games',
+    title: 'Games Built with Coding Agents',
+    intro:
+      'These are built by directing Claude Code agents: written briefs, long-running sessions, headless bot playtests and automated tests that keep the agents honest. I make them in my own time.',
+    items: games,
+  },
+  {
+    id: 'university',
+    icon: 'cap',
+    kicker: 'University',
+    title: 'Group Projects at North-West University',
+    intro: 'Group projects from my BSc IT at North-West University, 2021 to 2024.',
+    items: university,
+  },
+] as const;
+const shown = groups.filter((group) => group.items.length > 0);
+const number = (i: number) => String(i + 1).padStart(2, '0');
 ---
 
 <Base title={meta.title} description={meta.description} image="/og/projects.png">
-  <header class="page-head wrap">
-    <h1>Projects</h1>
-    <p class="lede">
+  <PageHead icon="wrench" kicker="Tooling, games and university" tag={tooling.length + games.length + university.length} title="Projects">
+    <p>
       Tooling that makes coding agents follow a team’s standards, games I build by directing those agents, and my
       university projects.
     </p>
-  </header>
+    <nav class="toc" aria-label="Sections">
+      {shown.map((group, i) => <a href={`#${group.id}`}><span>{number(i)}</span>{group.kicker}</a>)}
+    </nav>
+  </PageHead>
 
   {
-    groups.map((group) => {
-      const body = (
-        <div class="wrap">
-        <h2 class="section-title" id={`${group.id}-title`}>
-          {group.title}
-        </h2>
-        {group.id === 'games' && (
-          <p class="section-intro">
-            I build these in my own time by directing Claude Code agents: written briefs, long-running sessions,
-            headless bot playtests and automated tests that keep the agents honest.
+    shown.map((group, i) => (
+      <section class="section-block" id={group.id} aria-labelledby={`${group.id}-title`}>
+        <article class="card">
+          <Emblem icon={group.icon} />
+          <p class="kicker">
+            <b>{number(i)}</b> {group.kicker}
           </p>
-        )}
-        {group.id === 'university' && (
-          <p class="section-intro">Group projects from my BSc IT at North-West University, 2021 to 2024.</p>
-        )}
-        <ul class="project-list">
-          {group.items.map(({ project, Content }) => (
-            <li class="project" id={project.id}>
-              <div>
-                <h3>
-                  <Text text={project.data.title} />
-                </h3>
-                <p class="project-meta">
-                  <Text text={`${project.data.kind}. ${project.data.status}.`} />
-                </p>
-                <p class="project-summary">
-                  <Text text={project.data.summary} />
-                </p>
-                {project.data.links.length > 0 && (
-                  <ul class="project-links">
-                    {project.data.links.map((link) => (
-                      <li>
-                        <MaybeLink href={link.href}>{link.label}</MaybeLink>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-              <div class="project-side">
-                {project.data.cover && (
-                  <Image
-                    class="project-cover"
-                    src={project.data.cover.src}
-                    alt={project.data.cover.alt}
-                    widths={[480, 800, 1200]}
-                    sizes="(min-width: 64rem) 30rem, (min-width: 52rem) 45vw, 100vw"
-                    fetchpriority="low"
-                  />
-                )}
-                {project.data.highlights.length > 0 && (
-                  <ul class="marked">
-                    {project.data.highlights.map((h) => (
-                      <li>
-                        <Text text={h} />
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {project.body?.trim() && (
-                  <div class="prose">
-                    <Content />
-                  </div>
-                )}
-                {project.data.stack.length > 0 && (
-                  <p class="project-stack">
-                    <Text text={`Built with ${list.format(project.data.stack)}.`} />
-                  </p>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
-        </div>
-      );
-      return group.id === 'games' ? (
-        <Band photo={serverRoom} labelledby={`${group.id}-title`}>
-          {body}
-        </Band>
-      ) : (
-        <section class="section" aria-labelledby={`${group.id}-title`}>
-          {body}
-        </section>
-      );
-    })
+          <h2 class="display" id={`${group.id}-title`}>
+            {group.title}
+          </h2>
+          <div class="measure">
+            <p class="dropcap">{group.intro}</p>
+          </div>
+        </article>
+        {group.items.map((project) => (
+          <ProjectCard project={project} full />
+        ))}
+      </section>
+    ))
   }
 </Base>

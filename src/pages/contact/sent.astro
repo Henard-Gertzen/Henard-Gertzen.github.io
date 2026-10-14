@@ -1,12 +1,12 @@
 ---
 // Web3Forms redirects here after a message is sent from the contact form.
 import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
 ---
 
 <Base title="Message sent" description="Your message to Henard Gertzen has been sent." noindex>
-  <div class="not-found narrow">
-    <h1>Message sent</h1>
+  <PageHead icon="signal" kicker="Contact" title="Message Sent">
     <p>Thanks for getting in touch. I’ll reply to the email address you gave.</p>
-    <p><a href="/">Back to the home page</a></p>
-  </div>
+    <p class="page-note"><a href="/">Back to the home page</a></p>
+  </PageHead>
 </Base>

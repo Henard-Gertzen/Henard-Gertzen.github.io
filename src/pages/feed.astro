@@ -2,7 +2,7 @@
 // A page for people who click "RSS": the feed itself (/rss.xml) is for feed readers.
 import Base from '../layouts/Base.astro';
 import Copy from '../components/Copy.astro';
-import Band from '../components/Band.astro';
+import PageHead from '../components/PageHead.astro';
 import Signup from '../components/Signup.astro';
 import { pages, site } from '../site';
 
@@ -11,24 +11,23 @@ const feedUrl = new URL('/rss.xml', site.url).href;
 ---
 
 <Base title={meta.title} description={meta.description} image="/og/feed.png">
-  <header class="page-head narrow">
-    <h1>Follow by RSS</h1>
-    <p class="lede">
+  <PageHead icon="rss" kicker="For feed readers" title="Follow by RSS">
+    <p>
       Paste this address into a feed reader, such as Feedly, Inoreader or NetNewsWire, and new posts will show up there
       as they’re published.
     </p>
-  </header>
+  </PageHead>
 
-  <div class="narrow">
-    <Copy text={feedUrl} />
-    <p class="feed-raw">
-      This address is for feed readers; opening it in a browser shows <a href="/rss.xml">the raw feed</a>.
-    </p>
-  </div>
-
-  <Band>
-    <div class="narrow">
-      <Signup />
+  <section class="card" aria-label="Feed address">
+    <div class="measure">
+      <Copy text={feedUrl} />
+      <p class="feed-raw">
+        This address is for feed readers; opening it in a browser shows <a href="/rss.xml">the raw feed</a>.
+      </p>
     </div>
-  </Band>
+  </section>
+
+  <article class="card scene">
+    <Signup />
+  </article>
 </Base>

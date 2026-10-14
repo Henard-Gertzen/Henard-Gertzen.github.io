@@ -40,8 +40,8 @@ export async function renderOg({ kicker, title, description }: OgCard) {
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: '64px 72px',
-        background: '#f5f5f2',
-        color: '#000000',
+        background: '#f3efe6',
+        color: '#15171c',
         borderTop: '16px solid #e8770e',
       },
       [
@@ -50,7 +50,7 @@ export async function renderOg({ kicker, title, description }: OgCard) {
             h('div', { width: 20, height: 20, background: '#e8770e' }),
             h('div', { display: 'flex' }, 'Henard Gertzen'),
           ]),
-          h('div', { display: 'flex', color: '#55565c' }, kicker),
+          h('div', { display: 'flex', color: '#a84a0c', fontSize: 22, letterSpacing: 4, textTransform: 'uppercase' }, kicker),
         ]),
         h('div', { display: 'flex', flexDirection: 'column', gap: 28 }, [
           h(
@@ -58,12 +58,12 @@ export async function renderOg({ kicker, title, description }: OgCard) {
             { display: 'flex', fontFamily: 'Display', fontWeight: 800, fontSize: titleSize, lineHeight: 1.02, letterSpacing: '-0.035em' },
             title,
           ),
-          h('div', { display: 'flex', fontFamily: 'Serif', fontSize: 30, lineHeight: 1.35, color: '#55565c', maxWidth: 980 }, description),
+          h('div', { display: 'flex', fontFamily: 'Serif', fontSize: 30, lineHeight: 1.35, color: '#4d4943', maxWidth: 980 }, description),
         ]),
         h(
           'div',
-          { display: 'flex', justifyContent: 'space-between', paddingTop: 22, borderTop: '2px solid #dadad4', fontFamily: 'Display', fontWeight: 600, fontSize: 24 },
-          [h('div', { display: 'flex' }, 'henard-gertzen.github.io'), h('div', { display: 'flex', color: '#55565c' }, 'Secunda, South Africa')],
+          { display: 'flex', justifyContent: 'space-between', paddingTop: 22, borderTop: '2px solid #15171c', fontFamily: 'Display', fontWeight: 600, fontSize: 24 },
+          [h('div', { display: 'flex' }, 'henard-gertzen.github.io'), h('div', { display: 'flex', color: '#4d4943' }, 'Secunda, South Africa')],
         ),
       ],
     ) as Parameters<typeof satori>[0],

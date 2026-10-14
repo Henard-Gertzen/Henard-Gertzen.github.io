@@ -1,0 +1,33 @@
+---
+// The head of every page but the home page: an optional breadcrumb, an emblem, a kicker and a big
+// title, with the introduction in the slot.
+import Emblem from './Emblem.astro';
+import Text from './Text.astro';
+
+interface Props {
+  icon?: Parameters<typeof Emblem>[0]['icon'];
+  kicker: string;
+  /** Optional number in the kicker's orange tag, e.g. a count. */
+  tag?: string | number;
+  title: string;
+  /** A link back to the parent page, e.g. Writing from a post. */
+  back?: { href: string; label: string };
+}
+
+const { icon, kicker, tag, title, back } = Astro.props;
+---
+
+<header class="page-head">
+  {
+    back && (
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href={back.href}>{back.label}</a>
+        <span aria-hidden="true">/</span>
+      </nav>
+    )
+  }
+  {icon && <Emblem icon={icon} />}
+  <p class="kicker">{tag !== undefined && <b>{tag}</b>} <Text text={kicker} /></p>
+  <h1 class="display"><Text text={title} /></h1>
+  {Astro.slots.has('default') && <div class="page-intro"><slot /></div>}
+</header>
