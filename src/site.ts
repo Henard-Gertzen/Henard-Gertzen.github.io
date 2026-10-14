@@ -16,9 +16,9 @@ export const site = {
     github: 'https://github.com/Henard-Gertzen',
     linkedin: 'https://www.linkedin.com/in/henard-g-5b4267199',
   },
-  // Drop the PDF in public/ and set this to its path, e.g. '/cv.pdf'. Until then
-  // the Work with me page leaves the CV link out.
-  cv: '{{TODO: updated CV PDF (put it in public/cv.pdf, then set this to /cv.pdf)}}',
+  // The resume PDF, linked from the Contact page. It's printed from src/pages/cv by
+  // `npm run cv` (see the README); a {{TODO}} here hides the link.
+  cv: '/cv.pdf',
 
   // Kit form ID: the number in the form's embed URL (app.kit.com/forms/<id>/...).
   kitFormId: '10032559',

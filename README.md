@@ -132,8 +132,14 @@ SEO and link previews are there too.
   sends the visitor to `/contact/sent/`. It stays hidden until `web3formsKey` is set.
 - **Analytics:** GoatCounter (no cookies, no banner). The script only loads once
   `goatCounter` is set, and then only after the page has finished loading.
-- **CV:** put the PDF at `public/cv.pdf` and set `cv: '/cv.pdf'`; a download link
-  then appears on the Contact page.
+- **CV:** the resume is a page, `src/pages/cv/`, laid out for A4 in the site's style.
+  After `npm run build`, `npm run cv` prints it with headless Chrome to `public/cv.pdf`
+  (commit that; the Contact page links it). The public version describes the current
+  employer without naming it and has no phone number. In a local `.env` (git-ignored), set
+  `CV_EMPLOYER` and `CV_LINKEDIN_PDF` for a LinkedIn version (employer named, no phone), and
+  `CV_PHONE` and `CV_PRIVATE_PDF` for an applications version: the build then also makes
+  `/cv/linkedin/` and `/cv/private/`, and `npm run cv` prints them there. GitHub never sees
+  the `.env`, so those versions are never deployed.
 
 ## SEO
 

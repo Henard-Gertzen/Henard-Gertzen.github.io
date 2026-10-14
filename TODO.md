@@ -1,7 +1,7 @@
 # TODO
 
 Everything on the site that is still a placeholder. Run `npm run todos` for the
-live list with file and line numbers; this file groups the same 34 placeholders
+live list with file and line numbers; this file groups the same 33 placeholders
 by what needs doing.
 
 Placeholders render as yellow `{{TODO: ...}}` chips so nothing unfinished can
@@ -21,7 +21,7 @@ live site or **hidden** (drafts, or settings the site leaves out until they're s
 - [ ] **Case study** (hidden draft, 18 placeholders):
   `src/content/case-studies/claude-code-abp-angular-conventions.md`. Client, role,
   period, tooling, both metrics (baseline, after, method) and all six sections.
-  Anonymised throughout: no Sygnio, client or product names. Then remove
+  Anonymised throughout: no employer, client or product names. Then remove
   `draft: true` and set `featured: true` to open the home page's Agent Tooling chapter with it.
   Until then the Case studies page says the first one is in progress.
 - [ ] **Eval suite** (hidden draft, 7 placeholders):
@@ -31,9 +31,9 @@ live site or **hidden** (drafts, or settings the site leaves out until they're s
 - [ ] **Draft post** (hidden, 7 placeholders):
   `src/content/posts/claude-code-abp-team-standards.md`. Fill the outline from the
   case study, then remove `draft: true` to publish.
-- [ ] **CV** (hidden): put an updated PDF at `public/cv.pdf` and set
-  `cv: '/cv.pdf'` in `src/site.ts`; a download link then appears on the Contact page. The 2024 student CV stays on the
-  `legacy-3d-site` branch.
+- [x] **CV**: rebuilt in October 2026 from `src/pages/cv/` (`npm run cv`); the public
+  copy is `public/cv.pdf`, linked from the Contact page. The 2024 student CV stays on
+  the `legacy-3d-site` branch.
 
 ## Waiting on links
 

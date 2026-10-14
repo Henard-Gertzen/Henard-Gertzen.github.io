@@ -1,0 +1,251 @@
+---
+// The resume, laid out for A4 and printed to PDF by scripts/cv.mjs.
+//   /cv/           the public version: no phone number, employer described, not named.
+//   /cv/linkedin/  for LinkedIn: employer named (the profile already shows it), no phone number.
+//   /cv/private/   for applications: phone number and employer name.
+// The last two are only built when CV_EMPLOYER (and CV_PHONE) are set in a local, git-ignored
+// .env, so they are never deployed.
+import { Font } from 'astro:assets';
+import '../../styles/cv.css';
+
+export function getStaticPaths() {
+  const phone = import.meta.env.CV_PHONE as string | undefined;
+  const employer = import.meta.env.CV_EMPLOYER as string | undefined;
+  return [
+    { params: { variant: undefined }, props: {} },
+    ...(employer ? [{ params: { variant: 'linkedin' }, props: { employer } }] : []),
+    ...(phone && employer ? [{ params: { variant: 'private' }, props: { phone, employer } }] : []),
+  ];
+}
+
+interface Props {
+  phone?: string;
+  employer?: string;
+}
+
+const { phone, employer } = Astro.props;
+
+const experience = [
+  {
+    role: 'Junior Software Developer',
+    org: employer ?? 'Software company (remote)',
+    dates: 'Sep 2025 – present',
+    place: 'Remote',
+    points: [
+      'Build and maintain enterprise software on .NET (ABP Framework) and Angular as part of a product team.',
+      'Specialise in AI harnesses: setting up Claude Code so coding agents follow the team’s conventions, and checking that they do.',
+    ],
+  },
+  {
+    role: 'Intermediate Full-Stack Software Developer',
+    org: 'EziDev',
+    dates: 'Jan 2025 – Apr 2025',
+    place: 'Sedgefield, Western Cape',
+    points: [
+      'Built the front end for a payment aggregation platform.',
+      'Built landing pages and interactive experiences, working with Next.js, C#, SQL and Docker.',
+    ],
+  },
+  {
+    role: 'Computer Hardware Technician',
+    org: 'Techish',
+    dates: 'Jan 2020 – Apr 2020',
+    place: 'Secunda, Mpumalanga',
+    points: [
+      'Gave remote IT support with AnyDesk and TeamViewer, and repaired hardware and software faults on site and remotely.',
+      'Maintained and upgraded client hardware.',
+    ],
+  },
+  {
+    role: 'Intern Web Developer',
+    org: 'DYOPTRI',
+    dates: 'Nov 2017 – Jan 2018',
+    place: 'Secunda, Mpumalanga',
+    points: ['Designed and maintained client websites in WordPress: landing pages, dashboards and e-commerce pages.'],
+  },
+];
+
+const projects = [
+  {
+    name: 'Directorate Harness',
+    kind: 'Claude Code harness and plugins',
+    text: 'A bootloader for Claude Code on Windows: one command gives a solo agent and an orchestrated team the same tools, defaults and skills. Three plugins, each with its context cost measured (162, 945 and 312 tokens); one default alone cut a sample command output by 31%.',
+  },
+  {
+    name: 'The Directorate',
+    kind: 'Agent orchestration',
+    text: 'A Director session breaks instructions into tasks and runs autonomous Claude Code sessions, each in its own disposable git worktree. Approved work is fetched without touching the developer’s branch or uncommitted changes.',
+  },
+  {
+    name: 'pwsh-axi',
+    kind: 'Agent tooling',
+    text: 'A Windows diagnostics CLI for coding agents, with token-efficient output, honest exit codes and idempotent changes. 87 tests, CI on Node 20 and 22.',
+  },
+  {
+    name: 'Games built with coding agents',
+    kind: 'Godot 4, GDScript',
+    text: 'Nuke France, released on itch.io for Windows, Mac and the browser. Load Shedding, a power-grid sim in development, balanced with seeded headless bot runs. The Paracelsian, a proof of concept with 53 automated tests and an ML matting pipeline for period art.',
+  },
+  {
+    name: 'Share2Teach',
+    kind: 'Final-year group project, 2024',
+    text: 'An open educational resource platform for North-West University. I led the team as team lead, Scrum Master and head designer. Next.js, TypeScript, MongoDB, Auth0, Google Cloud Storage and Docker.',
+  },
+  {
+    name: 'Earlier university projects',
+    kind: '2023 – 2024',
+    text: 'A desktop chat app (Tauri, Rust, React, Firebase) that I led to 95% for Networks; a C# text-messaging app; a cinema point-of-sale app in C# and SQL Server; and an Airbnb data analysis in Python with PostGIS.',
+  },
+];
+
+const skills = [
+  ['Languages', 'C#, TypeScript, JavaScript, Python, SQL, GDScript, PowerShell, HTML and CSS'],
+  ['Frameworks', '.NET with ABP Framework, Angular, React, Next.js, Node.js, Tailwind CSS'],
+  ['AI tooling', 'Claude Code: harnesses, hooks, plugins, skills and multi-agent orchestration'],
+  ['Data and tools', 'SQL Server, PostgreSQL with PostGIS, MongoDB, Firebase, Docker, Git, GitHub Actions'],
+  ['Games', 'Godot 4, Unity, Unreal Engine, Blender scripting'],
+];
+
+const modules = [
+  'Data Structures and Algorithms',
+  'Object Oriented Programming',
+  'Advanced Databases',
+  'Information Security',
+  'Operating Systems',
+  'System Analysis and Design',
+  'User Interface Programming',
+  'Data Analytics',
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Henard Gertzen | Resume</title>
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-body" />
+    <Font cssVariable="--font-mono" />
+  </head>
+  <body>
+    <main class="cv">
+      <header class="cv-head">
+        <div class="cv-name">
+          <span class="cv-mark" aria-hidden="true"></span>
+          <h1>Henard Gertzen</h1>
+        </div>
+        <p class="cv-line">Full-stack developer: .NET, Angular and AI harnesses for coding agents</p>
+        <ul class="cv-contact">
+          <li><a href="mailto:henardgertzen@gmail.com">henardgertzen@gmail.com</a></li>
+          {phone && <li>{phone}</li>}
+          <li>Secunda, Mpumalanga, South Africa</li>
+        </ul>
+        <ul class="cv-contact">
+          <li><a href="https://henard-gertzen.github.io">henard-gertzen.github.io</a></li>
+          <li><a href="https://www.linkedin.com/in/henard-g-5b4267199">linkedin.com/in/henard-g-5b4267199</a></li>
+          <li><a href="https://github.com/Henard-Gertzen">github.com/Henard-Gertzen</a></li>
+        </ul>
+      </header>
+
+      <section class="cv-section">
+        <h2><span>01</span>Profile</h2>
+        <p class="cv-profile">
+          Full-stack developer on .NET (ABP Framework) and Angular, working remotely from Secunda. I specialise in AI
+          harnesses: setting up Claude Code so coding agents write code a team would merge, and measuring whether they
+          do. In my own time I build developer tooling and games by directing coding agents.
+        </p>
+      </section>
+
+      <section class="cv-section">
+        <h2><span>02</span>Experience</h2>
+        {
+          experience.map((job) => (
+            <article class="cv-entry">
+              <div class="cv-entry-head">
+                <h3>
+                  {job.role} <span class="cv-org">{job.org}</span>
+                </h3>
+                <p class="cv-meta">
+                  {job.dates} / {job.place}
+                </p>
+              </div>
+              <ul class="cv-points">
+                {job.points.map((point) => (
+                  <li>{point}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </section>
+
+      <section class="cv-section">
+        <h2><span>03</span>Selected projects</h2>
+        {
+          projects.map((project) => (
+            <article class="cv-entry">
+              <div class="cv-entry-head">
+                <h3>{project.name}</h3>
+                <p class="cv-meta">{project.kind}</p>
+              </div>
+              <p class="cv-text">{project.text}</p>
+            </article>
+          ))
+        }
+        <p class="cv-more">Details and screenshots: henard-gertzen.github.io/projects</p>
+      </section>
+
+      <section class="cv-section">
+        <h2><span>04</span>Skills</h2>
+        <dl class="cv-skills">
+          {
+            skills.map(([label, value]) => (
+              <div>
+                <dt>{label}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+
+      <section class="cv-section">
+        <h2><span>05</span>Education</h2>
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3>BSc Information Technology <span class="cv-org">North-West University, Potchefstroom</span></h3>
+            <p class="cv-meta">2021 – 2024 / Average 64%</p>
+          </div>
+          <p class="cv-text">Modules include {modules.join(', ')}.</p>
+        </article>
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3>National Senior Certificate <span class="cv-org">Hoërskool Oosterland, Secunda</span></h3>
+            <p class="cv-meta">2014 – 2018 / Average 62%</p>
+          </div>
+          <p class="cv-text">
+            Information Technology, Computer Applications Technology, Engineering Graphics and Design, Mathematics and
+            Physical Science. Public speaking, debate and chess.
+          </p>
+        </article>
+      </section>
+
+      <section class="cv-section cv-split">
+        <div>
+          <h2><span>06</span>Writing</h2>
+          <p class="cv-text">
+            <a href="https://www.linkedin.com/pulse/lazy-optimizer-why-we-need-stop-calling-ai-henard-gertzen-dnpef/"
+              >The Lazy Optimizer: Why We Need to Stop Calling AI “Intelligent”</a
+            >, LinkedIn, August 2026.
+          </p>
+        </div>
+        <div>
+          <h2><span>07</span>Languages</h2>
+          <p class="cv-text">English and Afrikaans (native), Dutch (basic, A2).</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

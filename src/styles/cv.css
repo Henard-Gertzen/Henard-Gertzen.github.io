@@ -1,0 +1,280 @@
+/* The resume (src/pages/cv): A4, printed to PDF by scripts/cv.mjs. The site's type and colours
+   on white paper, so it prints cleanly; sizes are in points because it is a printed page. */
+
+@page {
+  size: A4;
+  margin: 14mm 16mm 13mm;
+}
+
+:root {
+  --ink: #15171c;
+  --text: #2f2c28;
+  --muted: #5b564e;
+  --rule: #d9cfbc;
+  --accent: #e8770e;
+  --accent-ink: #a84a0c;
+  --tint: #f3efe6;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: #d9d4c9;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  font: 9.6pt/1.5 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* On screen, the page as a sheet of paper. */
+.cv {
+  max-width: 210mm;
+  margin: 24px auto;
+  padding: 14mm 16mm 13mm;
+  background: #fff;
+  box-shadow: 0 10px 40px -12px rgba(0, 0, 0, 0.35);
+}
+
+@media print {
+  html {
+    background: none;
+  }
+
+  .cv {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Head ---------- */
+
+.cv-head {
+  padding-bottom: 10pt;
+  border-bottom: 2pt solid var(--ink);
+}
+
+.cv-name {
+  display: flex;
+  align-items: center;
+  gap: 9pt;
+}
+
+.cv-mark {
+  width: 11pt;
+  height: 11pt;
+  background: var(--accent);
+}
+
+.cv-head h1 {
+  font-size: 27pt;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.cv-line {
+  margin-top: 5pt;
+  color: var(--muted);
+  font-size: 11.5pt;
+  font-style: italic;
+}
+
+/* Two rows: how to reach me, and where to look. */
+.cv-contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 3pt;
+  color: var(--ink);
+  font: 500 7.6pt/1.5 var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+.cv-line + .cv-contact {
+  margin-top: 8pt;
+}
+
+.cv-contact li + li::before {
+  content: '';
+  display: inline-block;
+  width: 4pt;
+  height: 4pt;
+  margin: 0 7pt 1pt;
+  background: var(--accent);
+}
+
+/* ---------- Sections ---------- */
+
+.cv-section {
+  margin-top: 13pt;
+}
+
+.cv-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 7pt;
+  margin-bottom: 7pt;
+  padding-bottom: 4pt;
+  border-bottom: 0.75pt solid var(--rule);
+  font-size: 12.5pt;
+  font-weight: 700;
+  break-after: avoid;
+}
+
+.cv-section h2 span {
+  padding: 2pt 3.5pt 1.5pt;
+  background: var(--accent);
+  color: var(--ink);
+  font: 600 7pt/1 var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+.cv-profile {
+  font-size: 10.2pt;
+  line-height: 1.55;
+}
+
+.cv-entry {
+  break-inside: avoid;
+}
+
+.cv-entry + .cv-entry {
+  margin-top: 8pt;
+}
+
+.cv-entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1pt 12pt;
+}
+
+.cv-entry h3 {
+  font-size: 10.6pt;
+  font-weight: 700;
+}
+
+.cv-org {
+  margin-left: 4pt;
+  color: var(--muted);
+  font: italic 400 9.6pt var(--font-body);
+  letter-spacing: 0;
+}
+
+.cv-meta {
+  color: var(--accent-ink);
+  font: 500 7.2pt/1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cv-points {
+  margin-top: 3pt;
+}
+
+.cv-points li {
+  position: relative;
+  padding-left: 11pt;
+}
+
+.cv-points li + li {
+  margin-top: 1.5pt;
+}
+
+.cv-points li::before {
+  content: '';
+  position: absolute;
+  top: 0.55em;
+  left: 1pt;
+  width: 5pt;
+  height: 5pt;
+  background: var(--accent);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.cv-text {
+  margin-top: 2pt;
+}
+
+.cv-text a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 2pt;
+}
+
+.cv-more {
+  margin-top: 7pt;
+  color: var(--muted);
+  font: 500 7.2pt/1.4 var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+.cv-skills {
+  display: grid;
+  gap: 3pt;
+  margin: 0;
+}
+
+.cv-skills div {
+  display: grid;
+  grid-template-columns: 26mm minmax(0, 1fr);
+  gap: 10pt;
+}
+
+.cv-skills dt {
+  padding-top: 1.5pt;
+  color: var(--accent-ink);
+  font: 600 7pt/1.5 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cv-skills dd {
+  margin: 0;
+}
+
+.cv-split {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 18pt;
+  break-inside: avoid;
+}
