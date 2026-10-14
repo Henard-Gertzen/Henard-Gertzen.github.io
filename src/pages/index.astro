@@ -48,7 +48,7 @@ const short = { tooling: 'Tooling', contact: 'Contact' } as Record<string, strin
   <section class="opener" aria-labelledby="page-title">
     <div class="opener-inner">
       <Gauge />
-      <p class="kicker">Full-Stack Developer <b>.NET</b> <b>Angular</b> <b>Claude Code</b></p>
+      <p class="kicker"><b>.NET</b> <b>Angular</b> <b>Claude Code</b></p>
       <h1 class="display" id="page-title">{site.name}</h1>
       <p class="opener-line">{site.hero.title}</p>
       <p class="byline"><span><strong>Secunda, South Africa</strong></span><span>Remote, UTC+2</span><span>Plates made from Pixabay photos</span></p>
@@ -62,7 +62,7 @@ const short = { tooling: 'Tooling', contact: 'Contact' } as Record<string, strin
         <p class="dropcap">
           By day I build .NET and Angular software as a remote full-stack developer in Secunda, South Africa. I help
           teams get coding agents to write code that fits their codebase, not just code that compiles, and I make games
-          with those agents on the side.
+          in Godot on the side.
         </p>
       </div>
       <dl class="readout">
@@ -197,11 +197,10 @@ const short = { tooling: 'Tooling', contact: 'Contact' } as Record<string, strin
       <article class="card">
         <Emblem icon="anvil" />
         <p class="kicker"><b>03</b> Games</p>
-        <h2 class="display" id="games-title">Games Built with Coding Agents</h2>
+        <h2 class="display" id="games-title">Games Made in Godot</h2>
         <div class="measure">
           <p class="dropcap">
-            These are built by directing Claude Code agents: written briefs, long-running sessions, headless bot
-            playtests and automated tests that keep the agents honest. I make them in my own time.
+            These are games I make in Godot in my own time, tested with headless bot playtests and automated tests.
           </p>
         </div>
       </article>
@@ -243,7 +242,7 @@ const short = { tooling: 'Tooling', contact: 'Contact' } as Record<string, strin
         <p class="kicker"><b>04</b> Writing</p>
         <h2 class="display" id="writing-title">Writing on Agents</h2>
         <div class="measure">
-          <p class="dropcap">What coding agents actually are, and how to make them write code your team would merge.</p>
+          <p class="dropcap">What coding agents actually are, and how to get them to follow a team’s standards.</p>
           {
             posts.slice(0, 3).map((post) => (
               <div class="post">

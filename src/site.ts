@@ -7,8 +7,8 @@ export const site = {
   url: 'https://henard-gertzen.github.io',
   tagline: 'AI enablement for .NET and Angular teams',
   hero: {
-    title: 'I make coding agents write code your team would merge.',
-    subtitle: 'Harness engineering, context engineering and evals for .NET/ABP and Angular teams.',
+    title: 'Full-stack developer who builds with coding agents.',
+    subtitle: 'Enterprise .NET and Angular, Claude Code set up to follow a team’s standards, and games made in Godot.',
   },
   email: 'henardgertzen@gmail.com',
   location: 'South Africa (UTC+2)',
@@ -32,9 +32,9 @@ export const site = {
 /** Title and description for each standalone page; also drives its Open Graph image. */
 export const pages = {
   '/': {
-    title: 'Henard Gertzen | Coding agents that follow your team’s standards',
+    title: 'Henard Gertzen | Full-stack developer who builds with coding agents',
     description:
-      'Harness engineering, context engineering and evals that make Claude Code write .NET/ABP and Angular code your team would merge.',
+      'Full-stack .NET and Angular developer in South Africa. I set up Claude Code to follow a team’s standards, build tooling for coding agents, and make games in Godot.',
   },
   '/case-studies/': {
     title: 'Case studies',
@@ -42,11 +42,11 @@ export const pages = {
   },
   '/projects/': {
     title: 'Projects',
-    description: 'Agent harnesses, evals and tooling for Claude Code, plus games built by orchestrating coding agents.',
+    description: 'Agent harnesses and tooling for Claude Code, plus games made in Godot.',
   },
   '/writing/': {
     title: 'Writing',
-    description: 'What coding agents actually are, and how to make them write code your team would merge.',
+    description: 'What coding agents actually are, and how to get them to follow a team’s standards.',
   },
 
   '/contact/': {

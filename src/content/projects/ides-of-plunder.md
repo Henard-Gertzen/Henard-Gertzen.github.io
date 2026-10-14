@@ -6,7 +6,7 @@ status: "Proof of concept, in progress"
 highlights:
   - "World generated from a seed, bit-exact with the browser prototype it was ported from"
   - "Broadside combat where you aim by turning the ship"
-stack: ["Godot 4", "GDScript", "Claude Code"]
+stack: ["Godot 4", "GDScript"]
 group: games
 order: 4
 ---

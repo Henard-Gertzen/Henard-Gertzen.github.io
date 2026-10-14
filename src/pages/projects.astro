@@ -26,9 +26,9 @@ const groups = [
     id: 'games',
     icon: 'anvil',
     kicker: 'Games',
-    title: 'Games Built with Coding Agents',
+    title: 'Games Made in Godot',
     intro:
-      'These are built by directing Claude Code agents: written briefs, long-running sessions, headless bot playtests and automated tests that keep the agents honest. I make them in my own time.',
+      'These are games I make in Godot in my own time, tested with headless bot playtests and automated tests.',
     items: games,
   },
   {
@@ -47,8 +47,7 @@ const number = (i: number) => String(i + 1).padStart(2, '0');
 <Base title={meta.title} description={meta.description} image="/og/projects.png">
   <PageHead icon="wrench" kicker="Tooling, games and university" tag={tooling.length + games.length + university.length} title="Projects">
     <p>
-      Tooling that makes coding agents follow a team’s standards, games I build by directing those agents, and my
-      university projects.
+      Tooling that makes coding agents follow a team’s standards, games I make in Godot, and my university projects.
     </p>
     <nav class="toc" aria-label="Sections">
       {shown.map((group, i) => <a href={`#${group.id}`}><span>{number(i)}</span>{group.kicker}</a>)}
