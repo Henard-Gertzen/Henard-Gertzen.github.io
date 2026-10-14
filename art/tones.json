@@ -1,0 +1,53 @@
+{
+  "ramps": {
+    "dusk": {
+      "about": "Navy shadows, blue mid-tones, orange highlights: skies, lit rooms, fire",
+      "r": [0.039, 0.110, 0.322, 0.729, 1.000],
+      "g": [0.094, 0.235, 0.478, 0.588, 0.890],
+      "b": [0.153, 0.380, 0.620, 0.471, 0.741]
+    },
+    "far": {
+      "about": "Pale blue, for the horizon",
+      "r": [0.137, 0.420, 0.780],
+      "g": [0.259, 0.545, 0.835],
+      "b": [0.384, 0.667, 0.886]
+    },
+    "ink": {
+      "about": "Deep blue silhouettes",
+      "r": [0.035, 0.110, 0.357],
+      "g": [0.075, 0.204, 0.518],
+      "b": [0.125, 0.322, 0.659]
+    },
+    "ember": {
+      "about": "Orange flowers",
+      "r": [0.200, 0.910, 1.000],
+      "g": [0.075, 0.467, 0.851],
+      "b": [0.020, 0.055, 0.659]
+    },
+    "portrait": {
+      "about": "Navy to cream, like a cyanotype print",
+      "r": [0.051, 0.427, 0.965],
+      "g": [0.133, 0.525, 0.937],
+      "b": [0.212, 0.620, 0.886]
+    }
+  },
+  "layers": {
+    "highveld/sky": "dusk",
+    "highveld/towers": "far",
+    "highveld/pylon": "ink",
+    "highveld/cosmos": "ember",
+    "rooms/control-back": "dusk",
+    "rooms/control-front": "dusk",
+    "rooms/forge-back": "dusk",
+    "rooms/forge-front": "dusk",
+    "rooms/desk-back": "dusk",
+    "rooms/desk-front": "dusk",
+    "portrait/henard": "portrait"
+  },
+  "patterns": {
+    "texture/circuit-tile": {
+      "light": [46, 90, 128, 0.13],
+      "dark": [142, 176, 204, 0.09]
+    }
+  }
+}

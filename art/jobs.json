@@ -1,0 +1,6 @@
+[
+  {"name": "highveld/sky", "file": "sky-3158852/storm-3158852_1280.jpg", "crop": null, "width": 1280, "cut": "full", "quality": 72},
+  {"name": "highveld/towers", "file": "plant-6574531/nuclear-power-plant-6574531_1280.jpg", "crop": [0, 600, 1280, 852], "width": 1280, "cut": "skyline", "thr": 140, "fallback_thr": [150], "smooth": 3},
+  {"name": "highveld/pylon", "file": "pylon-5202532/electricity-5202532_1280.png", "crop": [0, 0, 1280, 728], "width": 1280, "cut": "png", "variants": [640, 320]},
+  {"name": "highveld/cosmos", "file": "cosmos-4756999/cosmos-field-4756999_1280.jpg", "crop": null, "width": 1280, "cut": "sky", "sky": [160, 188], "variants": [640, 320]}
+]
