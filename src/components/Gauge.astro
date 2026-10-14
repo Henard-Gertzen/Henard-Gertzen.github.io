@@ -1,0 +1,60 @@
+---
+// The home page's opener: the portrait in a gauge dial, over the Highveld plate's layers.
+// The dial turns as the page scrolls (a CSS scroll-driven animation; the orange index stays
+// put), and hovering over the portrait brings back its colour. Decorative (the h1 below carries the name).
+import { readFileSync } from 'node:fs';
+
+// 60 ticks, longer every fifth, leaving the lower arc clear for the engraved place name.
+const ticks = Array.from({ length: 60 }, (_, i) => {
+  const a = (i / 60) * Math.PI * 2;
+  const major = i % 5 === 0;
+  const [r1, r2] = [180, major ? 194 : 187];
+  const point = (r: number) => [(200 + r * Math.sin(a)).toFixed(2), (200 - r * Math.cos(a)).toFixed(2)];
+  return { major, from: point(r1), to: point(r2), hidden: Math.cos(a) < -0.55 };
+}).filter((t) => !t.hidden);
+
+const layer = (name: string, width = 640) => `/plates/highveld/${name}-${width}.webp`;
+// The sky is the page's largest paint, so it comes inline (9 KB) instead of as a request.
+const sky = `data:image/webp;base64,${readFileSync('public/plates/highveld/sky-640.webp').toString('base64')}`;
+---
+
+<figure class="gauge" aria-hidden="true">
+  <svg viewBox="-40 -40 480 480" focusable="false">
+    <defs>
+      <clipPath id="gauge-clip"><circle cx="200" cy="200" r="176"></circle></clipPath>
+      <path id="gauge-arc" d="M 10 200 A 190 190 0 0 0 390 200" fill="none"></path>
+    </defs>
+    <g clip-path="url(#gauge-clip)">
+      <rect x="0" y="0" width="400" height="400" fill="#0f2236"></rect>
+      <image href={sky} x="-140" y="0" width="680" height="454" preserveAspectRatio="xMidYMid slice"></image>
+      <image href={layer('towers')} x="-120" y="226" width="640" height="126"></image>
+      <image href={layer('pylon', 320)} x="-70" y="148" width="330" height="188"></image>
+      <rect x="0" y="330" width="400" height="80" fill="#13304a"></rect>
+      <g class="gauge-face">
+        <image href="/plates/portrait/henard.webp" x="104" y="128" width="262" height="262"></image>
+        <image class="gauge-colour" data-href="/plates/portrait/henard-colour.webp" x="104" y="128" width="262" height="262"></image>
+      </g>
+      <image href={layer('cosmos', 320)} x="-96" y="232" width="250" height="167"></image>
+    </g>
+    <circle cx="200" cy="200" r="176" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+    <circle cx="200" cy="200" r="198" fill="none" stroke="currentColor" stroke-width="1"></circle>
+    <g class="gauge-dial">
+      <g fill="none" stroke="currentColor">
+        {ticks.map((t) => <line x1={t.from[0]} y1={t.from[1]} x2={t.to[0]} y2={t.to[1]} stroke-width={t.major ? 1.6 : 1} />)}
+      </g>
+      <text class="gauge-text"><textPath href="#gauge-arc" startOffset="50%" text-anchor="middle">SECUNDA · HIGHVELD · SOUTH AFRICA</textPath></text>
+    </g>
+    <path class="gauge-index" d="M200 -2 L192 -16 H208 Z"></path>
+  </svg>
+</figure>
+
+<script>
+  // The colour portrait loads on the first hover, so it never slows the page down.
+  const face = document.querySelector('.gauge-face');
+  const colour = face?.querySelector<SVGImageElement>('.gauge-colour');
+  face?.addEventListener(
+    'pointerenter',
+    () => colour?.dataset.href && colour.setAttribute('href', colour.dataset.href),
+    { once: true },
+  );
+</script>

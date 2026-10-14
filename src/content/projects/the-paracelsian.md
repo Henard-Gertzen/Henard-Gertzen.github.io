@@ -10,6 +10,7 @@ stack: ["Godot 4", "GDScript", "Python", "Claude Code"]
 cover:
   src: "./images/the-paracelsian-laboratory.png"
   alt: "The Paracelsian: a painted 1660s laboratory with a brick furnace, glass distilling flasks and a period-style caption bar"
+  caption: "A “living painting” of a 1660s laboratory in Utrecht"
 group: games
 order: 3
 ---

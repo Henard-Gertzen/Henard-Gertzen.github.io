@@ -22,12 +22,12 @@ live site or **hidden** (drafts, or settings the site leaves out until they're s
   `src/content/case-studies/claude-code-abp-angular-conventions.md`. Client, role,
   period, tooling, both metrics (baseline, after, method) and all six sections.
   Anonymised throughout: no Sygnio, client or product names. Then remove
-  `draft: true` and set `featured: true` to list it under Built on the home page.
+  `draft: true` and set `featured: true` to open the home page's Agent Tooling chapter with it.
   Until then the Case studies page says the first one is in progress.
 - [ ] **Eval suite** (hidden draft, 7 placeholders):
   `src/content/projects/eval-suite.md`. Name, summary, status, repo URL, two
-  highlights, stack. Then remove `draft: true`; `featured: true` (with a `tagline`)
-  also lists it under Built on the home page.
+  highlights, stack. Then remove `draft: true`; it then gets a card in the home page's
+  Agent Tooling chapter.
 - [ ] **Draft post** (hidden, 7 placeholders):
   `src/content/posts/claude-code-abp-team-standards.md`. Fill the outline from the
   case study, then remove `draft: true` to publish.

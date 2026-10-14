@@ -1,0 +1,68 @@
+---
+// A framed plate: layers that rise by depth as the page scrolls past, inside a frame with crop
+// and registration marks. In a .chapter it stays pinned while the chapter's cards scroll over it.
+// The motion is a CSS scroll-driven animation (global.css), so it runs in step with the scroll.
+// Decorative, so hidden from assistive tech; phones never load it.
+import type { Layer, Plate } from '../lib/plates';
+
+interface Props {
+  plate: Plate;
+  number: string;
+}
+
+const { plate, number } = Astro.props;
+
+const style = (layer: Layer) =>
+  [
+    `--d: ${layer.depth}`,
+    layer.left && `--l: ${layer.left}`,
+    layer.bottom && `--b: ${layer.bottom}`,
+    layer.width && `--w: ${layer.width}`,
+    layer.position && `--pos: ${layer.position}`,
+  ]
+    .filter(Boolean)
+    .join('; ');
+
+// The frame is about 90% of the window wide; a placed layer is a share of that.
+const sizes = (layer: Layer) => `${Math.round(0.9 * parseFloat(layer.width ?? '100%'))}vw`;
+---
+
+<div class="plate" aria-hidden="true">
+  <svg class="reg reg-top" viewBox="0 0 18 18"><circle cx="9" cy="9" r="5" fill="none" stroke="currentColor"></circle><path d="M9 0 V18 M0 9 H18" stroke="currentColor"></path></svg>
+  <div class="plate-frame">
+    {
+      plate.layers.map((layer) => (
+        <div class:list={['layer', { fill: layer.fill }]} style={style(layer)}>
+          <img
+            src={`${layer.src}.webp`}
+            srcset={`${layer.src}-640.webp 640w, ${layer.src}.webp 1280w`}
+            sizes={sizes(layer)}
+            width={layer.size[0]}
+            height={layer.size[1]}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      ))
+    }
+    <p class="plate-note"><b>Plate {number}</b> · {plate.note}</p>
+  </div>
+  <svg class="reg reg-bottom" viewBox="0 0 18 18"><circle cx="9" cy="9" r="5" fill="none" stroke="currentColor"></circle><path d="M9 0 V18 M0 9 H18" stroke="currentColor"></path></svg>
+</div>
+
+<script>
+  // Fixed plates (global.css) are always "in view" as far as lazy loading goes, so each one stays
+  // hidden, images unfetched, until its chapter is within a screen of the viewport.
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.querySelector('.plate')?.classList.add('is-near');
+        observer.unobserve(entry.target);
+      }
+    },
+    { rootMargin: '100% 0px' },
+  );
+  for (const chapter of document.querySelectorAll('.chapter')) observer.observe(chapter);
+</script>

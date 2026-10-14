@@ -1,0 +1,25 @@
+---
+// A panel drawn like an engineering drawing's title block: a heading row, cells (the slot,
+// as <div class="tb-cell">), and a strip of small print along the bottom.
+interface Props {
+  id?: string;
+  title: string;
+  /** Small print beside the heading, e.g. "Sheet 05 of 05". */
+  sheet?: string;
+  foot?: string[];
+}
+
+const { id, title, sheet, foot = [] } = Astro.props;
+const headingId = id ? `${id}-title` : undefined;
+---
+
+<section class="titleblock" id={id} aria-labelledby={headingId}>
+  <div class="titleblock-head">
+    <h2 id={headingId}>{title}</h2>
+    {sheet && <p>{sheet}</p>}
+  </div>
+  <div class="tb-grid">
+    <slot />
+  </div>
+  {foot.length > 0 && <div class="tb-foot">{foot.map((item) => <span>{item}</span>)}</div>}
+</section>

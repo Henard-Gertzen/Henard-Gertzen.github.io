@@ -56,14 +56,12 @@ const projects = defineCollection({
     group: z.enum(['tooling', 'games', 'university']),
     kind: z.string(),
     status: z.string(),
-    // A few words for the home page's "Built" list.
-    tagline: z.string().optional(),
     links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
     highlights: z.array(z.string()).default([]),
     stack: z.array(z.string()).default([]),
     // A screenshot, relative to the .md file, e.g. ./images/my-project.jpg
-    cover: z.object({ src: image(), alt: z.string() }).optional(),
-    featured: z.boolean().default(false),
+    // caption: optional, a few words shown under the screenshot on the home page.
+    cover: z.object({ src: image(), alt: z.string(), caption: z.string().optional() }).optional(),
     order: z.number().default(100),
     draft: z.boolean().default(false),
   }),

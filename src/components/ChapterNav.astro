@@ -1,0 +1,39 @@
+---
+// The phone chapter bar: a sticky row of pills under the header, marking the chapter in view.
+// Hidden on wider screens, where the plates do the work (global.css).
+interface Props {
+  chapters: { id: string; number: string; label: string }[];
+}
+
+const { chapters } = Astro.props;
+---
+
+<nav class="chapter-nav" aria-label="Chapters">
+  {chapters.map((c) => <a href={`#${c.id}`}><span>{c.number}</span>{c.label}</a>)}
+</nav>
+
+<script>
+  const pills = [...document.querySelectorAll<HTMLAnchorElement>('.chapter-nav a')];
+  if (pills.length && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const id = `#${entry.target.id}`;
+          const pill = pills.find((p) => p.getAttribute('href') === id);
+          if (entry.isIntersecting) {
+            for (const p of pills) p.setAttribute('aria-current', String(p === pill));
+            pill?.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+          } else if (pill?.getAttribute('aria-current') === 'true') {
+            // Scrolled out of every chapter (back up to the opener): mark none.
+            pill.setAttribute('aria-current', 'false');
+          }
+        }
+      },
+      { rootMargin: '-45% 0px -50% 0px' },
+    );
+    for (const pill of pills) {
+      const target = document.querySelector(pill.getAttribute('href') ?? '');
+      if (target) observer.observe(target);
+    }
+  }
+</script>

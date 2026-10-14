@@ -8,7 +8,5 @@ highlights:
   - "Approved work is fetched into your checkout without touching your branch, index or uncommitted changes"
 stack: ["Claude Code", "PowerShell", "WezTerm", "Git worktrees"]
 group: tooling
-tagline: "Runs Claude Code sessions in their own git worktrees"
-featured: true
 order: 3
 ---

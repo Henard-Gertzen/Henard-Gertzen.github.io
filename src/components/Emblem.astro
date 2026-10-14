@@ -1,0 +1,27 @@
+---
+// A chapter mark: a hex nut with a line icon. Decorative.
+interface Props {
+  icon: keyof typeof icons;
+}
+
+const icons = {
+  pylon: 'M33 54 L40 26 L47 54 M31.5 34 H48.5 M33.5 42 H46.5 M35.5 34 L45 42 M44.5 34 L35 42 M26 54 H54',
+  gauge: 'M25 48 A15 15 0 0 1 55 48 M40 48 L49 35 M28.5 40 L31 41.5 M32 33.5 L34 35.5 M40 31 V34 M48 33.5 L46 35.5 M51.5 40 L49 41.5 M25 52 H55 M38 48 A2 2 0 1 0 42 48 A2 2 0 1 0 38 48',
+  anvil: 'M25 38 H52 C52 42.5 48 45 43.5 45 V48.5 H47 V53 H32 V48.5 H35.5 V45 H31 C27.5 45 25 42 25 38 Z M50 28 L53 24.5 M54.5 32 H58.5 M45.5 27.5 L46.5 23',
+  nib: 'M40 24 L48.5 38 L43 52 H37 L31.5 38 Z M40 24 V43 M36 56 H44 M38.2 44.5 A1.8 1.8 0 1 0 41.8 44.5 A1.8 1.8 0 1 0 38.2 44.5',
+  wrench: 'M47.5 25 A8 8 0 0 0 39 35.5 L26.5 48 A3.5 3.5 0 0 0 31.5 53 L44 40.5 A8 8 0 0 0 54.5 32 L49.5 35 L45 34.5 L44.5 30 Z',
+  person: 'M33.5 31 A6.5 6.5 0 1 0 46.5 31 A6.5 6.5 0 1 0 33.5 31 Z M27 55 C27 46 33 41.5 40 41.5 C47 41.5 53 46 53 55',
+  signal: 'M40 43 V57 M35 57 H45 M37.5 40.5 A3.5 3.5 0 1 0 42.5 40.5 M33 34 A10 10 0 0 0 33 47 M47 34 A10 10 0 0 1 47 47 M28.5 29.5 A16 16 0 0 0 28.5 51.5 M51.5 29.5 A16 16 0 0 1 51.5 51.5',
+  chart: 'M26 55 H54 M30 55 V44 M37 55 V38 M44 55 V41 M51 55 V30 M29 37 L37 30 L43 34 L51 25 M46.5 25 H51 V29.5',
+  cap: 'M24 36 L40 29 L56 36 L40 43 Z M31 40 V48 C35 51.5 45 51.5 49 48 V40 M56 36 V46',
+  rss: 'M27 51 A2 2 0 1 0 31 51 A2 2 0 1 0 27 51 Z M28 41 A11 11 0 0 1 39 52 M28 31 A21 21 0 0 1 49 52',
+};
+
+const { icon } = Astro.props;
+---
+
+<svg class="emblem" viewBox="0 0 80 80" aria-hidden="true" focusable="false">
+  <path class="emblem-nut" d="M77 40 L58.5 72 H21.5 L3 40 L21.5 8 H58.5 Z" stroke="currentColor" stroke-width="1.6"></path>
+  <circle cx="40" cy="40" r="25" fill="none" stroke="currentColor" stroke-width="1"></circle>
+  <path class="emblem-icon" d={icons[icon]} fill="none" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path>
+</svg>

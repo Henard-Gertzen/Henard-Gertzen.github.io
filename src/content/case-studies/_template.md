@@ -15,7 +15,7 @@ metrics:
     after: 1.3
     unit: "rounds"
     note: "Median over 30 PRs each side" # optional: how it was measured
-featured: false # true puts it in the Proof section on the home page
+featured: false # true opens the home page's Agent Tooling chapter with it
 order: 10 # lower comes first
 draft: true # drafts show in `npm run dev` only
 ---

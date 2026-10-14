@@ -1,0 +1,59 @@
+---
+// Auto / Light / Dark. "Auto" follows the system and stores nothing; the inline script in
+// Base.astro applies a stored choice before the page paints.
+const choices = ['auto', 'light', 'dark'] as const;
+---
+
+<div class="theme-switch" role="group" aria-label="Colour theme">
+  {
+    choices.map((choice) => (
+      <button type="button" data-theme-choice={choice} aria-pressed={choice === 'auto' ? 'true' : 'false'}>
+        {choice[0].toUpperCase() + choice.slice(1)}
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  const root = document.documentElement;
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-theme-choice]')];
+  const current = () => root.dataset.theme ?? 'auto';
+  const sync = () => {
+    for (const b of buttons) b.setAttribute('aria-pressed', String(b.dataset.themeChoice === current()));
+  };
+
+  const apply = (choice: string) => {
+    if (choice === 'auto') delete root.dataset.theme;
+    else root.dataset.theme = choice;
+    try {
+      if (choice === 'auto') localStorage.removeItem('theme');
+      else localStorage.setItem('theme', choice);
+    } catch {}
+    sync();
+  };
+
+  for (const button of buttons) {
+    button.addEventListener('click', () => {
+      const choice = button.dataset.themeChoice ?? 'auto';
+      if (choice === current()) return;
+      const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!document.startViewTransition || still) return apply(choice);
+
+      // The new theme wipes out in a circle from the button.
+      const { left, top, width, height } = button.getBoundingClientRect();
+      const x = left + width / 2;
+      const y = top + height / 2;
+      const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      root.classList.add('theme-switching');
+      const transition = document.startViewTransition(() => apply(choice));
+      transition.ready.then(() =>
+        root.animate(
+          { clipPath: [`circle(0 at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+          { duration: 450, easing: 'cubic-bezier(0.4, 0, 0.2, 1)', pseudoElement: '::view-transition-new(root)' },
+        ),
+      );
+      transition.finished.finally(() => root.classList.remove('theme-switching'));
+    });
+  }
+  sync();
+</script>

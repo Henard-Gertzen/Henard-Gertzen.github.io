@@ -1,21 +1,24 @@
 ---
+import { plateCredits } from '../lib/plates';
 import { site } from '../site';
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="wrap site-footer-inner">
-    <p>
-      © {year} {site.name}. Secunda, South Africa, <time class="local-time">UTC+2</time>.
-    </p>
-    <ul class="footer-links">
-      <li><a href={`mailto:${site.email}`}>Email</a></li>
-      <li><a href={site.links.linkedin} rel="noopener">LinkedIn</a></li>
-      <li><a href={site.links.github} rel="noopener">GitHub</a></li>
-      <li><a href="/feed/">RSS</a></li>
-    </ul>
-  </div>
+  <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span>{site.name}</a>
+  <p>Secunda, South Africa, <time class="local-time">UTC+2</time></p>
+  <ul class="footer-links">
+    <li><a href={`mailto:${site.email}`}>Email</a></li>
+    <li><a href={site.links.linkedin} rel="noopener">LinkedIn</a></li>
+    <li><a href={site.links.github} rel="noopener">GitHub</a></li>
+    <li><a href="/feed/">RSS</a></li>
+  </ul>
+  <p>© {year}</p>
+  <p class="footer-credits">
+    {/* One line on purpose: line breaks here would render as spaces before the commas. */}
+    Illustrations made from Pixabay photos: {plateCredits.map((c, i) => <>{i > 0 && ', '}<a href={c.href}>{c.label}</a></>)}.
+  </p>
 </footer>
 
 <script>

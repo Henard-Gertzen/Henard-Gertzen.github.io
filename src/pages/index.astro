@@ -1,88 +1,297 @@
 ---
+// The home page as a long-form feature: an opener, an "at a glance" card, then four chapters,
+// each a pinned plate with cards scrolling over it, and a title block to close.
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import Band from '../components/Band.astro';
+import ChapterNav from '../components/ChapterNav.astro';
+import Emblem from '../components/Emblem.astro';
+import Gauge from '../components/Gauge.astro';
+import MaybeLink from '../components/MaybeLink.astro';
+import Ornament from '../components/Ornament.astro';
+import Plate from '../components/Plate.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import Signup from '../components/Signup.astro';
-import circuitTraces from '../assets/backgrounds/circuit-traces.jpg';
-import codeScreen from '../assets/backgrounds/code-screen.jpg';
-import headshot from '../assets/henard-gertzen.png';
-import { getCaseStudies, isoDate, published } from '../lib/content';
+import Text from '../components/Text.astro';
+import TitleBlock from '../components/TitleBlock.astro';
+import { getCaseStudies, getPosts, getProjects, isoDate, postHref } from '../lib/content';
+import { plates } from '../lib/plates';
 import { pages, site } from '../site';
 
 const meta = pages['/'];
-const month = (date: Date) => date.toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+const day = (date: Date) => date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' });
 
-const log = (await getCollection('log')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-// "Built": featured case studies first, then featured projects in their page order.
-const groupOrder = { tooling: 0, games: 1, university: 2 } as const;
-const [studies, projects] = await Promise.all([
+const [log, studies, tooling, games, university, posts] = await Promise.all([
+  getCollection('log'),
   getCaseStudies(),
-  getCollection('projects', (entry) => entry.data.featured && published(entry)),
+  getProjects('tooling'),
+  getProjects('games'),
+  getProjects('university'),
+  getPosts(),
 ]);
-const built = [
-  ...studies
-    .filter((s) => s.data.featured)
-    .map((s) => ({ title: s.data.title, href: `/case-studies/${s.id}/`, line: s.data.summary })),
-  ...projects
-    .sort((a, b) => groupOrder[a.data.group] - groupOrder[b.data.group] || a.data.order - b.data.order)
-    .map((p) => ({ title: p.data.title, href: `/projects/#${p.id}`, line: p.data.tagline ?? p.data.kind })),
+const recent = log.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 4);
+const featuredStudies = studies.filter((s) => s.data.featured);
+// Games with a screenshot get a card each; the rest share the "workbench" card.
+const shownGames = games.filter((g) => g.data.cover);
+const workbench = games.filter((g) => !g.data.cover);
+
+const chapters = [
+  { id: 'recently', number: '01', label: 'Recently' },
+  { id: 'tooling', number: '02', label: 'Agent Tooling' },
+  { id: 'games', number: '03', label: 'Games' },
+  { id: 'writing', number: '04', label: 'Writing' },
+  { id: 'contact', number: '05', label: 'Get in Touch' },
 ];
+const short = { tooling: 'Tooling', contact: 'Contact' } as Record<string, string>;
 ---
 
 <Base title={meta.title} description={meta.description} image="/og/index.png">
-  <div class="wrap">
-    <section class="hero" aria-labelledby="hero-title">
-      <figure class="portrait">
-        <Image src={headshot} alt="Henard Gertzen" widths={[200, 400]} sizes="(min-width: 48rem) 11rem, 7rem" loading="eager" />
-      </figure>
-      <div class="hero-text">
-        <h1 id="hero-title">Hi, I’m Henard. {site.hero.title}</h1>
-        <p>
-          I’m a full-stack developer on .NET and Angular in Secunda, South Africa, and I make games with coding agents on
-          the side.
+  <section class="opener" aria-labelledby="page-title">
+    <div class="opener-inner">
+      <Gauge />
+      <p class="kicker">Full-Stack Developer <b>.NET</b> <b>Angular</b> <b>Claude Code</b></p>
+      <h1 class="display" id="page-title">{site.name}</h1>
+      <p class="opener-line">{site.hero.title}</p>
+      <p class="byline"><span><strong>Secunda, South Africa</strong></span><span>Remote, UTC+2</span><span>Plates made from Pixabay photos</span></p>
+    </div>
+  </section>
+
+  <section aria-label="At a glance">
+    <article class="card">
+      <p class="kicker"><b>00</b> At a Glance</p>
+      <div class="measure">
+        <p class="dropcap">
+          By day I build .NET and Angular software as a remote full-stack developer in Secunda, South Africa. I help
+          teams get coding agents to write code that fits their codebase, not just code that compiles, and I make games
+          with those agents on the side.
         </p>
       </div>
-    </section>
-  </div>
+      <dl class="readout">
+        <div><dt>Based in</dt><dd>Secunda<small>Mpumalanga, UTC+2</small></dd></div>
+        <div><dt>Role</dt><dd>Full-stack<small>.NET and Angular, remote</small></dd></div>
+        <div><dt>Studied</dt><dd>BSc IT<small>North-West University, 2024</small></dd></div>
+        <div>
+          <dt>Built</dt>
+          <dd>{tooling.length + games.length + university.length}<small>{tooling.length} tools, {games.length} games, {university.length} at university</small></dd>
+        </div>
+      </dl>
+      <nav class="toc" aria-label="Chapters">
+        {chapters.map((c) => <a href={`#${c.id}`}><span>{c.number}</span>{c.label}</a>)}
+      </nav>
+    </article>
+  </section>
 
-  <Band photo={circuitTraces} labelledby="recent-title">
-    <div class="wrap">
-      <h2 class="section-title" id="recent-title">Recently</h2>
-      <ol class="dated">
-        {
-          log.map((entry) => (
-            <li>
-              <time datetime={isoDate(entry.data.date)}>{month(entry.data.date)}</time>
-              <span>{entry.data.href ? <a href={entry.data.href}>{entry.data.text}</a> : entry.data.text}</span>
-            </li>
-          ))
-        }
-      </ol>
+  <ChapterNav chapters={chapters.map((c) => ({ ...c, label: short[c.id] ?? c.label }))} />
+
+  <section class="chapter" id="recently" aria-labelledby="recently-title">
+    <Plate plate={plates.highveld} number="01" />
+    <div class="chapter-content">
+      <article class="card">
+        <Emblem icon="pylon" />
+        <p class="kicker"><b>01</b> Recently</p>
+        <h2 class="display" id="recently-title">Notes from the Highveld</h2>
+        <div class="measure">
+          <p class="dropcap">
+            What I’ve shipped, written and measured lately, newest first. The tooling and the games are in the next two
+            chapters.
+          </p>
+          <ol class="dated">
+            {
+              recent.map((entry) => (
+                <li>
+                  <time datetime={isoDate(entry.data.date)}>{day(entry.data.date)}</time>
+                  <span>{entry.data.href ? <a href={entry.data.href}>{entry.data.text}</a> : entry.data.text}</span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </article>
+      <article class="card scene">
+        <h3 class="display scene-title">How I Got Here</h3>
+        <p class="dateline"><span>Potchefstroom</span><span>Secunda</span><span>2021 to 2025</span></p>
+        <div class="measure">
+          <p>
+            In 2021 I started a BSc in IT at North-West University in Potchefstroom. Alongside my studies I did freelance
+            graphic and web design, and helped other students set up their computers and get through their projects.
+          </p>
+          <p>
+            In my final year I led our team on <a href="/projects/#share2teach">Share2Teach</a> as team lead, Scrum Master
+            and head designer. After graduating I spent a few months as an intermediate full-stack developer at EziDev,
+            then moved back to Secunda.
+          </p>
+          <p>
+            Since September 2025 I’ve worked remotely as a full-stack developer on .NET and Angular, specialising in AI
+            harnesses: the setup that makes coding agents work to a team’s standards.
+          </p>
+        </div>
+        <p class="more"><a href="/about/">More about me</a></p>
+      </article>
     </div>
-  </Band>
+  </section>
 
-  <div class="wrap">
-    <section class="section" aria-labelledby="built-title">
-      <h2 class="section-title" id="built-title">Built</h2>
-      <ul class="built">
-        {
-          built.map((item) => (
-            <li>
-              <a href={item.href}>{item.title}</a>
-              <span>{item.line}</span>
-            </li>
-          ))
-        }
-      </ul>
-      <p class="more"><a href="/projects/">All projects, including the games and university work</a></p>
-    </section>
-  </div>
-
-  <Band photo={codeScreen}>
-    <div class="wrap">
-      <Signup />
+  <section class="chapter" id="tooling" aria-labelledby="tooling-title">
+    <Plate plate={plates.control} number="02" />
+    <div class="chapter-content">
+      <article class="card">
+        <Emblem icon="gauge" />
+        <p class="kicker"><b>02</b> Agent Tooling</p>
+        <h2 class="display" id="tooling-title">Harnesses for Coding Agents</h2>
+        <div class="measure">
+          <p class="dropcap">
+            Setting up Claude Code so it follows a team’s conventions, and checking whether it actually does. The work has
+            three parts.
+          </p>
+          <dl class="parts">
+            <div>
+              <dt>Harness</dt>
+              <dd>Shared settings, hooks, permissions and tools, so every developer’s agent works the same way.</dd>
+            </div>
+            <div>
+              <dt>Context</dt>
+              <dd>Conventions written where the agent reads them, with real examples from the codebase.</dd>
+            </div>
+            <div>
+              <dt>Measurement</dt>
+              <dd>Every change gets a number, like the 31% token saving from one harness default.</dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+      {
+        featuredStudies.map((s) => (
+          <article class="card scene">
+            <h3 class="display scene-title">
+              <Text text={s.data.title} />
+            </h3>
+            <p class="dateline">
+              <span>Case study</span>
+              <span>
+                <Text text={s.data.period} />
+              </span>
+            </p>
+            <div class="measure">
+              <p>
+                <Text text={s.data.summary} />
+              </p>
+            </div>
+            <p class="more">
+              <a href={`/case-studies/${s.id}/`}>Read the case study</a>
+            </p>
+          </article>
+        ))
+      }
+      {
+        tooling.map((project, i) => (
+          <>
+            {i === 2 && <div class="breath" aria-hidden="true" />}
+            <ProjectCard project={project} />
+          </>
+        ))
+      }
     </div>
-  </Band>
+  </section>
+
+  <section class="chapter" id="games" aria-labelledby="games-title">
+    <Plate plate={plates.forge} number="03" />
+    <div class="chapter-content">
+      <article class="card">
+        <Emblem icon="anvil" />
+        <p class="kicker"><b>03</b> Games</p>
+        <h2 class="display" id="games-title">Games Built with Coding Agents</h2>
+        <div class="measure">
+          <p class="dropcap">
+            These are built by directing Claude Code agents: written briefs, long-running sessions, headless bot
+            playtests and automated tests that keep the agents honest. I make them in my own time.
+          </p>
+        </div>
+      </article>
+      {
+        shownGames.map((project, i) => (
+          <>
+            {i === 2 && <div class="breath" aria-hidden="true" />}
+            <ProjectCard project={project} />
+          </>
+        ))
+      }
+      {
+        workbench.length > 0 && (
+          <article class="card">
+            <h3 class="display scene-title">Also on the Workbench</h3>
+            <Ornament />
+            <div class="measure">
+              {workbench.map((project) => (
+                <p id={project.id}>
+                  {/* One line on purpose: a line break before the colon would render as a space. */}
+                  <strong><Text text={project.data.title} /></strong>: <Text text={project.data.summary} />
+                </p>
+              ))}
+            </div>
+            <p class="more">
+              <a href="/projects/">Every project, including my university work</a>
+            </p>
+          </article>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="chapter" id="writing" aria-labelledby="writing-title">
+    <Plate plate={plates.desk} number="04" />
+    <div class="chapter-content">
+      <article class="card">
+        <Emblem icon="nib" />
+        <p class="kicker"><b>04</b> Writing</p>
+        <h2 class="display" id="writing-title">Writing on Agents</h2>
+        <div class="measure">
+          <p class="dropcap">What coding agents actually are, and how to make them write code your team would merge.</p>
+          {
+            posts.slice(0, 3).map((post) => (
+              <div class="post">
+                <p class="post-meta">
+                  <time datetime={isoDate(post.data.date)}>
+                    <Text text={post.data.date instanceof Date ? day(post.data.date) : post.data.date} />
+                  </time>
+                  {post.data.outlet && <> / {post.data.outlet}</>}
+                </p>
+                <h3>
+                  <MaybeLink href={postHref(post)}>
+                    <Text text={post.data.title} />
+                  </MaybeLink>
+                </h3>
+                <p>
+                  <Text text={post.data.description} />
+                </p>
+              </div>
+            ))
+          }
+        </div>
+        <p class="more"><a href="/writing/">All writing</a></p>
+      </article>
+      <article class="card scene">
+        <Signup level={3} />
+      </article>
+    </div>
+  </section>
+
+  <TitleBlock id="contact" title="Get in Touch" sheet="Sheet 05 of 05" foot={['Drawn by H. Gertzen', 'Secunda, Mpumalanga']}>
+    <div class="tb-cell">
+      <h3>Email</h3>
+      <p class="big"><a href={`mailto:${site.email}`}>{site.email}</a></p>
+    </div>
+    <div class="tb-cell">
+      <h3>Elsewhere</h3>
+      <p class="links">
+        <a href={site.links.linkedin} rel="noopener">LinkedIn</a>
+        <a href={site.links.github} rel="noopener">GitHub</a>
+        <a href="/feed/">RSS</a>
+      </p>
+    </div>
+    <div class="tb-cell wide">
+      <h3>Works on</h3>
+      <p>
+        Full-stack development on .NET (ABP Framework) and Angular, and AI harnesses for coding agents. Remote, from
+        Secunda, South Africa (UTC+2). More on the <a href="/contact/">contact page</a>.
+      </p>
+    </div>
+  </TitleBlock>
 </Base>

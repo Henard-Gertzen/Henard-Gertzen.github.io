@@ -76,7 +76,7 @@ metrics:                                  # illustrative numbers
 
 Keep case studies anonymised: no employer, client or product names.
 
-Set `featured: true` to list it under "Built" on the home page.
+Set `featured: true` to open the home page's Agent Tooling chapter with it.
 
 ### A project: `src/content/projects/my-project.md`
 
@@ -96,21 +96,21 @@ stack: ["Node.js", "PowerShell 7"]
 cover:                        # optional screenshot, next to the .md file
   src: "./images/pwsh-axi.png"
   alt: "What the screenshot shows"
-tagline: "Six words or so"     # optional: its line in the home page's Built list
-featured: false               # true lists it under Built on the home page
+  caption: "A few words"       # optional: shown under it on the home page
 order: 5                      # lower comes first
 draft: false                  # optional: true hides it outside `npm run dev`
 ---
 ```
 
-The home page's Built list shows featured case studies first, then featured
-projects, each with its `tagline`. Cover images are resized and converted to WebP at build
-time, so a full-size PNG or JPG is fine.
+On the home page, tooling projects get a card each in the Agent Tooling chapter; games with a
+`cover` get a card each in the Games chapter, and the rest share its "Also on the Workbench"
+card. Featured case studies open the Agent Tooling chapter. Cover images are resized and
+converted to WebP at build time, so a full-size PNG or JPG is fine.
 
 ### The "Recently" log: `src/content/log.yaml`
 
-The dated list on the home page. Add an entry when you ship, write or start
-something; it's sorted by date, so order in the file doesn't matter.
+The dated list in the home page's first chapter (the newest four). Add an entry when you ship,
+write or start something; it's sorted by date, so order in the file doesn't matter.
 
 ```yaml
 - id: nuke-france            # any unique name
@@ -144,24 +144,30 @@ sitemap is at `/sitemap-index.xml`.
 
 ## Design
 
-The aim is a site that reads as made by a person, not generated: the checklist
-of "AI design tells" in the frontend-design skill was the guide.
+The home page is a long-form, illustrated feature, after the GKSA page in the Synodalia
+project: an opener, an "at a glance" card, four chapters and a title block to close. Each
+chapter's cards scroll over a framed plate; the frame stays put and the plates dissolve from one
+chapter to the next.
 
-- **Type:** Bricolage Grotesque for the name, headings and numbers; Source Serif 4
-  for everything else. JetBrains Mono only for code. No uppercase labels.
-- **Colour:** neutral paper and true-black ink; safety orange from Load Shedding
-  marks things (underlines, bullets, the brand square, button hover) and is never
-  used for body text in light mode. Dark mode is the game's navy. Every colour is
-  a token at the top of `src/styles/global.css`, written as `light-dark(light, dark)`.
-- **Sections:** alternate sections sit on a darker, grainier band (`Band.astro`),
-  each opening with a heading over a thick rule. A band can take a faint photo
-  (`<Band photo={...}>`); the photos are from Pixabay, credited in
-  `src/assets/backgrounds/CREDITS.md`.
-- **Structure:** lists, not cards. Dates, plain sentences and real screenshots do
-  the work; no numbered sections, eyebrows or "→" links.
-- **Motion:** only in answer to the visitor: page cross-fades, the theme switch
-  wipe, underline and button transitions. All off for `prefers-reduced-motion`.
-- **JavaScript:** the theme toggle, the copy button and the footer clock.
+- **Type:** Bricolage Grotesque for the name, headings and numbers; Source Serif 4 for text;
+  JetBrains Mono for small labels, dates and chips.
+- **Colour:** warm paper and ink by day, the Load Shedding navy by night. Safety orange marks
+  things (kicker tags, drop caps, rules, bullets). Every colour is a token at the top of
+  `src/styles/global.css`, written as `light-dark(light, dark)`.
+- **Plates:** photo composites from Pixabay, toned like cyanotypes with orange where the light
+  falls. Each layer drifts by its depth as the page scrolls; the cut-out front pieces move more
+  than the backgrounds. Recipes are in `src/lib/plates.ts`; the files, sources, credits and the
+  scripts that make them are in `art/` (see `art/README.md`). Phones never load a plate.
+- **Devices:** a gauge dial around the portrait that turns as you scroll (hover over the
+  portrait for colour), hex-nut chapter emblems, punch-card corners on the cards, crop and
+  registration marks on the plates, boxed drop caps, and a title block for contact details.
+  A circuit "damask" pattern sits behind every page.
+- **Motion:** the plates' parallax, their dissolves and the dial are CSS scroll-driven
+  animations, so they move in step with the scroll (browsers without them get still plates that
+  scroll away at the end of each chapter). Also page cross-fades and the theme-switch wipe. All
+  movement is off for `prefers-reduced-motion`; the dissolves stay.
+- **JavaScript:** revealing each plate as its chapter comes near, the colour portrait on hover,
+  the phone chapter bar, the theme switch, the copy button and the footer clock.
 
 ## Deploying
 
