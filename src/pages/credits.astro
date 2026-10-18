@@ -1,0 +1,66 @@
+---
+// Who made what the site is built from: the photos behind the plates, and the typefaces.
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { plateCredits } from '../lib/plates';
+import { pages } from '../site';
+
+const meta = pages['/credits/'];
+
+const typefaces = [
+  { name: 'Bricolage Grotesque', use: 'Headings', by: 'the Bricolage Grotesque Project Authors', href: 'https://github.com/ateliertriay/bricolage' },
+  { name: 'Source Serif 4', use: 'Body text', by: 'Adobe', href: 'https://github.com/adobe-fonts/source-serif' },
+  { name: 'JetBrains Mono', use: 'Labels, dates and chips', by: 'JetBrains', href: 'https://github.com/JetBrains/JetBrainsMono' },
+];
+---
+
+<Base title={meta.title} description={meta.description} image="/og/credits.png">
+  <PageHead icon="pylon" kicker="Photos and type" title="Credits">
+    <p>
+      The illustrated plates are composites I made from Pixabay photos, cut into layers and toned like cyanotypes.
+      These are the photos, and the typefaces the site is set in.
+    </p>
+  </PageHead>
+
+  <section class="card scene" aria-labelledby="photos-title">
+    <h2 class="display scene-title" id="photos-title">Photos</h2>
+    <p class="dateline"><span>Pixabay</span><span>Pixabay Content License</span></p>
+    <div class="measure">
+      <dl class="parts">
+        {
+          plateCredits.map((c) => (
+            <div>
+              <dt>{c.label}</dt>
+              <dd>
+                {c.usedFor}. <a href={c.href}>View it on Pixabay</a>
+              </dd>
+            </div>
+          ))
+        }
+        <div>
+          <dt>Portrait</dt>
+          <dd>My own photo, in the dial on the home page.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="card scene" aria-labelledby="type-title">
+    <h2 class="display scene-title" id="type-title">Typefaces</h2>
+    <p class="dateline"><span>SIL Open Font License</span></p>
+    <div class="measure">
+      <dl class="parts">
+        {
+          typefaces.map((t) => (
+            <div>
+              <dt>{t.use}</dt>
+              <dd>
+                <a href={t.href}>{t.name}</a>, by {t.by}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+</Base>

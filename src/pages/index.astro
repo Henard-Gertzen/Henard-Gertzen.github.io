@@ -51,7 +51,6 @@ const short = { tooling: 'Tooling', contact: 'Contact' } as Record<string, strin
       <p class="kicker"><b>.NET</b> <b>Angular</b> <b>Claude Code</b></p>
       <h1 class="display" id="page-title">{site.name}</h1>
       <p class="opener-line">{site.hero.title}</p>
-      <p class="byline"><span><strong>Secunda, South Africa</strong></span><span>Remote, UTC+2</span><span>Plates made from Pixabay photos</span></p>
     </div>
   </section>
 
@@ -83,7 +82,7 @@ const short = { tooling: 'Tooling', contact: 'Contact' } as Record<string, strin
   <ChapterNav chapters={chapters.map((c) => ({ ...c, label: short[c.id] ?? c.label }))} />
 
   <section class="chapter" id="recently" aria-labelledby="recently-title">
-    <Plate plate={plates.highveld} number="01" />
+    <Plate plate={plates.highveld} />
     <div class="chapter-content">
       <article class="card">
         <Emblem icon="pylon" />
@@ -130,7 +129,7 @@ const short = { tooling: 'Tooling', contact: 'Contact' } as Record<string, strin
   </section>
 
   <section class="chapter" id="tooling" aria-labelledby="tooling-title">
-    <Plate plate={plates.control} number="02" />
+    <Plate plate={plates.control} />
     <div class="chapter-content">
       <article class="card">
         <Emblem icon="gauge" />
@@ -192,7 +191,7 @@ const short = { tooling: 'Tooling', contact: 'Contact' } as Record<string, strin
   </section>
 
   <section class="chapter" id="games" aria-labelledby="games-title">
-    <Plate plate={plates.forge} number="03" />
+    <Plate plate={plates.forge} />
     <div class="chapter-content">
       <article class="card">
         <Emblem icon="anvil" />
@@ -235,7 +234,7 @@ const short = { tooling: 'Tooling', contact: 'Contact' } as Record<string, strin
   </section>
 
   <section class="chapter" id="writing" aria-labelledby="writing-title">
-    <Plate plate={plates.desk} number="04" />
+    <Plate plate={plates.desk} />
     <div class="chapter-content">
       <article class="card">
         <Emblem icon="nib" />

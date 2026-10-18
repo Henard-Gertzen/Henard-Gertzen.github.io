@@ -7,10 +7,9 @@ import type { Layer, Plate } from '../lib/plates';
 
 interface Props {
   plate: Plate;
-  number: string;
 }
 
-const { plate, number } = Astro.props;
+const { plate } = Astro.props;
 
 const style = (layer: Layer) =>
   [
@@ -46,7 +45,6 @@ const sizes = (layer: Layer) => `${Math.round(0.9 * parseFloat(layer.width ?? '1
         </div>
       ))
     }
-    <p class="plate-note"><b>Plate {number}</b> · {plate.note}</p>
   </div>
   <svg class="reg reg-bottom" viewBox="0 0 18 18"><circle cx="9" cy="9" r="5" fill="none" stroke="currentColor"></circle><path d="M9 0 V18 M0 9 H18" stroke="currentColor"></path></svg>
 </div>

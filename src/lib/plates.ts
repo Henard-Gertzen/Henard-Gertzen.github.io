@@ -20,7 +20,6 @@ export interface Layer {
 }
 
 export interface Plate {
-  note: string;
   layers: Layer[];
 }
 
@@ -31,7 +30,6 @@ const room = (name: string, size: [number, number], extra: Partial<Layer> = {}):
 
 export const plates = {
   highveld: {
-    note: 'Composite from Pixabay photos',
     layers: [
       { src: '/plates/highveld/sky', size: [1280, 854], depth: 0.04, fill: true, position: '50% 70%' },
       { src: '/plates/highveld/towers', size: [1280, 252], depth: 0.1, left: '-10%', bottom: '-5%', width: '120%' },
@@ -39,20 +37,20 @@ export const plates = {
       { src: '/plates/highveld/cosmos', size: [1280, 853], depth: 0.5, left: '64%', bottom: '-26%', width: '46%' },
     ],
   },
-  control: { note: 'Two planes from a Pixabay photo', layers: room('control', [1280, 853], { position: '50% 60%' }) },
+  control: { layers: room('control', [1280, 853], { position: '50% 60%' }) },
   // Widened so the fire sits in the strip left of the cards.
-  forge: { note: 'Two planes from a Pixabay photo', layers: room('forge', [1280, 950], { left: '-50%', width: '150%', position: '50% 70%' }) },
-  desk: { note: 'Two planes from a Pixabay photo', layers: room('desk', [1280, 853], { position: '50% 50%' }) },
+  forge: { layers: room('forge', [1280, 950], { left: '-50%', width: '150%', position: '50% 70%' }) },
+  desk: { layers: room('desk', [1280, 853], { position: '50% 50%' }) },
 } satisfies Record<string, Plate>;
 
-/** Credits for the footer; the full list with licences is art/CREDITS.md. */
+/** The photos the plates are made from, for the credits page; art/CREDITS.md also has their source folders. */
 export const plateCredits = [
-  { label: 'storm', href: 'https://pixabay.com/photos/storm-thunderstorm-super-cell-3158852/' },
-  { label: 'power station', href: 'https://pixabay.com/photos/nuclear-power-plant-chimneys-6574531/' },
-  { label: 'pylon', href: 'https://pixabay.com/vectors/electricity-pylon-silhouette-5202532/' },
-  { label: 'cosmos', href: 'https://pixabay.com/photos/cosmos-field-flower-cosmos-4756999/' },
-  { label: 'control room', href: 'https://pixabay.com/photos/power-plant-conducting-electronic-344231/' },
-  { label: 'forge', href: 'https://pixabay.com/photos/fire-wrought-forge-1561656/' },
-  { label: 'writing desk', href: 'https://pixabay.com/photos/dark-room-office-table-chair-lamp-2584166/' },
-  { label: 'circuit board', href: 'https://pixabay.com/photos/circuit-electric-trace-computer-5315089/' },
+  { label: 'Storm', usedFor: 'The sky in the Highveld plate and behind the portrait', href: 'https://pixabay.com/photos/storm-thunderstorm-super-cell-3158852/' },
+  { label: 'Power station', usedFor: 'The power station and grass on the Highveld horizon', href: 'https://pixabay.com/photos/nuclear-power-plant-chimneys-6574531/' },
+  { label: 'Pylon', usedFor: 'The pylon in the Highveld plate and beside the portrait', href: 'https://pixabay.com/vectors/electricity-pylon-silhouette-5202532/' },
+  { label: 'Cosmos', usedFor: 'The cosmos flowers in the Highveld foreground', href: 'https://pixabay.com/photos/cosmos-field-flower-cosmos-4756999/' },
+  { label: 'Control room', usedFor: 'The control room plate', href: 'https://pixabay.com/photos/power-plant-conducting-electronic-344231/' },
+  { label: 'Forge', usedFor: 'The forge plate', href: 'https://pixabay.com/photos/fire-wrought-forge-1561656/' },
+  { label: 'Writing desk', usedFor: 'The writing desk plate', href: 'https://pixabay.com/photos/dark-room-office-table-chair-lamp-2584166/' },
+  { label: 'Circuit board', usedFor: 'The background pattern', href: 'https://pixabay.com/photos/circuit-electric-trace-computer-5315089/' },
 ];

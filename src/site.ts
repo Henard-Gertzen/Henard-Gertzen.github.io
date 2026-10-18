@@ -57,6 +57,10 @@ export const pages = {
     title: 'Follow by RSS',
     description: 'Get new posts from Henard Gertzen in your feed reader, or by email.',
   },
+  '/credits/': {
+    title: 'Credits',
+    description: 'The Pixabay photos the illustrated plates are made from, and the typefaces.',
+  },
   '/about/': {
     title: 'About',
     description: 'Henard Gertzen: a South African developer who makes coding agents behave like members of the team.',

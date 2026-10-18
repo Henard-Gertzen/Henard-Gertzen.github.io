@@ -1,5 +1,4 @@
 ---
-import { plateCredits } from '../lib/plates';
 import { site } from '../site';
 
 const year = new Date().getFullYear();
@@ -13,12 +12,9 @@ const year = new Date().getFullYear();
     <li><a href={site.links.linkedin} rel="noopener">LinkedIn</a></li>
     <li><a href={site.links.github} rel="noopener">GitHub</a></li>
     <li><a href="/feed/">RSS</a></li>
+    <li><a href="/credits/">Credits</a></li>
   </ul>
   <p>© {year}</p>
-  <p class="footer-credits">
-    {/* One line on purpose: line breaks here would render as spaces before the commas. */}
-    Illustrations made from Pixabay photos: {plateCredits.map((c, i) => <>{i > 0 && ', '}<a href={c.href}>{c.label}</a></>)}.
-  </p>
 </footer>
 
 <script>
